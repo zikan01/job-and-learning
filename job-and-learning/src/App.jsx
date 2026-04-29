@@ -15,11 +15,8 @@ function Footer({ lang }) {
   return (
     <footer className="bg-[#002147] text-white/40 py-6 px-4">
       <div className="max-w-3xl mx-auto text-center space-y-1.5">
-        <div className="flex items-center justify-center gap-2">
-          <div className="w-6 h-6 bg-[#FF8C00] rounded-md flex items-center justify-center font-outfit text-[10px] font-black text-white select-none">
-            J&L
-          </div>
-          <span className="text-white/60 font-outfit font-bold text-sm">Job & Learning</span>
+        <div className="flex items-center justify-center">
+          <img src="/logo.png" alt="Job and Learning" className="h-10 w-auto object-contain brightness-0 invert opacity-80" />
         </div>
         <p className="text-xs">
           {tr.footerReg}: <span className="text-white/60 font-semibold">J1700020240003</span>

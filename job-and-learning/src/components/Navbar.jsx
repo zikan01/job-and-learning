@@ -30,7 +30,7 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-12 w-auto object-contain rounded-lg"
+              className="h-16 w-auto object-contain"
             />
           </div>
 
