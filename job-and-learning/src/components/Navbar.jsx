@@ -15,13 +15,6 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
 
   return (
     <header className="sticky top-0 z-50 shadow-lg">
-      {/* 공지 바 */}
-      <div className="bg-[#FF8C00] px-6 py-1.5 text-center">
-        <p className="text-white text-xs font-semibold tracking-wide">
-          {tr.noticebar}
-        </p>
-      </div>
-
       {/* 메인 헤더: 로고 + 탭 + 언어선택 + 로그인 */}
       <div className="bg-[#002147]">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
@@ -30,7 +23,7 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-16 w-auto object-contain"
+              className="h-16 w-auto object-contain" style={{filter: 'brightness(0) invert(55%) sepia(89%) saturate(2000%) hue-rotate(1deg) brightness(1.1)'}}
             />
           </div>
 
