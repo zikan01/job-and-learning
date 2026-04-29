@@ -19,11 +19,11 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
       <div className="bg-[#002147]">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
           {/* 로고 */}
-          <div className="flex items-center flex-shrink-0">
+          <div className="flex items-center flex-shrink-0 overflow-visible">
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-16 w-auto object-contain" style={{filter: 'brightness(0) invert(55%) sepia(89%) saturate(2000%) hue-rotate(1deg) brightness(1.1)'}}
+              className="h-28 w-auto object-contain" style={{filter: 'brightness(0) invert(55%) sepia(89%) saturate(2000%) hue-rotate(1deg) brightness(1.1)'}}
             />
           </div>
 
