@@ -23,7 +23,7 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-28 w-auto object-contain" style={{filter: 'hue-rotate(175deg) saturate(2.5) brightness(1.8) contrast(0.85)'}}
+              className="h-28 w-auto object-contain"
             />
           </div>
 
