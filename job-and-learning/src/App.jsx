@@ -16,7 +16,7 @@ function Footer({ lang }) {
     <footer className="bg-[#002147] text-white/40 py-6 px-4">
       <div className="max-w-3xl mx-auto text-center space-y-1.5">
         <div className="flex items-center justify-center">
-          <img src="/logo.png" alt="Job and Learning" className="h-10 w-auto object-contain opacity-80" style={{filter: 'brightness(0) invert(55%) sepia(89%) saturate(2000%) hue-rotate(1deg) brightness(1.1)'}} />
+          <img src="/logo.png" alt="Job and Learning" className="h-28 w-auto object-contain" style={{filter: 'hue-rotate(175deg) saturate(4) brightness(1.2) contrast(1.1)'}} />
         </div>
         <p className="text-xs">
           {tr.footerReg}: <span className="text-white/60 font-semibold">J1700020240003</span>
