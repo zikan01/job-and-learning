@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCA Korea Inbound — Program Plan v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+img, svg { display:block; max-width:100%; }
+
+/* ── TOKENS ── */
+:root {
+  --orange:#E8541A;
+  --dark:#0C0C0C;
+  --cream:#F4F1EC;
+  --cream2:#EAE6DF;
+  --border:#E0DBD3;
+  --gray:#888;
+  --r-card:14px;
+  --r-box:20px;
+}
+
+body {
+  font-family:'Figtree',sans-serif;
+  background:var(--cream);
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  font-size:14px;
+  line-height:1.5;
+  overflow-x:hidden;
+}
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+.top-nav {
+  position:sticky; top:0; z-index:100;
+  background:rgba(12,12,12,.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.nav-wrap {
+  position:relative;
+  max-width:1120px; margin:0 auto;
+}
+.nav-inner {
+  display:flex; align-items:center; gap:4px;
+  overflow-x:auto; scrollbar-width:none;
+  padding:0 16px;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+.nav-inner::-webkit-scrollbar { display:none; }
+
+.nav-logo {
+  font-family:'Outfit',sans-serif;
+  font-size:13px; font-weight:800;
+  color:var(--orange); letter-spacing:-.02em;
+  white-space:nowrap;
+  padding:14px 12px 14px 0;
+  margin-right:6px;
+  border-right:1px solid rgba(255,255,255,.1);
+  flex-shrink:0;
+}
+.nav-a {
+  display:flex; align-items:center; gap:5px;
+  padding:12px 10px;
+  font-size:11.5px; font-weight:500;
+  color:rgba(255,255,255,.5);
+  white-space:nowrap;
+  border-radius:8px;
+  text-decoration:none;
+  transition:color .15s, background .15s;
+  flex-shrink:0;
+  min-height:44px;
+}
+.nav-a:hover  { color:#fff; background:rgba(255,255,255,.06); }
+.nav-a.active { color:var(--orange); background:rgba(232,84,26,.1); }
+.nav-num {
+  font-size:10px; font-weight:700;
+  color:rgba(232,84,26,.6);
+  letter-spacing:.05em;
+}
+
+/* nav edge fade + scroll buttons */
+.nav-fade {
+  position:absolute; top:0; bottom:0; width:56px;
+  pointer-events:none; opacity:0;
+  transition:opacity .2s; z-index:2;
+}
+.nav-fade-l { left:0;  background:linear-gradient(to right,rgba(12,12,12,.95) 30%,transparent); }
+.nav-fade-r { right:0; background:linear-gradient(to left, rgba(12,12,12,.95) 30%,transparent); }
+.nav-fade.on { opacity:1; }
+.nav-btn {
+  position:absolute; top:0; bottom:0; width:36px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; z-index:3;
+  color:rgba(255,255,255,.45); font-size:20px;
+  transition:color .15s, opacity .2s;
+  user-select:none; opacity:0; pointer-events:none;
+}
+.nav-btn:hover { color:#fff; }
+.nav-btn-l { left:0; }
+.nav-btn-r { right:0; }
+
+/* ══════════════════════════════
+   PAGE SHELL
+══════════════════════════════ */
+.page {
+  max-width:1120px; margin:0 auto;
+  padding:32px 20px 100px;
+}
+
+/* ══════════════════════════════
+   COVER
+══════════════════════════════ */
+.cover {
+  background:var(--dark); color:#fff;
+  border-radius:var(--r-box);
+  padding:56px 52px 48px;
+  margin-bottom:36px;
+  position:relative; overflow:hidden;
+}
+.cover-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.cover-glow {
+  position:absolute; top:-100px; right:-100px;
+  width:500px; height:500px;
+  background:radial-gradient(circle,rgba(232,84,26,.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cover-body { position:relative; z-index:2; }
+.cover-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid rgba(232,84,26,.5); border-radius:100px;
+  padding:6px 14px;
+  font-size:11px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:#FF7040;
+  margin-bottom:24px;
+}
+.cover-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--orange); }
+.cover-title {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(32px, 6vw, 64px);
+  font-weight:800; letter-spacing:-.03em; line-height:1.0;
+  margin-bottom:14px;
+}
+.cover-title em { color:var(--orange); font-style:normal; }
+.cover-tagline { font-size:clamp(13px,2.5vw,18px); font-weight:300; color:rgba(255,255,255,.6); margin-bottom:36px; }
+.cover-meta {
+  display:flex; gap:28px; flex-wrap:wrap;
+  padding-top:32px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.cover-meta-val {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(20px,3.5vw,32px); font-weight:800;
+  letter-spacing:-.03em; line-height:1;
+  display:block; margin-bottom:4px;
+}
+.cover-meta-key { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.06em; text-transform:uppercase; }
+
+/* ══════════════════════════════
+   SECTION HEADER
+══════════════════════════════ */
+.sec { margin-bottom:32px; }
+.sec-label {
+  font-size:10px; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--orange);
+  display:block; margin-bottom:10px;
+}
+.sec-title {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(20px,3.5vw,28px); font-weight:800;
+  letter-spacing:-.02em; line-height:1.15; margin-bottom:6px;
+}
+.sec-desc { font-size:14px; color:var(--gray); font-weight:300; }
+hr.div { border:none; border-top:1px solid var(--border); margin:36px 0; }
+
+/* ══════════════════════════════
+   POSITIONING
+══════════════════════════════ */
+.pos-box {
+  background:#fff; border-radius:var(--r-box);
+  padding:40px; border:1px solid var(--border);
+  margin-bottom:24px;
+}
+.pos-cols {
+  display:grid;
+  grid-template-columns:1fr 2px 1fr 2px 1fr;
+  gap:36px; align-items:start;
+}
+.pos-divider { background:var(--border); border-radius:1px; }
+.pos-label {
+  font-size:10px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--orange);
+  margin-bottom:10px; display:block;
+}
+.pos-h {
+  font-family:'Outfit',sans-serif;
+  font-size:18px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:10px; line-height:1.2;
+}
+.pos-list { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.pos-list li { font-size:13px; color:#333; display:flex; align-items:flex-start; gap:8px; }
+.pos-list li::before { content:'▪'; color:var(--orange); flex-shrink:0; margin-top:1px; }
+
+/* ══════════════════════════════
+   IMPACT VALUE CHAIN
+══════════════════════════════ */
+.ivc-wrap {
+  background:var(--dark); border-radius:var(--r-box);
+  padding:40px 36px; color:#fff; margin-bottom:24px;
+}
+.ivc-h {
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(16px,2.5vw,22px); font-weight:800;
+  letter-spacing:-.02em; margin-bottom:28px;
+}
+.ivc-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+.ivc-step {
+  font-size:10px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--orange);
+  margin-bottom:8px; display:block;
+}
+.ivc-card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px; padding:16px 14px;
+}
+.ivc-card-h {
+  font-family:'Outfit',sans-serif;
+  font-size:14px; font-weight:700; margin-bottom:10px; line-height:1.2;
+}
+.ivc-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.ivc-list li { font-size:11px; color:rgba(255,255,255,.6); display:flex; gap:6px; align-items:flex-start; }
+.ivc-list li::before { content:'·'; color:var(--orange); font-size:16px; line-height:1; flex-shrink:0; }
+.ivc-footer {
+  margin-top:24px;
+  background:rgba(232,84,26,.08);
+  border:1px solid rgba(232,84,26,.2);
+  border-radius:10px; padding:14px 18px;
+  font-size:12px; color:rgba(255,255,255,.6);
+  line-height:1.7; font-style:italic;
+}
+.ivc-footer strong { color:var(--orange); font-style:normal; }
+
+/* ══════════════════════════════
+   PROGRAM FLOW
+══════════════════════════════ */
+.flow-box {
+  background:#fff; border:1px solid var(--border);
+  border-radius:var(--r-box); padding:32px;
+  margin-bottom:24px;
+}
+.flow-grid {
+  display:grid;
+  grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr 36px 1fr;
+  align-items:stretch;
+  gap:0; margin-bottom:24px;
+}
+.flow-phase {
+  border-radius:var(--r-card);
+  padding:18px 14px;
+  display:flex; flex-direction:column; gap:5px;
+}
+.flow-phase.p0    { background:#F8F5F0; border:1px solid var(--border); }
+.flow-phase.p-h1  { background:var(--dark); border:1px solid var(--dark); color:#fff; }
+.flow-phase.p-btw { background:#F0F7FF; border:1px solid #C8DCF5; }
+.flow-phase.p-h2  { background:var(--orange); border:1px solid var(--orange); color:#fff; }
+.flow-phase.p3    { background:#F0FFF5; border:1px solid #B8E8CA; }
+.flow-num {
+  font-family:'Outfit',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.flow-num.c-orange { color:var(--orange); }
+.flow-num.c-h1     { color:#FF7040; }
+.flow-num.c-btw    { color:#3B7FD4; }
+.flow-num.c-h2     { color:rgba(255,255,255,.8); }
+.flow-num.c-green  { color:#2E9E5B; }
+.flow-name {
+  font-family:'Outfit',sans-serif;
+  font-size:13px; font-weight:800;
+  letter-spacing:-.02em; line-height:1.25;
+}
+.flow-detail { font-size:11px; line-height:1.5; }
+.flow-detail.light   { color:var(--gray); }
+.flow-detail.d-white { color:rgba(255,255,255,.55); }
+.flow-detail.d-wh75  { color:rgba(255,255,255,.75); }
+.flow-arrow {
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; color:rgba(0,0,0,.2);
+}
+
+/* methodology strip */
+.method-strip {
+  background:#F8F5F0; border-radius:12px; padding:18px 20px;
+}
+.method-label {
+  font-size:10px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--gray); margin-bottom:12px;
+}
+.method-grid {
+  display:grid;
+  grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr 36px 1fr;
+  gap:0; align-items:center;
+}
+.method-cell { text-align:center; }
+.method-tag {
+  display:inline-block; padding:4px 10px;
+  border-radius:6px; font-size:11px; font-weight:700;
+}
+.method-tag.dark   { background:var(--dark); color:#fff; }
+.method-tag.orange { background:var(--orange); color:#fff; }
+.method-sub { font-size:10px; color:var(--gray); margin-top:5px; line-height:1.4; }
+
+/* mobile method row */
+.method-mobile {
+  display:none;
+  flex-direction:column; gap:8px;
+}
+.method-mobile-row {
+  display:flex; align-items:center; gap:10px;
+}
+.method-mobile-text { font-size:12px; color:var(--gray); }
+
+/* ══════════════════════════════
+   TIMETABLE
+══════════════════════════════ */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.tt-wrap {
+  background:#fff; border-radius:var(--r-card);
+  border:1px solid var(--border); overflow:hidden;
+  margin-bottom:16px;
+}
+.tt-head {
+  background:var(--dark); color:#fff;
+  padding:16px 20px;
+  display:flex; align-items:center; gap:12px;
+}
+.tt-head.orange-head { background:var(--orange); }
+.tt-badge {
+  background:var(--orange); color:#fff;
+  font-size:10px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; padding:3px 8px; border-radius:4px;
+  flex-shrink:0;
+}
+.tt-badge.dark-badge { background:rgba(0,0,0,.25); }
+.tt-head-title {
+  font-family:'Outfit',sans-serif; font-size:15px; font-weight:700;
+}
+.tt-row {
+  display:grid; grid-template-columns:72px 1fr;
+  border-bottom:1px solid var(--border); min-height:50px;
+}
+.tt-row:last-child { border-bottom:none; }
+.tt-time {
+  padding:12px 10px;
+  font-size:11px; font-weight:600; color:var(--orange);
+  border-right:1px solid var(--border);
+  display:flex; align-items:center;
+  font-variant-numeric:tabular-nums;
+}
+.tt-cell {
+  padding:12px 14px;
+  display:flex; align-items:center; gap:10px;
+}
+.tt-icon { font-size:17px; flex-shrink:0; }
+.tt-text h5 { font-size:12.5px; font-weight:600; color:#111; margin-bottom:2px; }
+.tt-text p  { font-size:11.5px; color:var(--gray); line-height:1.4; }
+.tt-tag {
+  margin-left:auto; flex-shrink:0;
+  font-size:10px; font-weight:700; letter-spacing:.07em;
+  text-transform:uppercase; padding:3px 8px; border-radius:4px;
+}
+.tt-tag.m  { background:#FFF3EE; color:var(--orange); }
+.tt-tag.c  { background:#F0F7FF; color:#3B7FD4; }
+.tt-tag.o  { background:#F0FFF5; color:#2E9E5B; }
+.tt-tag.s  { background:#F9F0FF; color:#8B4DC8; }
+.tt-tag.l  { background:#FFFBF0; color:#B07D0A; }
+
+/* deliverables box */
+.deliv-box {
+  background:#fff; border:1px solid var(--border);
+  border-radius:var(--r-card); padding:18px;
+}
+.deliv-label {
+  font-size:11px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gray); margin-bottom:12px;
+}
+.chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip {
+  background:#fff; border:1px solid var(--border);
+  border-radius:8px; padding:9px 14px;
+  display:flex; align-items:center; gap:7px;
+  font-size:12.5px; font-weight:500;
+}
+
+/* hack header */
+.hack-head { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.hack-num {
+  width:40px; height:40px; border-radius:10px;
+  background:var(--dark); color:#fff;
+  font-family:'Outfit',sans-serif; font-size:20px; font-weight:800;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.hack-num.h2 { background:var(--orange); }
+.hack-info h3 { font-family:'Outfit',sans-serif; font-size:19px; font-weight:800; letter-spacing:-.02em; }
+.hack-info span { font-size:12px; color:var(--gray); }
+
+/* ══════════════════════════════
+   BETWEEN
+══════════════════════════════ */
+.between-box {
+  background:var(--cream2);
+  border:2px dashed var(--border);
+  border-radius:var(--r-card); padding:28px;
+  margin-bottom:24px;
+}
+.between-title {
+  font-family:'Outfit',sans-serif; font-size:16px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:18px;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+.between-badge {
+  background:var(--cream2); border:1px solid var(--border);
+  border-radius:8px; padding:5px 10px; font-size:12px; color:var(--gray);
+}
+.between-sub { font-size:13px; font-weight:400; color:var(--gray); }
+.between-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.between-item {
+  background:#fff; border-radius:10px;
+  padding:16px; border:1px solid var(--border);
+}
+.between-icon { font-size:20px; margin-bottom:8px; display:block; }
+.between-item h5 { font-size:12.5px; font-weight:600; margin-bottom:4px; }
+.between-item p  { font-size:11px; color:var(--gray); line-height:1.5; }
+
+/* ══════════════════════════════
+   POST TRACKS
+══════════════════════════════ */
+.tracks-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:16px; }
+.track-card {
+  border-radius:var(--r-card); padding:26px;
+  border:1px solid var(--border); background:#fff;
+  position:relative; overflow:hidden;
+}
+.track-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:3px;
+}
+.track-card.t1::before { background:#2E9E5B; }
+.track-card.t2::before { background:#3B7FD4; }
+.track-card.t3::before { background:var(--orange); }
+.track-icon { font-size:26px; margin-bottom:12px; display:block; }
+.track-name {
+  font-family:'Outfit',sans-serif; font-size:15px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:7px;
+}
+.track-desc { font-size:13px; color:var(--gray); line-height:1.6; margin-bottom:12px; }
+.track-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.track-list li { font-size:12px; color:#555; display:flex; align-items:flex-start; gap:7px; }
+.track-list li::before { content:'→'; color:var(--orange); flex-shrink:0; }
+
+/* ══════════════════════════════
+   COACHES
+══════════════════════════════ */
+.coaches-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:16px; }
+.coach-card {
+  background:var(--dark); border-radius:var(--r-card);
+  padding:26px; color:#fff;
+  border:1px solid rgba(255,255,255,.06);
+}
+.coach-av {
+  width:50px; height:50px; border-radius:12px;
+  background:var(--orange); color:#fff;
+  font-family:'Outfit',sans-serif; font-size:21px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:14px;
+}
+.coach-name { font-family:'Outfit',sans-serif; font-size:17px; font-weight:800; letter-spacing:-.02em; margin-bottom:3px; }
+.coach-role { font-size:11.5px; color:var(--orange); margin-bottom:10px; font-weight:600; }
+.coach-bio  { font-size:12px; color:rgba(255,255,255,.5); line-height:1.7; }
+
+/* ══════════════════════════════
+   PRINCIPLES
+══════════════════════════════ */
+.principles-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:16px; }
+.principle {
+  background:#fff; border-radius:12px;
+  padding:22px; border:1px solid var(--border);
+  display:flex; gap:14px;
+}
+.principle-num {
+  font-family:'Outfit',sans-serif; font-size:30px; font-weight:800;
+  color:rgba(0,0,0,.06); letter-spacing:-.03em;
+  flex-shrink:0; line-height:1; min-width:34px;
+}
+.principle h5 { font-size:13.5px; font-weight:700; margin-bottom:5px; color:var(--dark); }
+.principle p  { font-size:12.5px; color:var(--gray); line-height:1.6; }
+
+/* ══════════════════════════════
+   APPLICATION
+══════════════════════════════ */
+.app-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.card {
+  background:#fff; border-radius:var(--r-card);
+  padding:26px; border:1px solid var(--border);
+}
+.card-label { font-size:12.5px; font-weight:700; color:var(--orange); letter-spacing:.05em; margin-bottom:14px; }
+.app-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.app-list li { display:flex; gap:10px; font-size:13px; color:#333; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.version-tag {
+  text-align:center; padding:20px;
+  font-size:11px; color:rgba(0,0,0,.3); letter-spacing:.08em;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — tablet ≤ 768px
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .page { padding:20px 14px 80px; }
+
+  /* Cover */
+  .cover { padding:32px 24px 28px; border-radius:16px; }
+  .cover-meta { gap:18px; }
+
+  /* Positioning: 3-col → 1-col */
+  .pos-box { padding:24px; }
+  .pos-cols { grid-template-columns:1fr; gap:24px; }
+  .pos-divider { display:none; }
+
+  /* IVC: 5-col → 2-col */
+  .ivc-wrap { padding:28px 18px; }
+  .ivc-grid  { grid-template-columns:1fr 1fr; gap:10px; }
+
+  /* Program flow: 9-col → vertical */
+  .flow-box  { padding:22px 16px; }
+  .flow-grid {
+    grid-template-columns:1fr;
+    gap:6px;
+    margin-bottom:20px;
+  }
+  .flow-arrow { height:24px; transform:rotate(90deg); }
+  .method-grid { display:none; }
+  .method-mobile { display:flex; }
+
+  /* Timetable: 2-col → 1-col */
+  .two-col { grid-template-columns:1fr; gap:16px; }
+
+  /* Between: 4-col → 2-col */
+  .between-box { padding:20px; }
+  .between-grid { grid-template-columns:1fr 1fr; gap:12px; }
+
+  /* Post tracks: 3-col → 1-col */
+  .tracks-grid { grid-template-columns:1fr; }
+
+  /* Coaches: 3-col → 1-col */
+  .coaches-grid { grid-template-columns:1fr; }
+
+  /* Principles: 2-col → 1-col */
+  .principles-grid { grid-template-columns:1fr; }
+
+  /* Application: 2-col → 1-col */
+  .app-grid { grid-template-columns:1fr; }
+
+  hr.div { margin:24px 0; }
+
+  /* Timetable tag hide on small */
+  .tt-tag { display:none; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — mobile ≤ 480px
+══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .page { padding:14px 10px 60px; }
+
+  /* Nav */
+  .nav-logo { display:none; }
+  .nav-a { font-size:11px; padding:10px 8px; }
+
+  /* Cover */
+  .cover { padding:24px 16px 22px; border-radius:12px; margin-bottom:24px; }
+  .cover-badge { font-size:10px; padding:5px 10px; margin-bottom:16px; }
+  .cover-meta { gap:14px; padding-top:20px; }
+
+  /* IVC: → 1-col */
+  .ivc-grid { grid-template-columns:1fr; }
+  .ivc-wrap { padding:20px 14px; }
+
+  /* Between: → 1-col */
+  .between-grid { grid-template-columns:1fr; }
+
+  /* Flow box */
+  .flow-box { padding:16px 12px; }
+  .flow-phase { padding:14px 12px; }
+
+  /* Timetable */
+  .tt-row { grid-template-columns:58px 1fr; }
+  .tt-time { font-size:10px; padding:10px 7px; }
+  .tt-cell { padding:10px 10px; gap:7px; }
+  .tt-icon { font-size:15px; }
+  .tt-text h5 { font-size:12px; }
+  .tt-text p  { font-size:11px; }
+  .tt-head { padding:13px 14px; gap:10px; }
+  .tt-head-title { font-size:13px; }
+
+  /* Principles */
+  .principle { padding:16px; }
+
+  /* Coaches */
+  .coach-card { padding:20px; }
+
+  /* Chips */
+  .chip { font-size:12px; padding:8px 11px; }
+
+  /* Pos box */
+  .pos-box { padding:16px; }
+  .pos-h { font-size:16px; }
+
+  /* Card */
+  .card { padding:18px; }
+  .track-card { padding:18px; }
+  .between-item { padding:14px; }
+
+  hr.div { margin:20px 0; }
+  .sec { margin-bottom:22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="top-nav">
+  <div class="nav-wrap">
+    <div class="nav-fade nav-fade-l" id="nfl"></div>
+    <div class="nav-btn nav-btn-l" id="nbl">&#8249;</div>
+    <div class="nav-inner" id="nvi">
+      <div class="nav-logo">UCA Korea</div>
+      <a class="nav-a active" href="#cover"><span>Overview</span></a>
+      <a class="nav-a" href="#sec-pos"><span class="nav-num">01</span><span>Positioning</span></a>
+      <a class="nav-a" href="#sec-ivc"><span class="nav-num">02</span><span>Impact Value Chain</span></a>
+      <a class="nav-a" href="#sec-flow"><span class="nav-num">03</span><span>Program Structure</span></a>
+      <a class="nav-a" href="#sec-h1"><span class="nav-num">04</span><span>Hackathon #1</span></a>
+      <a class="nav-a" href="#sec-h2"><span class="nav-num">05</span><span>Hackathon #2</span></a>
+      <a class="nav-a" href="#sec-tracks"><span class="nav-num">06</span><span>Post-Program Tracks</span></a>
+      <a class="nav-a" href="#sec-coaches"><span class="nav-num">07</span><span>Coaching Team</span></a>
+      <a class="nav-a" href="#sec-principles"><span class="nav-num">08</span><span>Design Principles</span></a>
+      <a class="nav-a" href="#sec-app"><span class="nav-num">09</span><span>Application</span></a>
+    </div>
+    <div class="nav-btn nav-btn-r" id="nbr">&#8250;</div>
+    <div class="nav-fade nav-fade-r" id="nfr"></div>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ══ COVER ══ -->
+<div id="cover" class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-body">
+    <div class="cover-badge"><span class="cover-badge-dot"></span>Track 02 · Korea Inbound · Underdogs × UCA</div>
+    <div class="cover-title">University<br>Co-founder<br><em>Accelerator.</em></div>
+    <div class="cover-tagline">Foreign students. Korean startup ecosystem. Real co-founders. Real products.</div>
+    <div class="cover-meta">
+      <div><span class="cover-meta-val">2×</span><span class="cover-meta-key">1N2D Hackathons</span></div>
+      <div><span class="cover-meta-val">~30</span><span class="cover-meta-key">Participants / Cohort</span></div>
+      <div><span class="cover-meta-val">EN</span><span class="cover-meta-key">Program Language</span></div>
+      <div><span class="cover-meta-val">3</span><span class="cover-meta-key">Expert Coaches</span></div>
+      <div><span class="cover-meta-val">B2G</span><span class="cover-meta-key">Client Type</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 01 POSITIONING ══ -->
+<div id="sec-pos" class="sec">
+  <span class="sec-label">01 — Positioning</span>
+  <div class="sec-title">Who, What, Why.</div>
+  <p class="sec-desc">The core proposition framed for the program client (universities) and the participant (international students).</p>
+</div>
+<div class="pos-box">
+  <div class="pos-cols">
+    <div>
+      <span class="pos-label">Target</span>
+      <div class="pos-h">International Students in Korea</div>
+      <ul class="pos-list">
+        <li>Undergrad (3rd/4th yr) + grad students at Korean universities</li>
+        <li>Intent: launch or build something <em>inside</em> Korea</li>
+        <li>Often pre-team, pre-idea — but motivated</li>
+        <li>Also includes "in-between" students (Korean diaspora, heritage students)</li>
+        <li>Language: English program → Korean-speaking students encouraged to connect</li>
+      </ul>
+    </div>
+    <div class="pos-divider"></div>
+    <div>
+      <span class="pos-label">Core Challenge</span>
+      <div class="pos-h">K-Market Localization Barrier</div>
+      <ul class="pos-list">
+        <li>Language barrier in Korean-only startup education</li>
+        <li>Visa friction: D2 → working / startup visa paths unclear</li>
+        <li>No co-founder, no network, no "in" to the Korean startup ecosystem</li>
+        <li>Startup education at universities targets Korean students only</li>
+        <li>Employment is nearly impossible → entrepreneurship is the real alternative</li>
+      </ul>
+    </div>
+    <div class="pos-divider"></div>
+    <div>
+      <span class="pos-label">Theme &amp; Methodology</span>
+      <div class="pos-h">K-Market Entry for Foreign Founders</div>
+      <ul class="pos-list">
+        <li><strong>Reverse glocal posture</strong> — they are the "global" entering Korea</li>
+        <li>IMPACT methodology: I → M → P (Hackathon #1) → A (Hackathon #2)</li>
+        <li>CORE foundation: Act-preneur mindset, ACTT execution habits, 5D skillset</li>
+        <li>AI as co-founder: solo is valid, AI tools replace early team needs</li>
+        <li>Korean mentor pool + startup lawyer + alumni network as key resources</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 02 IMPACT VALUE CHAIN ══ -->
+<div id="sec-ivc" class="sec">
+  <span class="sec-label">02 — Impact Value Chain</span>
+  <div class="sec-title">From Resources to Real Change.</div>
+  <p class="sec-desc">Every layer connects with a "So What?" test. Each output must logically cause the next layer.</p>
+</div>
+<div class="ivc-wrap">
+  <div class="ivc-h">UCA Korea Inbound — Impact Value Chain</div>
+  <div class="ivc-grid">
+    <div>
+      <span class="ivc-step">1 · Input</span>
+      <div class="ivc-card">
+        <div class="ivc-card-h">What We Put In</div>
+        <ul class="ivc-list">
+          <li>3 facilitator-coaches</li>
+          <li>Startup lawyer (visa &amp; legal)</li>
+          <li>2 × hackathon venues</li>
+          <li>AI tools: Claude, Lovable, Gemini</li>
+          <li>VOD platform &amp; LMS</li>
+          <li>Prize fund ₩1,000,000</li>
+          <li>LinkedIn cert system</li>
+          <li>University partner network</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <span class="ivc-step">2 · Activity</span>
+      <div class="ivc-card">
+        <div class="ivc-card-h">What We Do</div>
+        <ul class="ivc-list">
+          <li>Application &amp; screening</li>
+          <li>Hackathon #1: mindset + problem + co-founder</li>
+          <li>Visa &amp; legal consultation session</li>
+          <li>VOD self-learning (2–4 wks)</li>
+          <li>Hackathon #2: AI MVP build</li>
+          <li>Demo Day + Awards</li>
+          <li>Post-program track briefing</li>
+          <li>1:1 coaching (throughout)</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <span class="ivc-step">3 · Output</span>
+      <div class="ivc-card">
+        <div class="ivc-card-h">What Comes Out</div>
+        <ul class="ivc-list">
+          <li>~20 graduates w/ certificate</li>
+          <li>~15 MVP artifacts (live URLs)</li>
+          <li>~8–10 co-founder teams formed</li>
+          <li>~20 concept notes submitted</li>
+          <li>100% LinkedIn certificates issued</li>
+          <li>1 visa consultation session</li>
+          <li>Top 3 teams awarded</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <span class="ivc-step">4 · Outcome</span>
+      <div class="ivc-card">
+        <div class="ivc-card-h">What Changes</div>
+        <ul class="ivc-list">
+          <li>2–3 business registrations</li>
+          <li>1–2 visa conversions (D10-2)</li>
+          <li>10%+ apply to external programs (예비창업패키지)</li>
+          <li>70%+ re-participation / referral intent</li>
+          <li>15+ meaningful network connections</li>
+          <li>↑ Entrepreneurial mindset score (pre/post)</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <span class="ivc-step">5 · Impact</span>
+      <div class="ivc-card">
+        <div class="ivc-card-h">Long-Term Change</div>
+        <ul class="ivc-list">
+          <li>Universities adopt this as standard program for intl. students</li>
+          <li>Korean ↔ Global co-creation loop forms</li>
+          <li>Intl. students voluntarily stay in Korea via entrepreneurship</li>
+          <li>Supports government's foreign talent retention goal</li>
+          <li>Inbound ↔ outbound startup synergy across Asia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ivc-footer">
+    <strong>So What? Chain:</strong> Hackathons run → teams form + MVPs built → some register businesses / apply to programs / convert visas → intl. students build real entrepreneurial careers in Korea → universities adopt the model; a global-local startup ecosystem grows.
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 03 PROGRAM STRUCTURE ══ -->
+<div id="sec-flow" class="sec">
+  <span class="sec-label">03 — Program Structure</span>
+  <div class="sec-title">Three Phases, One Journey.</div>
+  <p class="sec-desc">Short but intense. Every phase ends with a tangible deliverable.</p>
+</div>
+<div class="flow-box">
+  <div class="flow-grid">
+    <div class="flow-phase p0">
+      <span class="flow-num c-orange">Phase 0</span>
+      <div class="flow-name">Application &amp; Selection</div>
+      <div class="flow-detail light">1-page concept note<br>Individual screening</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-phase p-h1">
+      <span class="flow-num c-h1">Hackathon #1</span>
+      <div class="flow-name">Find Your Co-founder</div>
+      <div class="flow-detail d-white">1 Night · 2 Days<br>Offline · ~30 pax</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-phase p-btw">
+      <span class="flow-num c-btw">Between</span>
+      <div class="flow-name">Self-Directed Learning</div>
+      <div class="flow-detail light">2–4 weeks online<br>VOD + AI tools</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-phase p-h2">
+      <span class="flow-num c-h2">Hackathon #2</span>
+      <div class="flow-name">Build Your Mini MVP</div>
+      <div class="flow-detail d-wh75">1 Night · 2 Days<br>Demo Day + Awards</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-phase p3">
+      <span class="flow-num c-green">Phase 3</span>
+      <div class="flow-name">Post-Program Tracks</div>
+      <div class="flow-detail light">Optional<br>3 pathways</div>
+    </div>
+  </div>
+
+  <!-- Methodology strip -->
+  <div class="method-strip">
+    <div class="method-label">IMPACT Methodology Mapping</div>
+    <!-- Desktop 9-col -->
+    <div class="method-grid">
+      <div class="method-cell" style="font-size:11px;color:var(--gray);">Pre-screening</div>
+      <div></div>
+      <div class="method-cell">
+        <span class="method-tag dark">I · M · P</span>
+        <div class="method-sub">Inspiration<br>Market · Product</div>
+      </div>
+      <div></div>
+      <div class="method-cell" style="font-size:11px;color:#3B7FD4;font-weight:600;">Self-learning<br>+ AI tools</div>
+      <div></div>
+      <div class="method-cell">
+        <span class="method-tag orange">A · C · T</span>
+        <div class="method-sub">Acquisition<br>Commerce · Team</div>
+      </div>
+      <div></div>
+      <div class="method-cell" style="font-size:11px;color:#2E9E5B;font-weight:600;">Optional<br>3 Tracks</div>
+    </div>
+    <!-- Mobile simplified -->
+    <div class="method-mobile">
+      <div class="method-mobile-row">
+        <span class="method-tag dark">I · M · P</span>
+        <span class="method-mobile-text">Hackathon #1 — Inspiration · Market · Product</span>
+      </div>
+      <div class="method-mobile-row">
+        <span class="method-tag orange">A · C · T</span>
+        <span class="method-mobile-text">Hackathon #2 — Acquisition · Commerce · Team</span>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 04 HACKATHON #1 ══ -->
+<div id="sec-h1" class="sec">
+  <span class="sec-label">04 — Hackathon #1 · "Find Your Co-founder"</span>
+  <div class="hack-head">
+    <div class="hack-num">1</div>
+    <div class="hack-info">
+      <h3>Find Your Co-founder</h3>
+      <span>1 Night · 2 Days · Offline · Goal: Problem definition + Team formation</span>
+    </div>
+  </div>
+</div>
+<div class="two-col" style="margin-bottom:20px;">
+  <div>
+    <div class="tt-wrap">
+      <div class="tt-head">
+        <span class="tt-badge">Day 1</span>
+        <span class="tt-head-title">Opening, Mindset &amp; Team Discovery</span>
+      </div>
+      <div class="tt-row"><div class="tt-time">09:00</div><div class="tt-cell"><span class="tt-icon">👋</span><div class="tt-text"><h5>Welcome &amp; Ice-breaking</h5><p>2-min self-intro per participant (timed)</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">10:00</div><div class="tt-cell"><span class="tt-icon">🧠</span><div class="tt-text"><h5>Act-preneur Mindset Session</h5><p>CORE: Calling + Operation (ACTT) · Why action beats planning</p></div><span class="tt-tag m">CORE</span></div></div>
+      <div class="tt-row"><div class="tt-time">10:45</div><div class="tt-cell"><span class="tt-icon">⚡</span><div class="tt-text"><h5>IMPACT Methodology Workshop</h5><p>5-layer Impact Value Chain · "So What?" test · I·M·P overview</p></div><span class="tt-tag m">IMPACT</span></div></div>
+      <div class="tt-row"><div class="tt-time">12:00</div><div class="tt-cell"><span class="tt-icon">🍱</span><div class="tt-text"><h5>Lunch</h5><p>—</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">13:00</div><div class="tt-cell"><span class="tt-icon">🃏</span><div class="tt-text"><h5>Blind Idea Showcase</h5><p>Concept notes displayed anonymously · Each marks 3 ideas they find interesting</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">14:00</div><div class="tt-cell"><span class="tt-icon">🔄</span><div class="tt-text"><h5>Speed Networking (Rotation)</h5><p>2–3 min conversations · Find resonance before forming teams</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">15:30</div><div class="tt-cell"><span class="tt-icon">🎯</span><div class="tt-text"><h5>Problem Definition Workshop</h5><p>IMPACT I·M — "Who has this pain? How bad? Why now?"</p></div><span class="tt-tag m">IMPACT I·M</span></div></div>
+      <div class="tt-row"><div class="tt-time">17:30</div><div class="tt-cell"><span class="tt-icon">🎤</span><div class="tt-text"><h5>Lightning Round Pitches</h5><p>90-sec pitch: My problem + Why I want to solve it</p></div><span class="tt-tag o">Output</span></div></div>
+      <div class="tt-row"><div class="tt-time">19:00</div><div class="tt-cell"><span class="tt-icon">🍽</span><div class="tt-text"><h5>Dinner + Free Networking</h5><p>Informal co-founder conversations begin</p></div><span class="tt-tag s">Social</span></div></div>
+      <div class="tt-row"><div class="tt-time">21:00</div><div class="tt-cell"><span class="tt-icon">🤝</span><div class="tt-text"><h5>Co-founder Matching Session</h5><p>Voluntary team formation · Coaches facilitate · Solo OK</p></div><span class="tt-tag o">Output</span></div></div>
+    </div>
+  </div>
+  <div>
+    <div class="tt-wrap">
+      <div class="tt-head">
+        <span class="tt-badge">Day 2</span>
+        <span class="tt-head-title">Problem Deepening &amp; Team Confirmation</span>
+      </div>
+      <div class="tt-row"><div class="tt-time">09:00</div><div class="tt-cell"><span class="tt-icon">✅</span><div class="tt-text"><h5>Team Check-in</h5><p>Each team confirms direction (solo or paired)</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">09:30</div><div class="tt-cell"><span class="tt-icon">⚖️</span><div class="tt-text"><h5>Visa &amp; Legal Consultation</h5><p>Startup lawyer: D2 → D10-2 → D8-4 pathway · Q&amp;A per nationality</p></div><span class="tt-tag l">Legal</span></div></div>
+      <div class="tt-row"><div class="tt-time">11:00</div><div class="tt-cell"><span class="tt-icon">💡</span><div class="tt-text"><h5>Problem → Solution Sketch</h5><p>IMPACT P — Simplest version of solution · AI draft a 1-page concept</p></div><span class="tt-tag m">IMPACT P</span></div></div>
+      <div class="tt-row"><div class="tt-time">12:30</div><div class="tt-cell"><span class="tt-icon">🍱</span><div class="tt-text"><h5>Lunch</h5><p>—</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">13:30</div><div class="tt-cell"><span class="tt-icon">🎙</span><div class="tt-text"><h5>1:1 Mentor Coaching</h5><p>Each coach: ~10 participants · Problem clarity + team direction feedback</p></div><span class="tt-tag c">Coaching</span></div></div>
+      <div class="tt-row"><div class="tt-time">15:00</div><div class="tt-cell"><span class="tt-icon">🏁</span><div class="tt-text"><h5>Hackathon #1 Final Pitches</h5><p>3-min: Problem · Target user · Proposed solution · What's next</p></div><span class="tt-tag o">Output</span></div></div>
+      <div class="tt-row"><div class="tt-time">16:30</div><div class="tt-cell"><span class="tt-icon">📋</span><div class="tt-text"><h5>Between-Period Briefing</h5><p>VOD access · AI tool guidance · Submit 1-page updated plan before H#2</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">17:00</div><div class="tt-cell"><span class="tt-icon">🚪</span><div class="tt-text"><h5>Close</h5><p>—</p></div></div></div>
+    </div>
+    <div class="deliv-box">
+      <div class="deliv-label">Hackathon #1 — Deliverables</div>
+      <div class="chips">
+        <div class="chip"><span>✅</span>Problem statement (1 sentence)</div>
+        <div class="chip"><span>🤝</span>Co-founder team confirmed</div>
+        <div class="chip"><span>📄</span>1-page concept note</div>
+        <div class="chip"><span>⚖️</span>Visa pathway understood</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Between -->
+<div class="between-box">
+  <div class="between-title">
+    <span class="between-badge">Between Hackathons · 2–4 Weeks · Online</span>
+    <span class="between-sub">Deepen solution thinking before building</span>
+  </div>
+  <div class="between-grid">
+    <div class="between-item"><span class="between-icon">🎥</span><h5>VOD Module 1</h5><p>Customer discovery basics — how to talk to real users</p></div>
+    <div class="between-item"><span class="between-icon">🎥</span><h5>VOD Module 2</h5><p>MVP thinking — what's the simplest thing you can build?</p></div>
+    <div class="between-item"><span class="between-icon">🤖</span><h5>VOD Module 3</h5><p>AI tools crash course: Lovable, Claude, Notion AI for prototyping</p></div>
+    <div class="between-item"><span class="between-icon">💬</span><h5>Slack Community</h5><p>Peer check-ins · Coach feedback channel · Required: 1-page updated plan</p></div>
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 05 HACKATHON #2 ══ -->
+<div id="sec-h2" class="sec">
+  <span class="sec-label">05 — Hackathon #2 · "Build Your Mini MVP"</span>
+  <div class="hack-head">
+    <div class="hack-num h2">2</div>
+    <div class="hack-info">
+      <h3>Build Your Mini MVP</h3>
+      <span>1 Night · 2 Days · Offline · Goal: Working MVP artifact + Demo Day pitch</span>
+    </div>
+  </div>
+</div>
+<div class="two-col" style="margin-bottom:20px;">
+  <div>
+    <div class="tt-wrap">
+      <div class="tt-head orange-head">
+        <span class="tt-badge dark-badge">Day 1</span>
+        <span class="tt-head-title">Build Day</span>
+      </div>
+      <div class="tt-row"><div class="tt-time">09:00</div><div class="tt-cell"><span class="tt-icon">📋</span><div class="tt-text"><h5>Team Check-in &amp; Plan Review</h5><p>Quick coach feedback on updated 1-page plan</p></div><span class="tt-tag c">Coaching</span></div></div>
+      <div class="tt-row"><div class="tt-time">10:00</div><div class="tt-cell"><span class="tt-icon">🛠</span><div class="tt-text"><h5>AI Build Workshop</h5><p>IMPACT A — Hands-on: build a landing page with Lovable / Claude / Canva AI</p></div><span class="tt-tag m">IMPACT A</span></div></div>
+      <div class="tt-row"><div class="tt-time">12:00</div><div class="tt-cell"><span class="tt-icon">🍱</span><div class="tt-text"><h5>Lunch</h5><p>—</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">13:00</div><div class="tt-cell"><span class="tt-icon">⚡</span><div class="tt-text"><h5>Build Sprint</h5><p>Teams build independently · Coaches rotate · Focus: one working MVP artifact</p></div><span class="tt-tag o">Building</span></div></div>
+      <div class="tt-row"><div class="tt-time">17:00</div><div class="tt-cell"><span class="tt-icon">👀</span><div class="tt-text"><h5>Progress Check</h5><p>Screen-share: "This is what we have." · 5-min sharp coach feedback</p></div><span class="tt-tag c">Coaching</span></div></div>
+      <div class="tt-row"><div class="tt-time">19:00</div><div class="tt-cell"><span class="tt-icon">🍽</span><div class="tt-text"><h5>Dinner</h5><p>—</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">20:00</div><div class="tt-cell"><span class="tt-icon">🌙</span><div class="tt-text"><h5>Optional Build Session</h5><p>Teams who need more time continue building</p></div></div></div>
+    </div>
+  </div>
+  <div>
+    <div class="tt-wrap">
+      <div class="tt-head orange-head">
+        <span class="tt-badge dark-badge">Day 2</span>
+        <span class="tt-head-title">Polish &amp; Demo Day 🎤</span>
+      </div>
+      <div class="tt-row"><div class="tt-time">09:00</div><div class="tt-cell"><span class="tt-icon">⚡</span><div class="tt-text"><h5>Final Build Sprint</h5><p>Last 2 hours to finalize MVP artifact</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">11:00</div><div class="tt-cell"><span class="tt-icon">🎭</span><div class="tt-text"><h5>Demo Day Prep</h5><p>Coaches help each team rehearse 5-min pitch</p></div><span class="tt-tag c">Coaching</span></div></div>
+      <div class="tt-row"><div class="tt-time">12:00</div><div class="tt-cell"><span class="tt-icon">🍱</span><div class="tt-text"><h5>Lunch</h5><p>—</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">13:00</div><div class="tt-cell"><span class="tt-icon">🎤</span><div class="tt-text"><h5>🎤 DEMO DAY</h5><p>5-min pitch: Problem · Who it's for · MVP demo · What's next</p></div><span class="tt-tag o">Pitch</span></div></div>
+      <div class="tt-row"><div class="tt-time">15:00</div><div class="tt-cell"><span class="tt-icon">🏆</span><div class="tt-text"><h5>Award Ceremony</h5><p>🥇 ₩500K · 🥈 ₩300K · 🥉 ₩200K</p></div><span class="tt-tag o">Award</span></div></div>
+      <div class="tt-row"><div class="tt-time">15:30</div><div class="tt-cell"><span class="tt-icon">📜</span><div class="tt-text"><h5>Digital Certificate Issuance</h5><p>LinkedIn-shareable official cert for all graduates</p></div><span class="tt-tag o">Certificate</span></div></div>
+      <div class="tt-row"><div class="tt-time">16:00</div><div class="tt-cell"><span class="tt-icon">🛣</span><div class="tt-text"><h5>Next Track Briefing</h5><p>Introduction to post-program pathways</p></div></div></div>
+      <div class="tt-row"><div class="tt-time">16:30</div><div class="tt-cell"><span class="tt-icon">🚪</span><div class="tt-text"><h5>Close</h5><p>—</p></div></div></div>
+    </div>
+    <div class="deliv-box">
+      <div class="deliv-label">Hackathon #2 — Deliverables</div>
+      <div class="chips">
+        <div class="chip"><span>💻</span>Working MVP artifact (live URL)</div>
+        <div class="chip"><span>🎤</span>5-min Demo Day pitch</div>
+        <div class="chip"><span>🏆</span>Top 3 prizes awarded</div>
+        <div class="chip"><span>📜</span>LinkedIn certificate (all grads)</div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 06 POST TRACKS ══ -->
+<div id="sec-tracks" class="sec">
+  <span class="sec-label">06 — Post-Program Tracks (Optional)</span>
+  <div class="sec-title">What Comes After.</div>
+  <p class="sec-desc">Motivated teams contact a coach directly. Three pathways, each addressing a different next need.</p>
+</div>
+<div class="tracks-grid">
+  <div class="track-card t1">
+    <span class="track-icon">🏗️</span>
+    <div class="track-name">Incorporation Track</div>
+    <div class="track-desc">For teams ready to register a business in Korea and formalize their startup.</div>
+    <ul class="track-list">
+      <li>Business registration guidance in Korea</li>
+      <li>Visa conversion: D10-2 → D8-4</li>
+      <li>Startup lawyer connection</li>
+      <li>IP &amp; legal structure basics</li>
+    </ul>
+  </div>
+  <div class="track-card t2">
+    <span class="track-icon">💰</span>
+    <div class="track-name">Funding Track</div>
+    <div class="track-desc">For teams with a working MVP ready to pursue Korean government grants or investors.</div>
+    <ul class="track-list">
+      <li>Korean startup grants (예비창업패키지 etc.)</li>
+      <li>IR deck coaching</li>
+      <li>Investor network introduction</li>
+      <li>Underdogs ecosystem connection</li>
+    </ul>
+  </div>
+  <div class="track-card t3">
+    <span class="track-icon">🌐</span>
+    <div class="track-name">Partnership Track</div>
+    <div class="track-desc">For teams whose product targets their home market — connect with Korean startups for co-expansion.</div>
+    <ul class="track-list">
+      <li>Matching with Korean startups</li>
+      <li>Co-expansion into home market</li>
+      <li>Inbound ↔ outbound synergy</li>
+      <li>Underdogs alumni network access</li>
+    </ul>
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 07 COACHES ══ -->
+<div id="sec-coaches" class="sec">
+  <span class="sec-label">07 — The Coaching Team</span>
+  <div class="sec-title">Three Practitioners. One Program.</div>
+  <p class="sec-desc">Not lecturers. Coaches who have been through the Underdogs methodology and operate at the intersection of startup execution and coaching.</p>
+</div>
+<div class="coaches-grid">
+  <div class="coach-card">
+    <div class="coach-av">D</div>
+    <div class="coach-name">신동호</div>
+    <div class="coach-role">Dongho Shin · Coach</div>
+    <div class="coach-bio">Underdogs program facilitator with direct experience coaching international students at Woosong University. B2G startup program specialist. Brings field-level insight on foreign student startup pain points.</div>
+  </div>
+  <div class="coach-card">
+    <div class="coach-av" style="background:#3B7FD4;">I</div>
+    <div class="coach-name">Isabel Han</div>
+    <div class="coach-role">Isabel Han · Coach</div>
+    <div class="coach-bio">University lecturer with direct experience teaching and mentoring international students (Yonsei + other universities). Fluent in the realities of foreign student career anxiety in Korea. Startup lawyer network connector.</div>
+  </div>
+  <div class="coach-card">
+    <div class="coach-av" style="background:#2E9E5B;">K</div>
+    <div class="coach-name">김규영</div>
+    <div class="coach-role">Kyu-Young Kim · Coach</div>
+    <div class="coach-bio">Founder of Gainground. Pre-seed funded startup founder (Antler Korea). Government startup agency evaluator (창진원). Experienced in AI tools, solopreneur methodology, and institutional program design.</div>
+  </div>
+</div>
+<hr class="div">
+
+<!-- ══ 08 DESIGN PRINCIPLES ══ -->
+<div id="sec-principles" class="sec">
+  <span class="sec-label">08 — Design Principles</span>
+  <div class="sec-title">Why It's Built This Way.</div>
+</div>
+<div class="principles-grid">
+  <div class="principle"><div class="principle-num">01</div><div><h5>Short but Intense</h5><p>Two focused 1N2D events are more realistic for students than a month-long curriculum. Students value their time — every block delivers a tangible output, not just knowledge.</p></div></div>
+  <div class="principle"><div class="principle-num">02</div><div><h5>Action Over Education</h5><p>Every session ends with a deliverable. Underdogs' core principle: proof over promise. The program is designed for "Act-preneurs" — people who build first and learn by doing.</p></div></div>
+  <div class="principle"><div class="principle-num">03</div><div><h5>Visa Support as a Core Feature</h5><p>Not an add-on. D2 → D10-2 → D8-4 is a critical pain point universities cannot solve alone. Including a startup lawyer makes this program uniquely valuable to both students and university administrators.</p></div></div>
+  <div class="principle"><div class="principle-num">04</div><div><h5>AI as Co-founder</h5><p>Solo is valid. In an era where AI handles prototyping, writing, and strategy — one person with the right tools is a team. Claude + Lovable replace early co-founder dependencies.</p></div></div>
+  <div class="principle"><div class="principle-num">05</div><div><h5>Reverse Glocal Posture</h5><p>International students ARE the global founders entering Korea. Their home-market knowledge + Korean ecosystem access creates a unique inbound ↔ outbound loop unavailable to Korean-only programs.</p></div></div>
+  <div class="principle"><div class="principle-num">06</div><div><h5>University Admin as Client, Student as User</h5><p>The landing page talks to students. The proposal talks to universities. Universities want: participation numbers, satisfaction scores, visible tangible results, and reduced administrative burden (especially visa issues).</p></div></div>
+</div>
+<hr class="div">
+
+<!-- ══ 09 APPLICATION ══ -->
+<div id="sec-app" class="sec">
+  <span class="sec-label">09 — Application &amp; Selection</span>
+  <div class="sec-title">Who Gets In.</div>
+</div>
+<div class="app-grid">
+  <div class="card">
+    <div class="card-label">ELIGIBILITY</div>
+    <ul class="app-list">
+      <li><span style="color:var(--orange);">✓</span> International student enrolled at a Korean university</li>
+      <li><span style="color:var(--orange);">✓</span> 3rd/4th year undergraduate or graduate student</li>
+      <li><span style="color:var(--orange);">✓</span> Interested in entrepreneurship — idea not required</li>
+      <li><span style="color:var(--orange);">✓</span> Willing to work in English</li>
+      <li><span style="color:var(--orange);">✓</span> Can commit to 2 full weekends + 2–4 weeks online</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-label">APPLICATION REQUIREMENTS</div>
+    <ul class="app-list">
+      <li><span style="color:var(--orange);">→</span> 1-page brief concept note (no strict format)</li>
+      <li><span style="color:var(--orange);">→</span> What problem do you want to solve?</li>
+      <li><span style="color:var(--orange);">→</span> Who is affected by this problem?</li>
+      <li><span style="color:var(--orange);">→</span> Any early idea for a solution? (OK if incomplete)</li>
+      <li style="color:#666;font-style:italic;"><span>*</span> Teams of 2–3 may apply together; each evaluated individually</li>
+    </ul>
+  </div>
+</div>
+
+<div class="version-tag">UCA Korea Inbound — Program Plan v2 · April 2026 · Coaches: Dongho Shin · Isabel Han · Kyu-Young Kim · Powered by Underdogs</div>
+</div>
+
+<script>
+(function () {
+  /* ── NAV edge-scroll & fades ── */
+  var ni = document.getElementById('nvi');
+  var fl = document.getElementById('nfl'), fr = document.getElementById('nfr');
+  var bl = document.getElementById('nbl'), br = document.getElementById('nbr');
+
+  function upd() {
+    var sl = ni.scrollLeft, max = ni.scrollWidth - ni.clientWidth;
+    var l = sl > 4, r = sl < max - 4;
+    fl.classList.toggle('on', l); bl.style.opacity = l ? '1' : '0'; bl.style.pointerEvents = l ? 'auto' : 'none';
+    fr.classList.toggle('on', r); br.style.opacity = r ? '1' : '0'; br.style.pointerEvents = r ? 'auto' : 'none';
+  }
+  ni.addEventListener('scroll', upd, { passive: true });
+  window.addEventListener('resize', upd);
+  upd();
+
+  bl.addEventListener('click', function () { ni.scrollBy({ left: -150, behavior: 'smooth' }); });
+  br.addEventListener('click', function () { ni.scrollBy({ left:  150, behavior: 'smooth' }); });
+
+  var timer = null;
+  document.querySelector('.top-nav').addEventListener('mousemove', function (e) {
+    var r = ni.getBoundingClientRect(), x = e.clientX - r.left, dir = 0;
+    if (x < 70) dir = -1; else if (x > r.width - 70) dir = 1;
+    if (dir && !timer) timer = setInterval(function () { ni.scrollLeft += dir * 5; upd(); }, 16);
+    else if (!dir) { clearInterval(timer); timer = null; }
+  });
+  document.querySelector('.top-nav').addEventListener('mouseleave', function () { clearInterval(timer); timer = null; });
+
+  /* ── Active section highlight ── */
+  var secs = [
+    ['cover',          'a[href="#cover"]'],
+    ['sec-pos',        'a[href="#sec-pos"]'],
+    ['sec-ivc',        'a[href="#sec-ivc"]'],
+    ['sec-flow',       'a[href="#sec-flow"]'],
+    ['sec-h1',         'a[href="#sec-h1"]'],
+    ['sec-h2',         'a[href="#sec-h2"]'],
+    ['sec-tracks',     'a[href="#sec-tracks"]'],
+    ['sec-coaches',    'a[href="#sec-coaches"]'],
+    ['sec-principles', 'a[href="#sec-principles"]'],
+    ['sec-app',        'a[href="#sec-app"]'],
+  ];
+  var NH = document.querySelector('.top-nav').offsetHeight;
+
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY + NH + 30, cur = secs[0][1];
+    secs.forEach(function (s) {
+      var el = document.getElementById(s[0]);
+      if (el && el.offsetTop <= y) cur = s[1];
+    });
+    document.querySelectorAll('.nav-a').forEach(function (a) { a.classList.remove('active'); });
+    var a = document.querySelector(cur);
+    if (a) a.classList.add('active');
+  }, { passive: true });
+
+  /* ── Smooth scroll on nav click ── */
+  document.querySelectorAll('.nav-a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var h = a.getAttribute('href');
+      if (h && h[0] === '#') {
+        e.preventDefault();
+        var t = document.getElementById(h.slice(1));
+        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - NH - 12, behavior: 'smooth' });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

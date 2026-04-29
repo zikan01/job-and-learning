@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCA Korea Inbound — Program Plan v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Figtree',sans-serif;
+  background:#F4F1EC;
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  font-size:14px;
+  line-height:1.5;
+}
+:root {
+  --orange:#E8541A;
+  --dark:#0C0C0C;
+  --cream:#F4F1EC;
+  --cream2:#EAE6DF;
+  --white:#FFFFFF;
+  --gray:#888;
+  --border:#E0DBD3;
+}
+
+/* ── TOP NAV ── */
+.top-nav {
+  position:sticky; top:0; z-index:100;
+  background:rgba(12,12,12,0.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.top-nav-scroll-wrap {
+  position:relative;
+  max-width:1120px; margin:0 auto;
+}
+.top-nav-inner {
+  display:flex; align-items:center; gap:4px;
+  overflow-x:auto; scrollbar-width:none;
+  padding:0 40px;
+  scroll-behavior:smooth;
+}
+.top-nav-inner::-webkit-scrollbar { display:none; }
+.nav-fade {
+  position:absolute; top:0; bottom:0; width:72px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .2s;
+  z-index:2;
+}
+.nav-fade-left {
+  left:0;
+  background:linear-gradient(to right, rgba(12,12,12,.95) 30%, transparent);
+}
+.nav-fade-right {
+  right:0;
+  background:linear-gradient(to left, rgba(12,12,12,.95) 30%, transparent);
+}
+.nav-fade.visible { opacity:1; }
+.nav-scroll-btn {
+  position:absolute; top:0; bottom:0; width:44px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; z-index:3;
+  color:rgba(255,255,255,.5);
+  font-size:20px; font-weight:300;
+  transition:color .15s, opacity .2s;
+  user-select:none;
+  opacity:0; pointer-events:none;
+}
+.nav-scroll-btn:hover { color:white; }
+.nav-scroll-btn-left  { left:0; }
+.nav-scroll-btn-right { right:0; }
+.nav-logo {
+  font-family:'Outfit',sans-serif;
+  font-size:13px; font-weight:800;
+  color:var(--orange); letter-spacing:-.02em;
+  white-space:nowrap; padding:16px 16px 16px 0;
+  margin-right:8px;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.nav-item {
+  display:flex; align-items:center; gap:6px;
+  padding:14px 14px;
+  font-size:12px; font-weight:500;
+  color:rgba(255,255,255,.5);
+  white-space:nowrap; cursor:pointer;
+  border-radius:8px;
+  text-decoration:none;
+  transition:color .15s, background .15s;
+}
+.nav-item:hover {
+  color:white;
+  background:rgba(255,255,255,.06);
+}
+.nav-item.active {
+  color:var(--orange);
+  background:rgba(232,84,26,.1);
+}
+.nav-item-num {
+  font-size:10px; font-weight:700;
+  color:rgba(232,84,26,.6);
+  letter-spacing:.05em;
+}
+
+html { scroll-behavior:smooth; }
+
+/* ── PAGE LAYOUT ── */
+.page { max-width:1120px; margin:0 auto; padding:40px 40px 100px; }
+
+/* ── COVER ── */
+.cover {
+  background:var(--dark);
+  color:white;
+  border-radius:20px;
+  padding:64px 64px 56px;
+  margin-bottom:40px;
+  position:relative;
+  overflow:hidden;
+}
+.cover-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.cover-glow {
+  position:absolute;
+  top:-100px; right:-100px;
+  width:500px; height:500px;
+  background:radial-gradient(circle,rgba(232,84,26,.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cover-inner { position:relative; z-index:2; }
+.cover-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid rgba(232,84,26,.5);
+  border-radius:100px; padding:6px 14px;
+  font-size:11px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:#FF7040;
+  margin-bottom:28px;
+}
+.cover-badge-dot { width:6px;height:6px;border-radius:50%;background:var(--orange); }
+.cover-title {
+  font-family:'Outfit',sans-serif;
+  font-size:64px; font-weight:800;
+  letter-spacing:-.03em; line-height:1.0;
+  margin-bottom:16px;
+}
+.cover-title em { color:var(--orange); font-style:normal; }
+.cover-tagline { font-size:18px; font-weight:300; color:rgba(255,255,255,.6); margin-bottom:48px; }
+.cover-meta {
+  display:flex; gap:48px;
+  padding-top:40px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.cover-meta-item { }
+.cover-meta-val {
+  font-family:'Outfit',sans-serif;
+  font-size:32px; font-weight:800;
+  letter-spacing:-.03em; line-height:1;
+  display:block; margin-bottom:4px;
+}
+.cover-meta-key { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.06em; text-transform:uppercase; }
+
+/* ── SECTION TITLES ── */
+.section { margin-bottom:40px; }
+.label {
+  font-size:10px; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--orange);
+  display:block; margin-bottom:10px;
+}
+.section-title {
+  font-family:'Outfit',sans-serif;
+  font-size:28px; font-weight:800;
+  letter-spacing:-.02em; line-height:1.1;
+  margin-bottom:6px;
+}
+.section-desc { font-size:14px; color:var(--gray); font-weight:300; }
+
+/* ── 2-COL LAYOUT ── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+
+/* ── CARD ── */
+.card {
+  background:white; border-radius:14px;
+  padding:28px; border:1px solid var(--border);
+}
+.card-dark {
+  background:var(--dark); border-radius:14px;
+  padding:28px; color:white;
+}
+.card-orange {
+  background:var(--orange); border-radius:14px;
+  padding:28px; color:white;
+}
+
+/* ── POSITIONING BOX ── */
+.position-box {
+  background:white; border-radius:20px;
+  padding:48px; border:1px solid var(--border);
+  margin-bottom:24px;
+}
+.position-row { display:grid; grid-template-columns:1fr 2px 1fr 2px 1fr; gap:40px; align-items:start; }
+.divider-v { background:var(--border); border-radius:1px; }
+.pos-label {
+  font-size:10px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--orange);
+  margin-bottom:12px; display:block;
+}
+.pos-title {
+  font-family:'Outfit',sans-serif;
+  font-size:20px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:12px;
+  line-height:1.2;
+}
+.pos-items { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.pos-items li {
+  font-size:13px; color:#333;
+  display:flex; align-items:flex-start; gap:8px;
+}
+.pos-items li::before { content:'▪'; color:var(--orange); flex-shrink:0; margin-top:1px; }
+
+/* ── IMPACT VALUE CHAIN ── */
+.ivc-wrap {
+  background:var(--dark); border-radius:20px;
+  padding:48px; color:white; margin-bottom:24px;
+}
+.ivc-title {
+  font-family:'Outfit',sans-serif;
+  font-size:22px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:36px;
+  color:white;
+}
+.ivc-chain {
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:0; position:relative;
+}
+.ivc-arrow-row {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  margin:0 10%;
+  margin-bottom:-12px;
+  position:relative; z-index:2;
+}
+.ivc-arrow {
+  text-align:center;
+  font-size:18px; color:rgba(232,84,26,.5);
+}
+.ivc-item { padding:0 12px; }
+.ivc-step {
+  font-size:10px; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--orange);
+  margin-bottom:10px; display:block;
+}
+.ivc-box {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px; padding:20px 16px;
+  height:100%;
+}
+.ivc-box-title {
+  font-family:'Outfit',sans-serif;
+  font-size:15px; font-weight:700;
+  margin-bottom:12px; line-height:1.2;
+}
+.ivc-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.ivc-list li { font-size:12px; color:rgba(255,255,255,.6); display:flex; align-items:flex-start; gap:7px; }
+.ivc-list li::before { content:'·'; color:var(--orange); font-size:16px; line-height:1; flex-shrink:0; }
+.ivc-so-what {
+  margin-top:28px;
+  background:rgba(232,84,26,.08);
+  border:1px solid rgba(232,84,26,.2);
+  border-radius:10px; padding:16px 20px;
+  font-size:12px; color:rgba(255,255,255,.6);
+  line-height:1.7;
+  font-style:italic;
+}
+.ivc-so-what strong { color:var(--orange); font-style:normal; }
+
+/* ── PROGRAM FLOW ── */
+.flow-wrap { margin-bottom:24px; }
+
+/* ── TIMETABLE ── */
+.timetable-wrap {
+  background:white; border-radius:14px;
+  border:1px solid var(--border);
+  overflow:hidden; margin-bottom:20px;
+}
+.timetable-header {
+  background:var(--dark); color:white;
+  padding:18px 24px;
+  display:flex; align-items:center; gap:14px;
+}
+.tt-day-badge {
+  background:var(--orange); color:white;
+  font-size:10px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  padding:4px 10px; border-radius:4px;
+}
+.timetable-header-title {
+  font-family:'Outfit',sans-serif;
+  font-size:16px; font-weight:700;
+}
+.timetable-body { }
+.tt-row {
+  display:grid; grid-template-columns:80px 1fr;
+  border-bottom:1px solid var(--border);
+  min-height:52px;
+}
+.tt-row:last-child { border-bottom:none; }
+.tt-time {
+  padding:14px 16px;
+  font-size:12px; font-weight:600;
+  color:var(--orange); letter-spacing:.02em;
+  border-right:1px solid var(--border);
+  display:flex; align-items:center;
+  font-variant-numeric:tabular-nums;
+}
+.tt-content { padding:14px 20px; display:flex; align-items:center; gap:12px; }
+.tt-icon { font-size:18px; flex-shrink:0; }
+.tt-text h5 { font-size:13px; font-weight:600; color:#111; margin-bottom:2px; }
+.tt-text p { font-size:12px; color:var(--gray); line-height:1.4; }
+.tt-tag {
+  margin-left:auto; flex-shrink:0;
+  font-size:10px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:3px 9px; border-radius:4px;
+}
+.tt-tag.method { background:#FFF3EE; color:var(--orange); }
+.tt-tag.coaching { background:#F0F7FF; color:#3B7FD4; }
+.tt-tag.output { background:#F0FFF5; color:#2E9E5B; }
+.tt-tag.social { background:#F9F0FF; color:#8B4DC8; }
+.tt-tag.legal { background:#FFFBF0; color:#B07D0A; }
+
+/* ── HACKATHON HEADERS ── */
+.hack-label {
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:16px;
+}
+.hack-num {
+  width:40px; height:40px; border-radius:10px;
+  background:var(--dark); color:white;
+  font-family:'Outfit',sans-serif; font-size:20px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+.hack-num.orange { background:var(--orange); }
+.hack-info h3 {
+  font-family:'Outfit',sans-serif;
+  font-size:20px; font-weight:800; letter-spacing:-.02em;
+}
+.hack-info span { font-size:12px; color:var(--gray); }
+
+/* ── OUTPUT CARDS ── */
+.output-chips {
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin-top:16px;
+}
+.output-chip {
+  background:white; border:1px solid var(--border);
+  border-radius:8px; padding:10px 16px;
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; font-weight:500;
+}
+.output-chip-icon { font-size:16px; }
+
+/* ── BETWEEN PERIOD ── */
+.between-box {
+  background:var(--cream2);
+  border:2px dashed var(--border);
+  border-radius:14px; padding:32px;
+  margin-bottom:24px;
+}
+.between-title {
+  font-family:'Outfit',sans-serif;
+  font-size:18px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:20px;
+  display:flex; align-items:center; gap:10px;
+}
+.between-items { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.between-item {
+  background:white; border-radius:10px;
+  padding:18px; border:1px solid var(--border);
+}
+.between-item-icon { font-size:22px; margin-bottom:8px; display:block; }
+.between-item h5 { font-size:13px; font-weight:600; margin-bottom:4px; }
+.between-item p { font-size:11px; color:var(--gray); line-height:1.5; }
+
+/* ── POST TRACKS ── */
+.tracks-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:16px; }
+.track-card {
+  border-radius:14px; padding:28px;
+  border:1px solid var(--border);
+  background:white;
+  position:relative; overflow:hidden;
+}
+.track-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:3px;
+}
+.track-card.t1::before { background:#2E9E5B; }
+.track-card.t2::before { background:#3B7FD4; }
+.track-card.t3::before { background:var(--orange); }
+.track-icon { font-size:28px; margin-bottom:14px; display:block; }
+.track-name {
+  font-family:'Outfit',sans-serif;
+  font-size:16px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:8px;
+}
+.track-desc { font-size:13px; color:var(--gray); line-height:1.6; margin-bottom:14px; }
+.track-items { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.track-items li {
+  font-size:12px; color:#555;
+  display:flex; align-items:flex-start; gap:7px;
+}
+.track-items li::before { content:'→'; color:var(--orange); flex-shrink:0; }
+
+/* ── COACHES ── */
+.coaches-row { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:16px; }
+.coach-card {
+  background:var(--dark); border-radius:14px;
+  padding:28px; color:white;
+  border:1px solid rgba(255,255,255,.06);
+}
+.coach-avatar {
+  width:52px; height:52px; border-radius:12px;
+  background:var(--orange); color:white;
+  font-family:'Outfit',sans-serif; font-size:22px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:16px;
+}
+.coach-name {
+  font-family:'Outfit',sans-serif;
+  font-size:18px; font-weight:800;
+  letter-spacing:-.02em; margin-bottom:4px;
+}
+.coach-role { font-size:12px; color:var(--orange); margin-bottom:12px; font-weight:600; }
+.coach-bio { font-size:12px; color:rgba(255,255,255,.5); line-height:1.7; }
+
+/* ── DESIGN PRINCIPLES ── */
+.principles-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:16px; }
+.principle {
+  background:white; border-radius:12px;
+  padding:24px; border:1px solid var(--border);
+  display:flex; gap:16px;
+}
+.principle-num {
+  font-family:'Outfit',sans-serif;
+  font-size:32px; font-weight:800;
+  color:rgba(0,0,0,.06); letter-spacing:-.03em;
+  flex-shrink:0; line-height:1; min-width:36px;
+}
+.principle h5 { font-size:14px; font-weight:700; margin-bottom:6px; color:var(--dark); }
+.principle p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+/* ── DIVIDER ── */
+hr.section-divider {
+  border:none; border-top:1px solid var(--border);
+  margin:40px 0;
+}
+
+/* ── PRINT / EXPORT HINT ── */
+.version-tag {
+  text-align:center; padding:20px;
+  font-size:11px; color:rgba(0,0,0,.3);
+  letter-spacing:.08em;
+}
+
+/* ── APPLY BUTTON (top-right fixed) ── */
+.apply-btn {
+  position:fixed;
+  top:10px;
+  right:24px;
+  z-index:200;
+  background:var(--orange);
+  color:white;
+  border:none;
+  border-radius:8px;
+  padding:9px 22px;
+  font-family:'Outfit',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.04em;
+  cursor:pointer;
+  transition:background .15s, transform .12s, box-shadow .15s;
+  box-shadow:0 2px 10px rgba(232,84,26,.4);
+  white-space:nowrap;
+}
+.apply-btn:hover {
+  background:#D4481A;
+  transform:translateY(-1px);
+  box-shadow:0 4px 18px rgba(232,84,26,.5);
+}
+.apply-btn:active { transform:translateY(0); }
+
+@media (max-width:480px) {
+  .apply-btn { right:12px; padding:8px 16px; font-size:12px; }
+}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open {
+  display:flex;
+  animation:fadeInOverlay .22s ease;
+}
+@keyframes fadeInOverlay {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+.modal-box {
+  background:white;
+  border-radius:20px;
+  padding:40px;
+  width:100%;
+  max-width:560px;
+  max-height:90vh;
+  overflow-y:auto;
+  position:relative;
+  animation:fadeInModal .25s ease;
+}
+@keyframes fadeInModal {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.modal-close {
+  position:absolute;
+  top:16px; right:20px;
+  background:none;
+  border:none;
+  font-size:26px;
+  line-height:1;
+  color:var(--gray);
+  cursor:pointer;
+  padding:4px 6px;
+  transition:color .15s;
+  font-weight:300;
+}
+.modal-close:hover { color:var(--dark); }
+.modal-title {
+  font-family:'Outfit',sans-serif;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  margin-bottom:6px;
+}
+.modal-subtitle {
+  font-size:13px;
+  color:var(--gray);
+  margin-bottom:28px;
+  line-height:1.5;
+}
+.modal-form { display:flex; flex-direction:column; gap:18px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-label {
+  font-size:12px;
+  font-weight:700;
+  color:var(--dark);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.form-label .req { color:var(--orange); margin-left:2px; }
+.form-input,
+.form-select,
+.form-textarea {
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:11px 14px;
+  font-family:'Figtree',sans-serif;
+  font-size:14px;
+  color:var(--dark);
+  background:white;
+  outline:none;
+  width:100%;
+  transition:border-color .15s, box-shadow .15s;
+  appearance:auto;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px rgba(232,84,26,.12);
+}
+.form-textarea {
+  resize:vertical;
+  min-height:110px;
+  line-height:1.6;
+}
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.modal-submit {
+  margin-top:4px;
+  background:var(--orange);
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:15px;
+  font-family:'Outfit',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.03em;
+  cursor:pointer;
+  width:100%;
+  transition:background .15s, transform .12s;
+}
+.modal-submit:hover { background:#D4481A; transform:translateY(-1px); }
+.modal-submit:active { transform:translateY(0); }
+
+@media (max-width:600px) {
+  .modal-box { padding:28px 20px; }
+  .form-row  { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAVIGATION ── -->
+<nav class="top-nav">
+  <div class="top-nav-scroll-wrap">
+    <div class="nav-fade nav-fade-left" id="navFadeLeft"></div>
+    <div class="nav-scroll-btn nav-scroll-btn-left" id="navBtnLeft">&#8249;</div>
+    <div class="top-nav-inner" id="topNavInner">
+      <div class="nav-logo">UCA Korea</div>
+      <a class="nav-item active" href="#cover">
+        <span>Overview</span>
+      </a>
+      <a class="nav-item" href="#positioning">
+        <span class="nav-item-num">01</span>
+        <span>Positioning</span>
+      </a>
+      <a class="nav-item" href="#impact-value-chain">
+        <span class="nav-item-num">02</span>
+        <span>Impact Value Chain</span>
+      </a>
+      <a class="nav-item" href="#program-structure">
+        <span class="nav-item-num">03</span>
+        <span>Program Structure</span>
+      </a>
+      <a class="nav-item" href="#hackathon1">
+        <span class="nav-item-num">04</span>
+        <span>Hackathon #1</span>
+      </a>
+      <a class="nav-item" href="#hackathon2">
+        <span class="nav-item-num">05</span>
+        <span>Hackathon #2</span>
+      </a>
+      <a class="nav-item" href="#post-tracks">
+        <span class="nav-item-num">06</span>
+        <span>Post-Program Tracks</span>
+      </a>
+      <a class="nav-item" href="#coaches">
+        <span class="nav-item-num">07</span>
+        <span>Coaching Team</span>
+      </a>
+      <a class="nav-item" href="#design-principles">
+        <span class="nav-item-num">08</span>
+        <span>Design Principles</span>
+      </a>
+      <a class="nav-item" href="#application">
+        <span class="nav-item-num">09</span>
+        <span>Application</span>
+      </a>
+    </div>
+    <div class="nav-scroll-btn nav-scroll-btn-right" id="navBtnRight">&#8250;</div>
+    <div class="nav-fade nav-fade-right" id="navFadeRight"></div>
+  </div>
+</nav>
+
+<!-- ── APPLY BUTTON (fixed top-right) ── -->
+<button class="apply-btn" id="applyBtn">Apply Now</button>
+
+<!-- ── APPLY MODAL ── -->
+<div class="modal-overlay" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+  <div class="modal-box" id="applyModalBox">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-title" id="modalHeading">Apply to UCA Korea</div>
+    <div class="modal-subtitle">University Co-founder Accelerator · Korea Inbound<br>모든 항목을 빠짐없이 입력해주세요. (All fields required.)<br><span style="font-size:13px;color:#888;">Selected teams will be contacted individually based on the submitted details. 작성한 항목을 기반으로 선정된 팀에게는 개별연락을 드리겠습니다.</span></div>
+    <form class="modal-form" id="applyForm" novalidate>
+
+      <div class="form-group">
+        <label class="form-label" for="f-name">이름 (Full Name)<span class="req">*</span></label>
+        <input class="form-input" type="text" id="f-name" name="name" placeholder="Your full name" autocomplete="name">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-phone">연락처 (Phone)<span class="req">*</span></label>
+          <input class="form-input" type="tel" id="f-phone" name="phone" placeholder="+82-10-0000-0000" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-email">이메일 (Email)<span class="req">*</span></label>
+          <input class="form-input" type="email" id="f-email" name="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-school">학교 (University)<span class="req">*</span></label>
+          <input class="form-input" type="text" id="f-school" name="school" placeholder="e.g. Yonsei University">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-grade">학년 (Year / Level)<span class="req">*</span></label>
+          <select class="form-select" id="f-grade" name="grade">
+            <option value="">Select...</option>
+            <option value="1학년">1학년 (Freshman)</option>
+            <option value="2학년">2학년 (Sophomore)</option>
+            <option value="3학년">3학년 (Junior)</option>
+            <option value="4학년">4학년 (Senior)</option>
+            <option value="대학원생">대학원생 (Graduate)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="f-problem">해결하고자 하는 문제 (Problem to Solve)<span class="req">*</span></label>
+        <textarea class="form-textarea" id="f-problem" name="problem" placeholder="어떤 문제를 해결하고 싶으신가요? 누가 이 문제를 겪고 있나요? 왜 이 문제가 중요한가요?&#10;(Describe the problem you want to solve. Who is affected? Why does it matter?)"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="f-teamsize">팀 인원 수 (Team Size)<span class="req">*</span></label>
+        <select class="form-select" id="f-teamsize" name="teamSize">
+          <option value="">Select...</option>
+          <option value="1">1명 (Solo)</option>
+          <option value="2">2명</option>
+          <option value="3">3명</option>
+          <option value="4">4명</option>
+          <option value="5">5명</option>
+          <option value="6+">6명 이상</option>
+        </select>
+      </div>
+
+      <button class="modal-submit" type="submit">제출하기 (Submit Application)</button>
+    </form>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ── COVER ── -->
+<div id="cover" class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-inner">
+    <div class="cover-badge">
+      <span class="cover-badge-dot"></span>
+      Track 02 · Korea Inbound · Underdogs × UCA
+    </div>
+    <div class="cover-title">University<br>Co-founder<br><em>Accelerator.</em></div>
+    <div class="cover-tagline">Foreign students. Korean startup ecosystem. Real co-founders. Real products.</div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-val">2×</span>
+        <span class="cover-meta-key">1N2D Hackathons</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-val">~30</span>
+        <span class="cover-meta-key">Participants / Cohort</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-val">EN</span>
+        <span class="cover-meta-key">Program Language</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-val">3</span>
+        <span class="cover-meta-key">Expert Coaches</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-val">B2G</span>
+        <span class="cover-meta-key">Client Type</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── POSITIONING ── -->
+<div id="positioning" class="section">
+  <span class="label">01 — Positioning</span>
+  <div class="section-title">Who, What, Why.</div>
+  <p class="section-desc">The core proposition framed for the program client (universities) and the participant (international students).</p>
+</div>
+
+<div class="position-box">
+  <div class="position-row">
+    <div>
+      <span class="pos-label">Target</span>
+      <div class="pos-title">International Students in Korea</div>
+      <ul class="pos-items">
+        <li>Undergrad (3rd/4th yr) + grad students at Korean universities</li>
+        <li>Intent: launch or build something <em>inside</em> Korea</li>
+        <li>Often pre-team, pre-idea — but motivated</li>
+        <li>Also includes "in-between" students (Korean diaspora, heritage students)</li>
+        <li>Language: English program → Korean-speaking students encouraged to connect</li>
+      </ul>
+    </div>
+    <div class="divider-v"></div>
+    <div>
+      <span class="pos-label">Core Challenge</span>
+      <div class="pos-title">K-Market Localization Barrier</div>
+      <ul class="pos-items">
+        <li>Language barrier in Korean-only startup education</li>
+        <li>Visa friction: D2 → working / startup visa paths unclear</li>
+        <li>No co-founder, no network, no "in" to the Korean startup ecosystem</li>
+        <li>Startup education at universities targets Korean students only</li>
+        <li>Employment is nearly impossible → entrepreneurship is the real alternative</li>
+      </ul>
+    </div>
+    <div class="divider-v"></div>
+    <div>
+      <span class="pos-label">Theme &amp; Methodology</span>
+      <div class="pos-title">K-Market Entry for Foreign Founders</div>
+      <ul class="pos-items">
+        <li><strong>Reverse glocal posture</strong> — they are the "global" entering Korea</li>
+        <li>IMPACT methodology: I → M → P (Hackathon #1) → A (Hackathon #2)</li>
+        <li>CORE foundation: Act-preneur mindset, ACTT execution habits, 5D skillset</li>
+        <li>AI as co-founder: solo is valid, AI tools replace early team needs</li>
+        <li>Korean mentor pool + startup lawyer + alumni network as key resources</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── IMPACT VALUE CHAIN ── -->
+<div id="impact-value-chain" class="section">
+  <span class="label">02 — Impact Value Chain</span>
+  <div class="section-title">From Resources to Real Change.</div>
+  <p class="section-desc">Every layer connects with a "So What?" test. Each output must logically cause the next layer.</p>
+</div>
+
+<div class="ivc-wrap">
+  <div class="ivc-title">UCA Korea Inbound — Impact Value Chain</div>
+  <div class="ivc-chain">
+    <div class="ivc-item">
+      <span class="ivc-step">1 · Input</span>
+      <div class="ivc-box">
+        <div class="ivc-box-title">What We Put In</div>
+        <ul class="ivc-list">
+          <li>3 facilitator-coaches</li>
+          <li>Startup lawyer (visa &amp; legal)</li>
+          <li>2 × hackathon venues</li>
+          <li>AI tools: Claude, Lovable, Gemini</li>
+          <li>VOD platform &amp; LMS</li>
+          <li>Prize fund ₩1,000,000</li>
+          <li>LinkedIn cert system</li>
+          <li>University partner network</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ivc-item">
+      <span class="ivc-step">2 · Activity</span>
+      <div class="ivc-box">
+        <div class="ivc-box-title">What We Do</div>
+        <ul class="ivc-list">
+          <li>Application &amp; screening</li>
+          <li>Hackathon #1: mindset + problem + co-founder</li>
+          <li>Visa &amp; legal consultation session</li>
+          <li>VOD self-learning (2–4 wks)</li>
+          <li>Hackathon #2: AI MVP build</li>
+          <li>Demo Day + Awards</li>
+          <li>Post-program track briefing</li>
+          <li>1:1 coaching (throughout)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ivc-item">
+      <span class="ivc-step">3 · Output</span>
+      <div class="ivc-box">
+        <div class="ivc-box-title">What Comes Out</div>
+        <ul class="ivc-list">
+          <li>~20 graduates w/ certificate</li>
+          <li>~15 MVP artifacts (live URLs)</li>
+          <li>~8–10 co-founder teams formed</li>
+          <li>~20 concept notes submitted</li>
+          <li>100% LinkedIn certificates issued</li>
+          <li>1 visa consultation session</li>
+          <li>Top 3 teams awarded</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ivc-item">
+      <span class="ivc-step">4 · Outcome</span>
+      <div class="ivc-box">
+        <div class="ivc-box-title">What Changes</div>
+        <ul class="ivc-list">
+          <li>2–3 business registrations</li>
+          <li>1–2 visa conversions (D10-2)</li>
+          <li>10%+ apply to external programs (예비창업패키지)</li>
+          <li>70%+ re-participation / referral intent</li>
+          <li>15+ meaningful network connections</li>
+          <li>↑ Entrepreneurial mindset score (pre/post)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ivc-item">
+      <span class="ivc-step">5 · Impact</span>
+      <div class="ivc-box">
+        <div class="ivc-box-title">Long-Term Change</div>
+        <ul class="ivc-list">
+          <li>Universities adopt this as standard program for intl. students</li>
+          <li>Korean ↔ Global co-creation loop forms</li>
+          <li>Intl. students voluntarily stay in Korea via entrepreneurship</li>
+          <li>Supports government's foreign talent retention goal</li>
+          <li>Inbound ↔ outbound startup synergy across Asia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ivc-so-what">
+    <strong>So What? Chain:</strong> Hackathons run → teams form + MVPs built → some register businesses / apply to programs / convert visas → intl. students build real entrepreneurial careers in Korea → universities adopt the model; a global-local startup ecosystem grows.
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── PROGRAM FLOW ── -->
+<div id="program-structure" class="section">
+  <span class="label">03 — Program Structure</span>
+  <div class="section-title">Three Phases, One Journey.</div>
+  <p class="section-desc">Short but intense. Every phase ends with a tangible deliverable.</p>
+</div>
+
+<div style="background:white;border:1px solid var(--border);border-radius:20px;padding:40px;margin-bottom:24px;">
+
+  <!-- FLOW: 5 boxes + 4 arrows = 9 columns -->
+  <div style="display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr 44px 1fr 44px 1fr;align-items:stretch;gap:0;margin-bottom:28px;">
+
+    <!-- Phase 0 -->
+    <div style="background:#F8F5F0;border:1px solid var(--border);border-radius:14px;padding:20px 16px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);">Phase 0</span>
+      <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.25;">Application &amp; Selection</div>
+      <div style="font-size:11px;color:var(--gray);line-height:1.5;">1-page concept note<br>Individual screening</div>
+    </div>
+
+    <!-- Arrow 1 -->
+    <div style="display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,0,0,.2);">→</div>
+
+    <!-- Hackathon #1 -->
+    <div style="background:var(--dark);border:1px solid var(--dark);border-radius:14px;padding:20px 16px;color:white;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FF7040;">Hackathon #1</span>
+      <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.25;">Find Your<br>Co-founder</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;">1 Night · 2 Days<br>Offline · ~30 pax</div>
+    </div>
+
+    <!-- Arrow 2 -->
+    <div style="display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,0,0,.15);">→</div>
+
+    <!-- Between -->
+    <div style="background:#F0F7FF;border:1px solid #C8DCF5;border-radius:14px;padding:20px 16px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3B7FD4;">Between</span>
+      <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.25;">Self-Directed<br>Learning</div>
+      <div style="font-size:11px;color:var(--gray);line-height:1.5;">2–4 weeks online<br>VOD + AI tools</div>
+    </div>
+
+    <!-- Arrow 3 -->
+    <div style="display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,0,0,.15);">→</div>
+
+    <!-- Hackathon #2 -->
+    <div style="background:var(--orange);border:1px solid var(--orange);border-radius:14px;padding:20px 16px;color:white;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);">Hackathon #2</span>
+      <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.25;">Build Your<br>Mini MVP</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.75);line-height:1.5;">1 Night · 2 Days<br>Demo Day + Awards</div>
+    </div>
+
+    <!-- Arrow 4 -->
+    <div style="display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(0,0,0,.15);">→</div>
+
+    <!-- Phase 3 -->
+    <div style="background:#F0FFF5;border:1px solid #B8E8CA;border-radius:14px;padding:20px 16px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2E9E5B;">Phase 3</span>
+      <div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.25;">Post-Program<br>Tracks</div>
+      <div style="font-size:11px;color:var(--gray);line-height:1.5;">Optional<br>3 pathways</div>
+    </div>
+
+  </div>
+
+  <!-- METHODOLOGY MAPPING — same 9-column grid -->
+  <div style="background:#F8F5F0;border-radius:12px;padding:20px 24px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:14px;">IMPACT Methodology Mapping</div>
+    <div style="display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr 44px 1fr 44px 1fr;gap:0;align-items:center;">
+      <div style="text-align:center;font-size:11px;color:var(--gray);">Pre-screening</div>
+      <div></div>
+      <div style="text-align:center;">
+        <span style="background:var(--dark);color:white;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;display:inline-block;">I · M · P</span>
+        <div style="font-size:10px;color:var(--gray);margin-top:6px;line-height:1.5;">Inspiration<br>Market · Product</div>
+      </div>
+      <div></div>
+      <div style="text-align:center;font-size:11px;color:#3B7FD4;font-weight:600;">Self-learning<br>+ AI tools</div>
+      <div></div>
+      <div style="text-align:center;">
+        <span style="background:var(--orange);color:white;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;display:inline-block;">A · C · T</span>
+        <div style="font-size:10px;color:var(--gray);margin-top:6px;line-height:1.5;">Acquisition<br>Commerce · Team</div>
+      </div>
+      <div></div>
+      <div style="text-align:center;font-size:11px;color:#2E9E5B;font-weight:600;">Optional<br>3 Tracks</div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- ── HACKATHON #1 TIMETABLE ── -->
+<div id="hackathon1" class="section">
+  <span class="label">04 — Hackathon #1 · "Find Your Co-founder"</span>
+  <div class="hack-label">
+    <div class="hack-num">1</div>
+    <div class="hack-info">
+      <h3>Find Your Co-founder</h3>
+      <span>1 Night · 2 Days · Offline · Goal: Problem definition + Team formation</span>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-bottom:20px;">
+  <div>
+    <div class="timetable-wrap">
+      <div class="timetable-header">
+        <span class="tt-day-badge">Day 1</span>
+        <span class="timetable-header-title">Opening, Mindset &amp; Team Discovery</span>
+      </div>
+      <div class="timetable-body">
+        <div class="tt-row">
+          <div class="tt-time">09:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">👋</span>
+            <div class="tt-text"><h5>Welcome &amp; Ice-breaking</h5><p>2-min self-intro per participant (timed)</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">10:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🧠</span>
+            <div class="tt-text"><h5>Act-preneur Mindset Session</h5><p>CORE: Calling + Operation (ACTT) · Why action beats planning</p></div>
+            <span class="tt-tag method">CORE</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">10:45</div>
+          <div class="tt-content">
+            <span class="tt-icon">⚡</span>
+            <div class="tt-text"><h5>IMPACT Methodology Workshop</h5><p>5-layer Impact Value Chain · "So What?" test · I·M·P overview</p></div>
+            <span class="tt-tag method">IMPACT</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">12:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🍱</span>
+            <div class="tt-text"><h5>Lunch</h5><p>—</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">13:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🃏</span>
+            <div class="tt-text"><h5>Blind Idea Showcase</h5><p>Concept notes displayed anonymously · Each marks 3 ideas they find interesting</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">14:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🔄</span>
+            <div class="tt-text"><h5>Speed Networking (Rotation)</h5><p>2–3 min conversations · Find resonance before forming teams</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">15:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">🎯</span>
+            <div class="tt-text"><h5>Problem Definition Workshop</h5><p>IMPACT I·M — "Who has this pain? How bad? Why now?"</p></div>
+            <span class="tt-tag method">IMPACT I·M</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">17:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">🎤</span>
+            <div class="tt-text"><h5>Lightning Round Pitches</h5><p>90-sec pitch: My problem + Why I want to solve it</p></div>
+            <span class="tt-tag output">Output</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">19:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🍽</span>
+            <div class="tt-text"><h5>Dinner + Free Networking</h5><p>Informal co-founder conversations begin</p></div>
+            <span class="tt-tag social">Social</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">21:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🤝</span>
+            <div class="tt-text"><h5>Co-founder Matching Session</h5><p>Voluntary team formation · Coaches facilitate · Solo OK</p></div>
+            <span class="tt-tag output">Output</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="timetable-wrap">
+      <div class="timetable-header">
+        <span class="tt-day-badge">Day 2</span>
+        <span class="timetable-header-title">Problem Deepening &amp; Team Confirmation</span>
+      </div>
+      <div class="timetable-body">
+        <div class="tt-row">
+          <div class="tt-time">09:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">✅</span>
+            <div class="tt-text"><h5>Team Check-in</h5><p>Each team confirms direction (solo or paired)</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">09:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">⚖️</span>
+            <div class="tt-text"><h5>Visa &amp; Legal Consultation</h5><p>Startup lawyer: D2 → D10-2 → D8-4 pathway · Q&amp;A per nationality</p></div>
+            <span class="tt-tag legal">Legal</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">11:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">💡</span>
+            <div class="tt-text"><h5>Problem → Solution Sketch</h5><p>IMPACT P — Simplest version of solution · AI draft a 1-page concept</p></div>
+            <span class="tt-tag method">IMPACT P</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">12:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">🍱</span>
+            <div class="tt-text"><h5>Lunch</h5><p>—</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">13:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">🎙</span>
+            <div class="tt-text"><h5>1:1 Mentor Coaching</h5><p>Each coach: ~10 participants · Problem clarity + team direction feedback</p></div>
+            <span class="tt-tag coaching">Coaching</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">15:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🏁</span>
+            <div class="tt-text"><h5>Hackathon #1 Final Pitches</h5><p>3-min: Problem · Target user · Proposed solution · What's next</p></div>
+            <span class="tt-tag output">Output</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">16:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">📋</span>
+            <div class="tt-text"><h5>Between-Period Briefing</h5><p>VOD access · AI tool guidance · Submit 1-page updated plan before H#2</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">17:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🚪</span>
+            <div class="tt-text"><h5>Close</h5><p>—</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- H1 OUTPUTS -->
+    <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Hackathon #1 — Deliverables</div>
+      <div class="output-chips">
+        <div class="output-chip"><span class="output-chip-icon">✅</span>Problem statement (1 sentence)</div>
+        <div class="output-chip"><span class="output-chip-icon">🤝</span>Co-founder team confirmed</div>
+        <div class="output-chip"><span class="output-chip-icon">📄</span>1-page concept note</div>
+        <div class="output-chip"><span class="output-chip-icon">⚖️</span>Visa pathway understood</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BETWEEN ── -->
+<div class="between-box">
+  <div class="between-title">
+    <span style="background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:13px;color:var(--gray);">Between Hackathons · 2–4 Weeks · Online</span>
+    <span style="font-size:14px;font-weight:400;color:var(--gray);">Deepen solution thinking before building</span>
+  </div>
+  <div class="between-items">
+    <div class="between-item">
+      <span class="between-item-icon">🎥</span>
+      <h5>VOD Module 1</h5>
+      <p>Customer discovery basics — how to talk to real users</p>
+    </div>
+    <div class="between-item">
+      <span class="between-item-icon">🎥</span>
+      <h5>VOD Module 2</h5>
+      <p>MVP thinking — what's the simplest thing you can build?</p>
+    </div>
+    <div class="between-item">
+      <span class="between-item-icon">🤖</span>
+      <h5>VOD Module 3</h5>
+      <p>AI tools crash course: Lovable, Claude, Notion AI for prototyping</p>
+    </div>
+    <div class="between-item">
+      <span class="between-item-icon">💬</span>
+      <h5>Slack Community</h5>
+      <p>Peer check-ins · Coach feedback channel · Required: 1-page updated plan</p>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── HACKATHON #2 ── -->
+<div id="hackathon2" class="section">
+  <span class="label">05 — Hackathon #2 · "Build Your Mini MVP"</span>
+  <div class="hack-label">
+    <div class="hack-num orange">2</div>
+    <div class="hack-info">
+      <h3>Build Your Mini MVP</h3>
+      <span>1 Night · 2 Days · Offline · Goal: Working MVP artifact + Demo Day pitch</span>
+    </div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-bottom:20px;">
+  <div>
+    <div class="timetable-wrap">
+      <div class="timetable-header" style="background:var(--orange);">
+        <span class="tt-day-badge" style="background:rgba(0,0,0,.2);">Day 1</span>
+        <span class="timetable-header-title">Build Day</span>
+      </div>
+      <div class="timetable-body">
+        <div class="tt-row">
+          <div class="tt-time">09:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">📋</span>
+            <div class="tt-text"><h5>Team Check-in &amp; Plan Review</h5><p>Quick coach feedback on updated 1-page plan</p></div>
+            <span class="tt-tag coaching">Coaching</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">10:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🛠</span>
+            <div class="tt-text"><h5>AI Build Workshop</h5><p>IMPACT A — Hands-on: build a landing page with Lovable / Claude / Canva AI</p></div>
+            <span class="tt-tag method">IMPACT A</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">12:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🍱</span>
+            <div class="tt-text"><h5>Lunch</h5><p>—</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">13:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">⚡</span>
+            <div class="tt-text"><h5>Build Sprint</h5><p>Teams build independently · Coaches rotate · Focus: one working MVP artifact</p></div>
+            <span class="tt-tag output">Building</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">17:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">👀</span>
+            <div class="tt-text"><h5>Progress Check</h5><p>Screen-share: "This is what we have." · 5-min sharp coach feedback</p></div>
+            <span class="tt-tag coaching">Coaching</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">19:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🍽</span>
+            <div class="tt-text"><h5>Dinner</h5><p>—</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">20:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🌙</span>
+            <div class="tt-text"><h5>Optional Build Session</h5><p>Teams who need more time continue building</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="timetable-wrap">
+      <div class="timetable-header" style="background:var(--orange);">
+        <span class="tt-day-badge" style="background:rgba(0,0,0,.2);">Day 2</span>
+        <span class="timetable-header-title">Polish &amp; Demo Day 🎤</span>
+      </div>
+      <div class="timetable-body">
+        <div class="tt-row">
+          <div class="tt-time">09:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">⚡</span>
+            <div class="tt-text"><h5>Final Build Sprint</h5><p>Last 2 hours to finalize MVP artifact</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">11:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🎭</span>
+            <div class="tt-text"><h5>Demo Day Prep</h5><p>Coaches help each team rehearse 5-min pitch</p></div>
+            <span class="tt-tag coaching">Coaching</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">12:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🍱</span>
+            <div class="tt-text"><h5>Lunch</h5><p>—</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">13:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🎤</span>
+            <div class="tt-text"><h5>🎤 DEMO DAY</h5><p>5-min pitch: Problem · Who it's for · MVP demo · What's next</p></div>
+            <span class="tt-tag output">Pitch</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">15:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🏆</span>
+            <div class="tt-text"><h5>Award Ceremony</h5><p>🥇 ₩500K · 🥈 ₩300K · 🥉 ₩200K</p></div>
+            <span class="tt-tag output">Award</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">15:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">📜</span>
+            <div class="tt-text"><h5>Digital Certificate Issuance</h5><p>LinkedIn-shareable official cert for all graduates</p></div>
+            <span class="tt-tag output">Certificate</span>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">16:00</div>
+          <div class="tt-content">
+            <span class="tt-icon">🛣</span>
+            <div class="tt-text"><h5>Next Track Briefing</h5><p>Introduction to post-program pathways</p></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">16:30</div>
+          <div class="tt-content">
+            <span class="tt-icon">🚪</span>
+            <div class="tt-text"><h5>Close</h5><p>—</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;">Hackathon #2 — Deliverables</div>
+      <div class="output-chips">
+        <div class="output-chip"><span class="output-chip-icon">💻</span>Working MVP artifact (live URL)</div>
+        <div class="output-chip"><span class="output-chip-icon">🎤</span>5-min Demo Day pitch</div>
+        <div class="output-chip"><span class="output-chip-icon">🏆</span>Top 3 prizes awarded</div>
+        <div class="output-chip"><span class="output-chip-icon">📜</span>LinkedIn certificate (all grads)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── POST TRACKS ── -->
+<div id="post-tracks" class="section">
+  <span class="label">06 — Post-Program Tracks (Optional)</span>
+  <div class="section-title">What Comes After.</div>
+  <p class="section-desc">Motivated teams contact a coach directly. Three pathways, each addressing a different next need.</p>
+</div>
+
+<div class="tracks-grid">
+  <div class="track-card t1">
+    <span class="track-icon">🏗️</span>
+    <div class="track-name">Incorporation Track</div>
+    <div class="track-desc">For teams ready to register a business in Korea and formalize their startup.</div>
+    <ul class="track-items">
+      <li>Business registration guidance in Korea</li>
+      <li>Visa conversion: D10-2 → D8-4</li>
+      <li>Startup lawyer connection</li>
+      <li>IP &amp; legal structure basics</li>
+    </ul>
+  </div>
+  <div class="track-card t2">
+    <span class="track-icon">💰</span>
+    <div class="track-name">Funding Track</div>
+    <div class="track-desc">For teams with a working MVP ready to pursue Korean government grants or investors.</div>
+    <ul class="track-items">
+      <li>Korean startup grants (예비창업패키지 etc.)</li>
+      <li>IR deck coaching</li>
+      <li>Investor network introduction</li>
+      <li>Underdogs ecosystem connection</li>
+    </ul>
+  </div>
+  <div class="track-card t3">
+    <span class="track-icon">🌐</span>
+    <div class="track-name">Partnership Track</div>
+    <div class="track-desc">For teams whose product targets their home market — connect with Korean startups for co-expansion.</div>
+    <ul class="track-items">
+      <li>Matching with Korean startups</li>
+      <li>Co-expansion into home market</li>
+      <li>Inbound ↔ outbound synergy</li>
+      <li>Underdogs alumni network access</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── COACHES ── -->
+<div id="coaches" class="section">
+  <span class="label">07 — The Coaching Team</span>
+  <div class="section-title">Three Practitioners. One Program.</div>
+  <p class="section-desc">Not lecturers. Coaches who have been through the Underdogs methodology and operate at the intersection of startup execution and coaching.</p>
+</div>
+
+<div class="coaches-row">
+  <div class="coach-card">
+    <div class="coach-avatar">D</div>
+    <div class="coach-name">신동호</div>
+    <div class="coach-role">Dongho Shin · Coach</div>
+    <div class="coach-bio">Underdogs program facilitator with direct experience coaching international students at Woosong University. B2G startup program specialist. Brings field-level insight on foreign student startup pain points.</div>
+  </div>
+  <div class="coach-card">
+    <div class="coach-avatar" style="background:#3B7FD4;">I</div>
+    <div class="coach-name">Isabel Han</div>
+    <div class="coach-role">Isabel Han · Coach</div>
+    <div class="coach-bio">University lecturer with direct experience teaching and mentoring international students (Yonsei + other universities). Fluent in the realities of foreign student career anxiety in Korea. Startup lawyer network connector.</div>
+  </div>
+  <div class="coach-card">
+    <div class="coach-avatar" style="background:#2E9E5B;">K</div>
+    <div class="coach-name">김규영</div>
+    <div class="coach-role">Kyu-Young Kim · Coach</div>
+    <div class="coach-bio">Founder of Gainground. Pre-seed funded startup founder (Antler Korea). Government startup agency evaluator (창진원). Experienced in AI tools, solopreneur methodology, and institutional program design.</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── DESIGN PRINCIPLES ── -->
+<div id="design-principles" class="section">
+  <span class="label">08 — Design Principles</span>
+  <div class="section-title">Why It's Built This Way.</div>
+</div>
+
+<div class="principles-grid">
+  <div class="principle">
+    <div class="principle-num">01</div>
+    <div>
+      <h5>Short but Intense</h5>
+      <p>Two focused 1N2D events are more realistic for students than a month-long curriculum. Students value their time — every block delivers a tangible output, not just knowledge.</p>
+    </div>
+  </div>
+  <div class="principle">
+    <div class="principle-num">02</div>
+    <div>
+      <h5>Action Over Education</h5>
+      <p>Every session ends with a deliverable. Underdogs' core principle: proof over promise. The program is designed for "Act-preneurs" — people who build first and learn by doing.</p>
+    </div>
+  </div>
+  <div class="principle">
+    <div class="principle-num">03</div>
+    <div>
+      <h5>Visa Support as a Core Feature</h5>
+      <p>Not an add-on. D2 → D10-2 → D8-4 is a critical pain point universities cannot solve alone. Including a startup lawyer makes this program uniquely valuable to both students and university administrators.</p>
+    </div>
+  </div>
+  <div class="principle">
+    <div class="principle-num">04</div>
+    <div>
+      <h5>AI as Co-founder</h5>
+      <p>Solo is valid. In an era where AI handles prototyping, writing, and strategy — one person with the right tools is a team. Claude + Lovable replace early co-founder dependencies.</p>
+    </div>
+  </div>
+  <div class="principle">
+    <div class="principle-num">05</div>
+    <div>
+      <h5>Reverse Glocal Posture</h5>
+      <p>International students ARE the global founders entering Korea. Their home-market knowledge + Korean ecosystem access creates a unique inbound ↔ outbound loop unavailable to Korean-only programs.</p>
+    </div>
+  </div>
+  <div class="principle">
+    <div class="principle-num">06</div>
+    <div>
+      <h5>University Admin as Client, Student as User</h5>
+      <p>The landing page talks to students. The proposal talks to universities. Universities want: participation numbers, satisfaction scores, visible tangible results, and reduced administrative burden (especially visa issues).</p>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ── SELECTION CRITERIA ── -->
+<div id="application" class="section">
+  <span class="label">09 — Application &amp; Selection</span>
+  <div class="section-title">Who Gets In.</div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div style="font-size:13px;font-weight:700;color:var(--orange);letter-spacing:.05em;margin-bottom:16px;">ELIGIBILITY</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">✓</span> International student enrolled at a Korean university</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">✓</span> 3rd/4th year undergraduate or graduate student</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">✓</span> Interested in entrepreneurship — idea not required</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">✓</span> Willing to work in English</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">✓</span> Can commit to 2 full weekends + 2–4 weeks online</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div style="font-size:13px;font-weight:700;color:var(--orange);letter-spacing:.05em;margin-bottom:16px;">APPLICATION REQUIREMENTS</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">→</span> 1-page brief concept note (no strict format)</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">→</span> What problem do you want to solve?</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">→</span> Who is affected by this problem?</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#333;"><span style="color:var(--orange);">→</span> Any early idea for a solution? (OK if incomplete)</li>
+      <li style="display:flex;gap:10px;font-size:13px;color:#666;font-style:italic;"><span>*</span> Teams of 2–3 may apply together; each evaluated individually</li>
+    </ul>
+  </div>
+</div>
+
+<div class="version-tag">UCA Korea Inbound — Program Plan v2 · April 2026 · Coaches: Dongho Shin · Isabel Han · Kyu-Young Kim · Powered by Underdogs</div>
+
+</div>
+
+<script>
+(function() {
+  var navInner   = document.getElementById('topNavInner');
+  var fadeLeft   = document.getElementById('navFadeLeft');
+  var fadeRight  = document.getElementById('navFadeRight');
+  var btnLeft    = document.getElementById('navBtnLeft');
+  var btnRight   = document.getElementById('navBtnRight');
+
+  /* ── 페이드/버튼 표시 업데이트 ── */
+  function updateFades() {
+    var sl = navInner.scrollLeft;
+    var max = navInner.scrollWidth - navInner.clientWidth;
+    fadeLeft.classList.toggle('visible', sl > 4);
+    btnLeft.style.opacity  = sl > 4 ? '1' : '0';
+    btnLeft.style.pointerEvents = sl > 4 ? 'auto' : 'none';
+    fadeRight.classList.toggle('visible', sl < max - 4);
+    btnRight.style.opacity = sl < max - 4 ? '1' : '0';
+    btnRight.style.pointerEvents = sl < max - 4 ? 'auto' : 'none';
+  }
+  navInner.addEventListener('scroll', updateFades, { passive: true });
+  window.addEventListener('resize', updateFades);
+  updateFades();
+
+  /* ── 화살표 버튼 클릭 스크롤 ── */
+  var STEP = 160;
+  btnLeft.addEventListener('click', function() {
+    navInner.scrollBy({ left: -STEP, behavior: 'smooth' });
+  });
+  btnRight.addEventListener('click', function() {
+    navInner.scrollBy({ left: STEP, behavior: 'smooth' });
+  });
+
+  /* ── 마우스 엣지 호버 자동 스크롤 ── */
+  var scrollTimer = null;
+  var EDGE = 80;   /* px — 이 범위 안에 마우스가 오면 스크롤 시작 */
+  var SPEED = 6;   /* px per frame */
+
+  document.querySelector('.top-nav').addEventListener('mousemove', function(e) {
+    var rect = navInner.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var dir = 0;
+    if (x < EDGE) dir = -1;
+    else if (x > rect.width - EDGE) dir = 1;
+
+    if (dir !== 0) {
+      if (!scrollTimer) {
+        scrollTimer = setInterval(function() {
+          navInner.scrollLeft += dir * SPEED;
+          updateFades();
+        }, 16);
+      }
+    } else {
+      clearInterval(scrollTimer);
+      scrollTimer = null;
+    }
+  });
+  document.querySelector('.top-nav').addEventListener('mouseleave', function() {
+    clearInterval(scrollTimer);
+    scrollTimer = null;
+  });
+
+  /* ── 활성 섹션 하이라이트 ── */
+  var sections = [
+    { id: 'cover',             sel: 'a[href="#cover"]' },
+    { id: 'positioning',       sel: 'a[href="#positioning"]' },
+    { id: 'impact-value-chain',sel: 'a[href="#impact-value-chain"]' },
+    { id: 'program-structure', sel: 'a[href="#program-structure"]' },
+    { id: 'hackathon1',        sel: 'a[href="#hackathon1"]' },
+    { id: 'hackathon2',        sel: 'a[href="#hackathon2"]' },
+    { id: 'post-tracks',       sel: 'a[href="#post-tracks"]' },
+    { id: 'coaches',           sel: 'a[href="#coaches"]' },
+    { id: 'design-principles', sel: 'a[href="#design-principles"]' },
+    { id: 'application',       sel: 'a[href="#application"]' },
+  ];
+  var NAV_H = 53;
+
+  window.addEventListener('scroll', function() {
+    var scrollY = window.scrollY + NAV_H + 40;
+    var current = sections[0].sel;
+    for (var i = 0; i < sections.length; i++) {
+      var el = document.getElementById(sections[i].id);
+      if (el && el.offsetTop <= scrollY) current = sections[i].sel;
+    }
+    document.querySelectorAll('.nav-item').forEach(function(a) { a.classList.remove('active'); });
+    var active = document.querySelector(current);
+    if (active) active.classList.add('active');
+  }, { passive: true });
+
+  /* ── 메뉴 클릭 → 페이지 스크롤 ── */
+  document.querySelectorAll('.nav-item').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = a.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        var target = document.getElementById(href.slice(1));
+        if (target) {
+          var top = target.getBoundingClientRect().top + window.scrollY - NAV_H - 16;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+/* ── APPLY MODAL ── */
+(function() {
+  var applyBtn   = document.getElementById('applyBtn');
+  var modal      = document.getElementById('applyModal');
+  var modalClose = document.getElementById('modalClose');
+  var applyForm  = document.getElementById('applyForm');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('f-name').focus();
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  applyBtn.addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  applyForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var name     = document.getElementById('f-name').value.trim();
+    var phone    = document.getElementById('f-phone').value.trim();
+    var email    = document.getElementById('f-email').value.trim();
+    var school   = document.getElementById('f-school').value.trim();
+    var grade    = document.getElementById('f-grade').value;
+    var problem  = document.getElementById('f-problem').value.trim();
+    var teamSize = document.getElementById('f-teamsize').value;
+
+    if (!name || !phone || !email || !school || !grade || !problem || !teamSize) {
+      alert('모든 항목을 입력해주세요.\n(Please fill in all required fields.)');
+      return;
+    }
+
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) {
+      alert('유효한 이메일 주소를 입력해주세요.\n(Please enter a valid email address.)');
+      document.getElementById('f-email').focus();
+      return;
+    }
+
+    var data = {
+      name:     name,
+      phone:    phone,
+      email:    email,
+      school:   school,
+      grade:    grade,
+      problem:  problem,
+      teamSize: teamSize
+    };
+
+    console.log('[UCA Korea Apply] Submitted:', data);
+
+    closeModal();
+    applyForm.reset();
+    alert('신청이 완료되었습니다. 🎉\nThank you for applying to UCA Korea Inbound!');
+  });
+})();
+</script>
+</body>
+</html>
