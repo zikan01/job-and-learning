@@ -26,13 +26,12 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
       <div className="bg-[#002147]">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
           {/* 로고 */}
-          <div className="flex items-center gap-2.5 flex-shrink-0">
-            <div className="w-9 h-9 bg-[#FF8C00] rounded-xl flex items-center justify-center font-outfit text-sm font-black text-white select-none">
-              J&L
-            </div>
-            <span className="font-outfit font-black text-white text-lg tracking-tight">
-              Job &amp; Learning
-            </span>
+          <div className="flex items-center flex-shrink-0">
+            <img
+              src="/logo.png"
+              alt="Job and Learning"
+              className="h-12 w-auto object-contain rounded-lg"
+            />
           </div>
 
           {/* 탭 네비게이션 (헤더 중앙) */}
