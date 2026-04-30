@@ -122,10 +122,32 @@ export default function Learning({ user, lang, onLoginRequired }) {
               </div>
 
               {expanded === course.id && (
-                <div className="border-t border-gray-100 p-5 bg-gray-50 text-center">
-                  <div className="text-3xl mb-2">🔜</div>
-                  <div className="font-outfit font-bold text-[#002147] text-sm mb-1">{lt.comingSoon}</div>
-                  <div className="text-xs text-gray-400">{lt.comingSoonDesc}</div>
+                <div className="border-t border-gray-100 p-5 bg-gray-50 space-y-3">
+                  {course.pdf_url ? (
+                    <a
+                      href={course.pdf_url}
+                      download
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm hover:bg-[#243f6a] transition-colors"
+                    >
+                      📄 {lt.pdfDownload}
+                    </a>
+                  ) : (
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">🔜</div>
+                      <div className="font-outfit font-bold text-[#002147] text-sm mb-1">{lt.comingSoon}</div>
+                      <div className="text-xs text-gray-400">{lt.comingSoonDesc}</div>
+                    </div>
+                  )}
+                  {course.video_url && (
+                    <a
+                      href={course.video_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-red-500 text-white font-bold rounded-xl text-sm hover:bg-red-600 transition-colors"
+                    >
+                      ▶ {lt.videoWatch}
+                    </a>
+                  )}
                 </div>
               )}
             </div>
