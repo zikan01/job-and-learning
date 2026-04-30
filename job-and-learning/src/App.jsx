@@ -72,7 +72,11 @@ export default function App() {
       </main>
       <Footer lang={lang} />
       <BottomNav tab={tab} setTab={setTab} />
-      <AuthModal open={showAuth} onClose={() => setShowAuth(false)} />
+      <AuthModal
+        open={showAuth}
+        onClose={() => setShowAuth(false)}
+        onSuccess={() => { setShowAuth(false); setTab('home') }}
+      />
     </div>
   )
 }
