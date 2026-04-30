@@ -31,7 +31,6 @@ export const t = {
     // ── Footer ──
     footerReg: '직업정보제공사업신고 번호',
     footerCopy: '© 2024 잡앤러닝. All rights reserved.',
-    footerCoach: 'UD Impact Global Coach',
 
     // ── Jobs ──
     jobs: {
@@ -70,7 +69,7 @@ export const t = {
       levelLabels: { '입문': '입문', '초급': '초급', '중급': '중급' },
       catBadge: { ai: '🤖 AI 실무', life: '🇰🇷 생활 가이드' },
       ctaTitle: '1:1 맞춤 코칭 상담',
-      ctaDesc: 'UD Impact 글로벌 코치의 개인 맞춤 코칭',
+      ctaDesc: '전문가 코치의 개인맞춤 코칭',
       ctaBtn: '상담 신청하기 →',
     },
 
@@ -180,7 +179,6 @@ export const t = {
 
     footerReg: 'Job Info Provider No.',
     footerCopy: '© 2024 Job & Learning. All rights reserved.',
-    footerCoach: 'UD Impact Global Coach',
 
     jobs: {
       title: 'Employment Center',
@@ -217,7 +215,7 @@ export const t = {
       levelLabels: { '입문': 'Beginner', '초급': 'Elementary', '중급': 'Intermediate' },
       catBadge: { ai: '🤖 AI Skills', life: '🇰🇷 Life Guide' },
       ctaTitle: '1:1 Personalized Coaching',
-      ctaDesc: 'Personal coaching with UD Impact Global Coach',
+      ctaDesc: 'Personal coaching with Job & Learning',
       ctaBtn: 'Apply for Coaching →',
     },
 
@@ -324,7 +322,6 @@ export const t = {
 
     footerReg: 'Số đăng ký cung cấp thông tin việc làm',
     footerCopy: '© 2024 Job & Learning. Bảo lưu mọi quyền.',
-    footerCoach: 'UD Impact Global Coach',
 
     jobs: {
       title: 'Trung tâm tuyển dụng',
@@ -361,7 +358,7 @@ export const t = {
       levelLabels: { '입문': 'Người mới', '초급': 'Sơ cấp', '중급': 'Trung cấp' },
       catBadge: { ai: '🤖 Kỹ năng AI', life: '🇰🇷 Hướng dẫn' },
       ctaTitle: 'Tư vấn huấn luyện 1:1',
-      ctaDesc: 'Huấn luyện cá nhân hóa với UD Impact Global Coach',
+      ctaDesc: 'Huấn luyện cá nhân hóa với Job & Learning',
       ctaBtn: 'Đăng ký tư vấn →',
     },
 
