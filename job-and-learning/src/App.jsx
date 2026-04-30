@@ -23,7 +23,16 @@ function Footer({ lang }) {
         <p className="text-xs">
           {tr.footerReg}: <span className="text-white/60 font-semibold">J1700020240003</span>
         </p>
-        <p className="text-[11px]">{tr.footerCoach}</p>
+        <p className="text-[11px]">
+          <a
+            href="/d2d4-terms-of-service.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-white/80 transition-colors"
+          >
+            운영 약관
+          </a>
+        </p>
         <p className="text-[10px] pt-1 border-t border-white/10">{tr.footerCopy}</p>
       </div>
     </footer>
