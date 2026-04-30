@@ -1,10 +1,76 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+function OtpBoxes({ value, onChange }) {
+  const refs = useRef([])
+  const digits = Array(6).fill('').map((_, i) => value[i] ?? '')
+
+  function handleChange(i, e) {
+    const v = e.target.value.replace(/\D/g, '').slice(-1)
+    const next = [...digits]
+    next[i] = v
+    onChange(next.join(''))
+    if (v && i < 5) refs.current[i + 1]?.focus()
+  }
+
+  function handleKeyDown(i, e) {
+    if (e.key === 'Backspace') {
+      if (digits[i]) {
+        const next = [...digits]
+        next[i] = ''
+        onChange(next.join(''))
+      } else if (i > 0) {
+        refs.current[i - 1]?.focus()
+      }
+    } else if (e.key === 'ArrowLeft' && i > 0) {
+      refs.current[i - 1]?.focus()
+    } else if (e.key === 'ArrowRight' && i < 5) {
+      refs.current[i + 1]?.focus()
+    }
+  }
+
+  function handlePaste(e) {
+    e.preventDefault()
+    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6)
+    onChange(pasted.padEnd(6, '').slice(0, 6).split('').map((c, i) => pasted[i] ?? '').join(''))
+    onChange(pasted)
+    const focusIdx = Math.min(pasted.length, 5)
+    refs.current[focusIdx]?.focus()
+  }
+
+  function handleFocus(e) {
+    e.target.select()
+  }
+
+  return (
+    <div className="flex gap-2 justify-center" onPaste={handlePaste}>
+      {Array(6).fill(0).map((_, i) => (
+        <input
+          key={i}
+          ref={el => { refs.current[i] = el }}
+          type="text"
+          inputMode="numeric"
+          maxLength={1}
+          value={digits[i]}
+          onChange={e => handleChange(i, e)}
+          onKeyDown={e => handleKeyDown(i, e)}
+          onFocus={handleFocus}
+          autoFocus={i === 0}
+          className={`w-11 h-14 text-center text-2xl font-black rounded-xl border-2 outline-none transition-all ${
+            digits[i]
+              ? 'border-[#1a3a5f] bg-[#1a3a5f]/5 text-[#1a3a5f]'
+              : 'border-gray-200 bg-gray-50 text-gray-800'
+          } focus:border-[#1a3a5f] focus:bg-white focus:ring-2 focus:ring-[#1a3a5f]/10`}
+        />
+      ))}
+    </div>
+  )
+}
+
 export default function AuthModal({ open, onClose, onSuccess }) {
-  const [step, setStep] = useState('email') // 'email' | 'otp'
+  const [step, setStep] = useState('email')
   const [email, setEmail] = useState('')
   const [token, setToken] = useState('')
   const [loading, setLoading] = useState(false)
@@ -13,7 +79,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
   if (!open) return null
 
   const emailValid = EMAIL_RE.test(email.trim())
-  const tokenValid = /^\d{6}$/.test(token)
+  const tokenValid = token.replace(/\D/g, '').length === 6
 
   function reset() {
     setStep('email')
@@ -33,7 +99,10 @@ export default function AuthModal({ open, onClose, onSuccess }) {
     if (!emailValid) return
     setLoading(true)
     setError('')
-    const { error: err } = await supabase.auth.signInWithOtp({ email: email.trim() })
+    const { error: err } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
+      options: { shouldCreateUser: true },
+    })
     setLoading(false)
     if (err) {
       setError(err.message)
@@ -44,12 +113,13 @@ export default function AuthModal({ open, onClose, onSuccess }) {
 
   async function handleVerifyOtp(e) {
     e.preventDefault()
-    if (!tokenValid) return
+    const code = token.replace(/\D/g, '')
+    if (code.length !== 6) return
     setLoading(true)
     setError('')
     const { error: err } = await supabase.auth.verifyOtp({
       email: email.trim(),
-      token,
+      token: code,
       type: 'email',
     })
     setLoading(false)
@@ -75,18 +145,18 @@ export default function AuthModal({ open, onClose, onSuccess }) {
               {step === 'email' ? '간편 로그인' : '인증번호 확인'}
             </p>
             <h3 className="font-outfit font-black text-white text-xl">
-              {step === 'email' ? '이메일로 시작하기' : '인증번호를 입력해주세요'}
+              {step === 'email' ? '이메일로 시작하기' : '코드를 입력해주세요'}
             </h3>
           </div>
           <button
             onClick={handleClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 transition-colors text-lg leading-none"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 transition-colors text-lg"
           >
             ×
           </button>
         </div>
 
-        <div className="px-6 py-6 space-y-4">
+        <div className="px-6 py-6">
 
           {/* Step 1: 이메일 입력 */}
           {step === 'email' && (
@@ -123,35 +193,28 @@ export default function AuthModal({ open, onClose, onSuccess }) {
             </form>
           )}
 
-          {/* Step 2: OTP 입력 */}
+          {/* Step 2: OTP 6칸 입력 */}
           {step === 'otp' && (
-            <form onSubmit={handleVerifyOtp} className="space-y-4">
+            <form onSubmit={handleVerifyOtp} className="space-y-5">
+              {/* 전송된 이메일 표시 */}
               <div className="bg-blue-50 rounded-xl px-4 py-3 flex items-center gap-3">
                 <span className="text-xl">📧</span>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-gray-400">인증번호 전송됨</p>
-                  <p className="text-sm font-semibold text-[#1a3a5f]">{email}</p>
+                  <p className="text-sm font-semibold text-[#1a3a5f] truncate">{email}</p>
                 </div>
               </div>
 
+              {/* 6칸 OTP 입력 */}
               <div>
-                <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-1.5">
+                <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-3 text-center">
                   6자리 인증번호
                 </label>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={6}
-                  value={token}
-                  onChange={e => { setToken(e.target.value.replace(/\D/g, '')); setError('') }}
-                  placeholder="000000"
-                  autoFocus
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1a3a5f] focus:ring-2 focus:ring-[#1a3a5f]/10 tracking-[0.4em] text-center font-outfit font-bold text-lg transition-all"
-                />
+                <OtpBoxes value={token} onChange={setToken} />
               </div>
 
               {error && (
-                <div className="bg-red-50 text-red-600 text-xs px-4 py-3 rounded-xl">{error}</div>
+                <div className="bg-red-50 text-red-600 text-xs px-4 py-3 rounded-xl text-center">{error}</div>
               )}
 
               <button
@@ -165,7 +228,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
               <button
                 type="button"
                 onClick={() => { setStep('email'); setToken(''); setError('') }}
-                className="w-full py-2.5 text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                className="w-full py-2 text-xs text-gray-400 hover:text-gray-600 transition-colors"
               >
                 ← 이메일 다시 입력하기
               </button>
@@ -173,7 +236,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
           )}
 
           {/* 익명 계속 */}
-          <div className="pt-2 border-t border-gray-100">
+          <div className="mt-4 pt-4 border-t border-gray-100">
             <button
               onClick={handleClose}
               className="w-full py-2.5 border border-gray-200 text-gray-400 font-semibold rounded-xl text-xs hover:border-gray-300 transition-colors"
