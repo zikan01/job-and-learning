@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import { t } from './lib/translations'
 import Navbar from './components/Navbar'
+import BottomNav from './components/BottomNav'
 import AuthModal from './components/AuthModal'
 import Home from './pages/Home'
 import Jobs from './pages/Jobs'
@@ -66,10 +67,11 @@ export default function App() {
         lang={lang}
         setLang={setLang}
       />
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-0">
         <Page user={user} onTabChange={setTab} lang={lang} />
       </main>
       <Footer lang={lang} />
+      <BottomNav tab={tab} setTab={setTab} />
       <AuthModal open={showAuth} onClose={() => setShowAuth(false)} />
     </div>
   )

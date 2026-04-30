@@ -62,7 +62,7 @@ const TABS = [
 
 export default function BottomNav({ tab, setTab }) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 pb-safe">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 pb-safe">
       <div className="max-w-2xl mx-auto flex">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button

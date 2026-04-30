@@ -27,8 +27,8 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
             />
           </div>
 
-          {/* 탭 네비게이션 (헤더 중앙) */}
-          <nav className="flex-1 flex items-center overflow-x-auto no-scrollbar">
+          {/* 탭 네비게이션 (데스크탑 전용) */}
+          <nav className="flex-1 hidden md:flex items-center overflow-x-auto no-scrollbar">
             {TAB_IDS.map(id => (
               <button
                 key={id}
@@ -44,6 +44,9 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
               </button>
             ))}
           </nav>
+
+          {/* 모바일: 탭 대신 spacer */}
+          <div className="flex-1 md:hidden" />
 
           {/* 언어 선택 버튼 */}
           <div className="flex items-center gap-1 bg-white/10 rounded-xl p-1 flex-shrink-0">
