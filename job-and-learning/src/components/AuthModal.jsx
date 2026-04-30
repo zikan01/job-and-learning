@@ -1,135 +1,80 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const OTP_LEN = 8
 
-function OtpBoxes({ value, onChange }) {
-  const refs = useRef([])
-  const digits = Array(OTP_LEN).fill('').map((_, i) => value[i] ?? '')
-
-  function handleChange(i, e) {
-    const v = e.target.value.replace(/\D/g, '').slice(-1)
-    const next = [...digits]
-    next[i] = v
-    onChange(next.join(''))
-    if (v && i < OTP_LEN - 1) refs.current[i + 1]?.focus()
-  }
-
-  function handleKeyDown(i, e) {
-    if (e.key === 'Backspace') {
-      if (digits[i]) {
-        const next = [...digits]
-        next[i] = ''
-        onChange(next.join(''))
-      } else if (i > 0) {
-        refs.current[i - 1]?.focus()
-      }
-    } else if (e.key === 'ArrowLeft' && i > 0) {
-      refs.current[i - 1]?.focus()
-    } else if (e.key === 'ArrowRight' && i < OTP_LEN - 1) {
-      refs.current[i + 1]?.focus()
-    }
-  }
-
-  function handlePaste(e) {
-    e.preventDefault()
-    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6)
-    onChange(pasted.padEnd(6, '').slice(0, 6).split('').map((c, i) => pasted[i] ?? '').join(''))
-    onChange(pasted)
-    const focusIdx = Math.min(pasted.length, OTP_LEN - 1)
-    refs.current[focusIdx]?.focus()
-  }
-
-  function handleFocus(e) {
-    e.target.select()
-  }
-
-  return (
-    <div className="flex gap-1.5 justify-center" onPaste={handlePaste}>
-      {Array(OTP_LEN).fill(0).map((_, i) => (
-        <input
-          key={i}
-          ref={el => { refs.current[i] = el }}
-          type="text"
-          inputMode="numeric"
-          maxLength={1}
-          value={digits[i]}
-          onChange={e => handleChange(i, e)}
-          onKeyDown={e => handleKeyDown(i, e)}
-          onFocus={handleFocus}
-          autoFocus={i === 0}
-          className={`w-9 h-12 text-center text-xl font-black rounded-xl border-2 outline-none transition-all ${
-            digits[i]
-              ? 'border-[#1a3a5f] bg-[#1a3a5f]/5 text-[#1a3a5f]'
-              : 'border-gray-200 bg-gray-50 text-gray-800'
-          } focus:border-[#1a3a5f] focus:bg-white focus:ring-2 focus:ring-[#1a3a5f]/10`}
-        />
-      ))}
-    </div>
-  )
+const ERROR_MAP = {
+  'Invalid login credentials': '이메일 또는 비밀번호가 올바르지 않습니다.',
+  'Email not confirmed': '이메일 인증이 필요합니다. 받은 메일함을 확인해주세요.',
+  'User already registered': '이미 가입된 이메일입니다. 로그인을 시도해주세요.',
+  'Password should be at least 6 characters': '비밀번호는 6자 이상이어야 합니다.',
 }
 
-// reason: 로그인이 필요한 이유 문자열 (없으면 일반 로그인 모달)
+function friendlyError(msg) {
+  return ERROR_MAP[msg] ?? msg
+}
+
+// reason: 권한 가드에서 모달을 여는 경우 사유 문자열
 export default function AuthModal({ open, onClose, onSuccess, reason }) {
-  const [step, setStep] = useState('email')
+  const [mode, setMode] = useState('login') // 'login' | 'signup' | 'done'
   const [email, setEmail] = useState('')
-  const [token, setToken] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   if (!open) return null
 
   const emailValid = EMAIL_RE.test(email.trim())
-  const tokenValid = token.replace(/\D/g, '').length === OTP_LEN
-
-  function reset() {
-    setStep('email')
-    setEmail('')
-    setToken('')
-    setError('')
-    setLoading(false)
-  }
+  const passwordValid = password.length >= 6
+  const canSubmit = emailValid && passwordValid && !loading
 
   function handleClose() {
-    reset()
+    setMode('login')
+    setEmail('')
+    setPassword('')
+    setError('')
+    setLoading(false)
     onClose()
   }
 
-  async function handleSendOtp(e) {
+  function switchMode(next) {
+    setMode(next)
+    setError('')
+    setPassword('')
+  }
+
+  async function handleLogin(e) {
     e.preventDefault()
-    if (!emailValid) return
+    if (!canSubmit) return
     setLoading(true)
     setError('')
-    const { error: err } = await supabase.auth.signInWithOtp({
+    const { error: err } = await supabase.auth.signInWithPassword({
       email: email.trim(),
-      options: { shouldCreateUser: true },
+      password,
     })
     setLoading(false)
     if (err) {
-      setError(err.message)
+      setError(friendlyError(err.message))
     } else {
-      setStep('otp')
+      handleClose()
+      onSuccess?.()
     }
   }
 
-  async function handleVerifyOtp(e) {
+  async function handleSignup(e) {
     e.preventDefault()
-    const code = token.replace(/\D/g, '')
-    if (code.length !== OTP_LEN) return
+    if (!canSubmit) return
     setLoading(true)
     setError('')
-    const { error: err } = await supabase.auth.verifyOtp({
+    const { error: err } = await supabase.auth.signUp({
       email: email.trim(),
-      token: code,
-      type: 'email',
+      password,
     })
     setLoading(false)
     if (err) {
-      setError('인증번호가 올바르지 않거나 만료되었습니다.')
+      setError(friendlyError(err.message))
     } else {
-      reset()
-      onSuccess?.()
+      setMode('done')
     }
   }
 
@@ -144,12 +89,16 @@ export default function AuthModal({ open, onClose, onSuccess, reason }) {
         <div className="bg-[#1a3a5f] px-6 py-5 flex items-center justify-between">
           <div>
             <p className="text-white/50 text-xs font-semibold uppercase tracking-widest mb-0.5">
-              {reason ? '로그인 필요' : step === 'email' ? '간편 로그인' : '인증번호 확인'}
+              {reason ? '로그인 필요' : mode === 'signup' ? '회원가입' : '로그인'}
             </p>
             <h3 className="font-outfit font-black text-white text-xl">
-              {reason
-                ? '회원가입이 필요합니다'
-                : step === 'email' ? '이메일로 시작하기' : '코드를 입력해주세요'}
+              {mode === 'done'
+                ? '이메일을 확인해주세요'
+                : reason
+                ? '로그인이 필요합니다'
+                : mode === 'signup'
+                ? '잡앤러닝 회원가입'
+                : '잡앤러닝 로그인'}
             </h3>
           </div>
           <button
@@ -162,17 +111,36 @@ export default function AuthModal({ open, onClose, onSuccess, reason }) {
 
         <div className="px-6 py-6">
 
-          {/* Step 1: 이메일 입력 */}
-          {step === 'email' && (
-            <form onSubmit={handleSendOtp} className="space-y-4">
+          {/* 가입 완료 화면 */}
+          {mode === 'done' ? (
+            <div className="text-center py-4 space-y-4">
+              <div className="text-5xl">📧</div>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                <span className="font-bold text-[#1a3a5f]">{email}</span>로<br />
+                인증 링크를 보내드렸습니다.<br />
+                메일을 확인하고 링크를 클릭하면 로그인됩니다.
+              </p>
+              <button
+                onClick={() => switchMode('login')}
+                className="w-full py-3 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm hover:bg-[#243f6a] transition-colors"
+              >
+                로그인 화면으로 돌아가기
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+
+              {/* 권한 가드 사유 표시 */}
               {reason && (
                 <div className="bg-amber-50 border border-amber-200 text-amber-800 text-xs px-4 py-3 rounded-xl">
                   {reason}
                 </div>
               )}
+
+              {/* 이메일 */}
               <div>
                 <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-1.5">
-                  이메일 주소
+                  이메일
                 </label>
                 <input
                   type="email"
@@ -184,75 +152,73 @@ export default function AuthModal({ open, onClose, onSuccess, reason }) {
                 />
               </div>
 
+              {/* 비밀번호 */}
+              <div>
+                <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-1.5">
+                  비밀번호
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={e => { setPassword(e.target.value); setError('') }}
+                  placeholder="6자 이상"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1a3a5f] focus:ring-2 focus:ring-[#1a3a5f]/10 transition-all"
+                />
+              </div>
+
+              {/* 에러 */}
               {error && (
                 <div className="bg-red-50 text-red-600 text-xs px-4 py-3 rounded-xl">{error}</div>
               )}
 
-              <button
-                type="submit"
-                disabled={!emailValid || loading}
-                className="w-full py-3.5 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm disabled:opacity-40 hover:bg-[#243f6a] transition-colors"
-              >
-                {loading ? '전송 중…' : reason ? '간편 가입하기 →' : '인증번호 받기 →'}
-              </button>
-
-              <p className="text-center text-xs text-gray-400">
-                이메일로 8자리 인증번호를 보내드립니다
-              </p>
-            </form>
-          )}
-
-          {/* Step 2: OTP 6칸 입력 */}
-          {step === 'otp' && (
-            <form onSubmit={handleVerifyOtp} className="space-y-5">
-              {/* 전송된 이메일 표시 */}
-              <div className="bg-blue-50 rounded-xl px-4 py-3 flex items-center gap-3">
-                <span className="text-xl">📧</span>
-                <div className="min-w-0">
-                  <p className="text-xs text-gray-400">인증번호 전송됨</p>
-                  <p className="text-sm font-semibold text-[#1a3a5f] truncate">{email}</p>
-                </div>
-              </div>
-
-              {/* 6칸 OTP 입력 */}
-              <div>
-                <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-3 text-center">
-                  8자리 인증번호
-                </label>
-                <OtpBoxes value={token} onChange={setToken} />
-              </div>
-
-              {error && (
-                <div className="bg-red-50 text-red-600 text-xs px-4 py-3 rounded-xl text-center">{error}</div>
+              {/* 로그인 버튼 */}
+              {mode === 'login' ? (
+                <>
+                  <button
+                    onClick={handleLogin}
+                    disabled={!canSubmit}
+                    className="w-full py-3.5 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm disabled:opacity-40 hover:bg-[#243f6a] transition-colors"
+                  >
+                    {loading ? '로그인 중…' : '로그인 →'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => switchMode('signup')}
+                    className="w-full py-3 border-2 border-[#1a3a5f]/20 text-[#1a3a5f] font-bold rounded-xl text-sm hover:border-[#1a3a5f]/40 hover:bg-[#1a3a5f]/5 transition-colors"
+                  >
+                    처음이신가요? 회원가입하기 →
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={handleSignup}
+                    disabled={!canSubmit}
+                    className="w-full py-3.5 bg-[#FF8C00] text-white font-bold rounded-xl text-sm disabled:opacity-40 hover:bg-[#e07d00] transition-colors"
+                  >
+                    {loading ? '처리 중…' : '이메일 인증 후 가입하기 →'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => switchMode('login')}
+                    className="w-full py-2.5 text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    ← 이미 계정이 있어요, 로그인하기
+                  </button>
+                </>
               )}
 
-              <button
-                type="submit"
-                disabled={!tokenValid || loading}
-                className="w-full py-3.5 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm disabled:opacity-40 hover:bg-[#243f6a] transition-colors"
-              >
-                {loading ? '확인 중…' : '로그인 완료 →'}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => { setStep('email'); setToken(''); setError('') }}
-                className="w-full py-2 text-xs text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                ← 이메일 다시 입력하기
-              </button>
-            </form>
+              {/* 익명 계속 */}
+              <div className="pt-1 border-t border-gray-100">
+                <button
+                  onClick={handleClose}
+                  className="w-full py-2.5 text-xs text-gray-400 hover:text-gray-500 transition-colors"
+                >
+                  로그인 없이 둘러보기
+                </button>
+              </div>
+            </div>
           )}
-
-          {/* 익명 계속 */}
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <button
-              onClick={handleClose}
-              className="w-full py-2.5 border border-gray-200 text-gray-400 font-semibold rounded-xl text-xs hover:border-gray-300 transition-colors"
-            >
-              익명으로 계속 사용하기
-            </button>
-          </div>
         </div>
       </div>
     </div>
