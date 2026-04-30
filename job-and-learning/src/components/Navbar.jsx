@@ -8,7 +8,7 @@ const LANGS = [
 
 const TAB_IDS = ['home', 'jobs', 'market', 'learning', 'community', 'help']
 
-export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang }) {
+export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick, onLogout, lang, setLang }) {
   const tr = t[lang] ?? t.ko
   const isAnon = !user || user.is_anonymous
   const initial = user?.email ? user.email[0].toUpperCase() : '유'
@@ -65,31 +65,38 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
             ))}
           </div>
 
-          {/* 로그인 버튼 */}
-          <button
-            onClick={onLoginClick}
-            className={`flex items-center gap-1.5 transition-all active:scale-95 flex-shrink-0 ${
-              isAnon
-                ? 'bg-[#FF8C00] text-white px-3 md:px-4 py-2 rounded-xl text-sm font-bold shadow-md'
-                : 'bg-[#FF8C00]/20 px-2 md:px-3 py-2 rounded-xl'
-            }`}
-          >
-            {isAnon ? (
-              <>
-                <span>🔐</span>
-                <span className="hidden sm:inline">{tr.login}</span>
-              </>
-            ) : (
-              <>
-                <div className="w-7 h-7 rounded-full bg-[#FF8C00] flex items-center justify-center text-white text-xs font-bold">
+          {/* 로그인 전: 로그인 버튼 */}
+          {isAnon ? (
+            <button
+              onClick={onLoginClick}
+              className="flex items-center gap-1.5 bg-[#FF8C00] text-white px-3 md:px-4 py-2 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95 flex-shrink-0"
+            >
+              <span>🔐</span>
+              <span className="hidden sm:inline">{tr.login}</span>
+            </button>
+          ) : (
+            /* 로그인 후: 내 활동 + 로그아웃 */
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                onClick={onMyPageClick}
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-2 md:px-3 py-2 rounded-xl text-sm font-semibold transition-all active:scale-95"
+              >
+                <div className="w-6 h-6 rounded-full bg-[#FF8C00] flex items-center justify-center text-white text-xs font-black flex-shrink-0">
                   {initial}
                 </div>
-                <span className="hidden sm:inline text-white/80 text-sm font-semibold max-w-[80px] truncate">
-                  {user.email?.split('@')[0]}
-                </span>
-              </>
-            )}
-          </button>
+                <span className="hidden sm:inline max-w-[72px] truncate">{user.email?.split('@')[0]}</span>
+              </button>
+              <button
+                onClick={onLogout}
+                className="hidden md:flex items-center gap-1 bg-white/5 hover:bg-red-500/20 text-white/60 hover:text-red-300 px-3 py-2 rounded-xl text-xs font-semibold transition-all"
+              >
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24">
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                로그아웃
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>

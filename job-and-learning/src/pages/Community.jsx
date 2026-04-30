@@ -14,9 +14,10 @@ const GROUPS = [
 const BOARD_VALUES = ['전체', '소모임', '자유게시판', '정보공유']
 const BOARD_DB_VALUES = ['자유게시판', '소모임', '정보공유']
 
-export default function Community({ user, lang }) {
+export default function Community({ user, lang, onLoginRequired }) {
   const tr = t[lang] ?? t.ko
   const ct = tr.community
+  const isAnon = !user || user.is_anonymous
 
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -79,7 +80,11 @@ export default function Community({ user, lang }) {
           <h1 className="font-outfit font-black text-[#002147] text-xl">{ct.title}</h1>
           <p className="text-gray-400 text-sm mt-1">{ct.subtitle}</p>
         </div>
-        <button onClick={() => setShowWrite(true)}
+        <button
+          onClick={() => {
+            if (isAnon) { onLoginRequired?.('커뮤니티 글쓰기는 로그인이 필요합니다.'); return }
+            setShowWrite(true)
+          }}
           className="bg-[#FF8C00] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md active:scale-95">
           {ct.writeBtn}
         </button>

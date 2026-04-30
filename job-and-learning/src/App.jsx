@@ -4,6 +4,7 @@ import { t } from './lib/translations'
 import Navbar from './components/Navbar'
 import BottomNav from './components/BottomNav'
 import AuthModal from './components/AuthModal'
+import MyPageModal from './components/MyPageModal'
 import Home from './pages/Home'
 import Jobs from './pages/Jobs'
 import Market from './pages/Market'
@@ -34,6 +35,8 @@ export default function App() {
   const [lang, setLang] = useState('ko')
   const [user, setUser] = useState(null)
   const [showAuth, setShowAuth] = useState(false)
+  const [authReason, setAuthReason] = useState('')
+  const [showMyPage, setShowMyPage] = useState(false)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session }, error }) => {
@@ -54,6 +57,19 @@ export default function App() {
     return () => subscription.unsubscribe()
   }, [])
 
+  const isLoggedIn = user && !user.is_anonymous
+
+  function handleLogout() {
+    supabase.auth.signOut()
+    setTab('home')
+    setShowMyPage(false)
+  }
+
+  function handleLoginRequired(reason) {
+    setAuthReason(reason ?? '')
+    setShowAuth(true)
+  }
+
   const pages = { home: Home, jobs: Jobs, market: Market, learning: Learning, community: Community, help: Help }
   const Page = pages[tab]
 
@@ -64,18 +80,32 @@ export default function App() {
         setTab={setTab}
         user={user}
         onLoginClick={() => setShowAuth(true)}
+        onMyPageClick={() => setShowMyPage(true)}
+        onLogout={handleLogout}
         lang={lang}
         setLang={setLang}
       />
       <main className="flex-1 pb-16 md:pb-0">
-        <Page user={user} onTabChange={setTab} lang={lang} />
+        <Page
+          user={user}
+          onTabChange={setTab}
+          lang={lang}
+          onLoginRequired={handleLoginRequired}
+        />
       </main>
       <Footer lang={lang} />
       <BottomNav tab={tab} setTab={setTab} />
+      <MyPageModal
+        open={showMyPage}
+        onClose={() => setShowMyPage(false)}
+        user={user}
+        onLogout={handleLogout}
+      />
       <AuthModal
         open={showAuth}
-        onClose={() => setShowAuth(false)}
-        onSuccess={() => { setShowAuth(false); setTab('home') }}
+        onClose={() => { setShowAuth(false); setAuthReason('') }}
+        onSuccess={() => { setShowAuth(false); setAuthReason(''); setTab('home') }}
+        reason={authReason}
       />
     </div>
   )

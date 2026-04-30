@@ -70,7 +70,8 @@ function OtpBoxes({ value, onChange }) {
   )
 }
 
-export default function AuthModal({ open, onClose, onSuccess }) {
+// reason: 로그인이 필요한 이유 문자열 (없으면 일반 로그인 모달)
+export default function AuthModal({ open, onClose, onSuccess, reason }) {
   const [step, setStep] = useState('email')
   const [email, setEmail] = useState('')
   const [token, setToken] = useState('')
@@ -143,10 +144,12 @@ export default function AuthModal({ open, onClose, onSuccess }) {
         <div className="bg-[#1a3a5f] px-6 py-5 flex items-center justify-between">
           <div>
             <p className="text-white/50 text-xs font-semibold uppercase tracking-widest mb-0.5">
-              {step === 'email' ? '간편 로그인' : '인증번호 확인'}
+              {reason ? '로그인 필요' : step === 'email' ? '간편 로그인' : '인증번호 확인'}
             </p>
             <h3 className="font-outfit font-black text-white text-xl">
-              {step === 'email' ? '이메일로 시작하기' : '코드를 입력해주세요'}
+              {reason
+                ? '회원가입이 필요합니다'
+                : step === 'email' ? '이메일로 시작하기' : '코드를 입력해주세요'}
             </h3>
           </div>
           <button
@@ -162,6 +165,11 @@ export default function AuthModal({ open, onClose, onSuccess }) {
           {/* Step 1: 이메일 입력 */}
           {step === 'email' && (
             <form onSubmit={handleSendOtp} className="space-y-4">
+              {reason && (
+                <div className="bg-amber-50 border border-amber-200 text-amber-800 text-xs px-4 py-3 rounded-xl">
+                  {reason}
+                </div>
+              )}
               <div>
                 <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-1.5">
                   이메일 주소
@@ -185,7 +193,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
                 disabled={!emailValid || loading}
                 className="w-full py-3.5 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm disabled:opacity-40 hover:bg-[#243f6a] transition-colors"
               >
-                {loading ? '전송 중…' : '인증번호 받기 →'}
+                {loading ? '전송 중…' : reason ? '간편 가입하기 →' : '인증번호 받기 →'}
               </button>
 
               <p className="text-center text-xs text-gray-400">

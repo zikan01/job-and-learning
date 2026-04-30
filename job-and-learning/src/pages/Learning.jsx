@@ -7,9 +7,10 @@ const TAB_VALUES = ['전체', 'AI 실무(Vibe Coding)', '한국 생활 가이드
 const LEVEL_KEYS = ['입문', '초급', '중급']
 const LEVEL_STYLES = { '입문': 'bg-emerald-100 text-emerald-700', '초급': 'bg-blue-100 text-blue-700', '중급': 'bg-purple-100 text-purple-700' }
 
-export default function Learning({ user, lang }) {
+export default function Learning({ user, lang, onLoginRequired }) {
   const tr = t[lang] ?? t.ko
   const lt = tr.learning
+  const isAnon = !user || user.is_anonymous
 
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
@@ -83,7 +84,13 @@ export default function Learning({ user, lang }) {
         <div className="space-y-3">
           {filtered.map(course => (
             <div key={course.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="p-4 cursor-pointer" onClick={() => setExpanded(expanded === course.id ? null : course.id)}>
+              <div
+                className="p-4 cursor-pointer"
+                onClick={() => {
+                  if (isAnon) { onLoginRequired?.('강의 내용은 로그인 후 확인할 수 있습니다.'); return }
+                  setExpanded(expanded === course.id ? null : course.id)
+                }}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-2">
