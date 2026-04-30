@@ -6,9 +6,10 @@ import { t } from '../lib/translations'
 const CATEGORY_VALUES = ['전체', '생활용품', '가전', '도서', '의류', '식품', '기타']
 const CONDITION_VALUES = ['새상품', '양호', '보통']
 
-export default function Market({ user, lang }) {
+export default function Market({ user, lang, onLoginRequired }) {
   const tr = t[lang] ?? t.ko
   const mt = tr.market
+  const isAnon = !user || user.is_anonymous
 
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -76,7 +77,10 @@ export default function Market({ user, lang }) {
           <p className="text-gray-400 text-sm mt-1">{mt.subtitle}</p>
         </div>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            if (isAnon) { onLoginRequired?.('중고 거래 등록은 로그인이 필요합니다.'); return }
+            setShowModal(true)
+          }}
           className="bg-[#FF8C00] text-white font-bold text-sm px-4 py-2 rounded-xl shadow-md hover:bg-[#e07d00] active:scale-95 transition-all"
         >
           {mt.postBtn}
@@ -107,7 +111,13 @@ export default function Market({ user, lang }) {
         <div className="text-center py-16">
           <div className="text-4xl mb-3">🛒</div>
           <p className="text-gray-400 text-sm">{mt.noResults}</p>
-          <button onClick={() => setShowModal(true)} className="mt-4 text-[#FF8C00] font-bold text-sm">
+          <button
+            onClick={() => {
+              if (isAnon) { onLoginRequired?.('중고 거래 등록은 로그인이 필요합니다.'); return }
+              setShowModal(true)
+            }}
+            className="mt-4 text-[#FF8C00] font-bold text-sm"
+          >
             {mt.firstPost}
           </button>
         </div>

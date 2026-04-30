@@ -6,9 +6,10 @@ import { t } from '../lib/translations'
 const CATEGORY_VALUES = ['전체', '서비스업', '유통', '사무보조', '스포츠', '기타']
 const LOCATION_VALUES = ['전체 지역', '대전 유성구', '대전 서구', '대전 중구', '대전 동구', '대전 대덕구']
 
-export default function Jobs({ user, lang }) {
+export default function Jobs({ user, lang, onLoginRequired }) {
   const tr = t[lang] ?? t.ko
   const jt = tr.jobs
+  const isAnon = !user || user.is_anonymous
 
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
@@ -171,7 +172,11 @@ export default function Jobs({ user, lang }) {
                       <div className="text-gray-400 text-[10px]">{jt.perHour}</div>
                     </div>
                     <button
-                      onClick={() => !isApplied && setApplyModal(job)}
+                      onClick={() => {
+                        if (isApplied) return
+                        if (isAnon) { onLoginRequired?.('취업 지원은 로그인이 필요합니다.'); return }
+                        setApplyModal(job)
+                      }}
                       disabled={isApplied}
                       className={`px-4 py-2 rounded-xl text-xs font-bold transition-colors ${
                         isApplied

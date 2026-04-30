@@ -39,20 +39,27 @@ export default function App() {
   const [showMyPage, setShowMyPage] = useState(false)
 
   useEffect(() => {
+    // 기존 세션 복원 (localStorage → 자동 복원)
     supabase.auth.getSession().then(({ data: { session }, error }) => {
       if (error) { console.error('[Auth] getSession error:', error.message); return }
       if (session?.user) {
         setUser(session.user)
       } else {
+        // 세션 없을 때만 익명 로그인 (브라우징 전용)
         supabase.auth.signInAnonymously().then(({ data, error: anonError }) => {
           if (anonError) console.error('[Auth] anonymous sign-in error:', anonError.message)
-          setUser(data?.user ?? null)
+          else setUser(data?.user ?? null)
         })
       }
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
+    // 로그인/로그아웃/토큰 갱신 등 모든 auth 이벤트 감지
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT') {
+        setUser(null)
+      } else if (session?.user) {
+        setUser(session.user)
+      }
     })
     return () => subscription.unsubscribe()
   }, [])
