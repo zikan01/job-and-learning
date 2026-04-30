@@ -2,14 +2,6 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { t } from '../lib/translations'
 
-const GROUPS = [
-  { id: 'ust', label: 'UST 유학생', color: '#003087', text: '#fff' },
-  { id: 'kaist', label: 'KAIST 유학생', color: '#CC0033', text: '#fff' },
-  { id: 'chungnam', label: '충남대 유학생', color: '#003DA5', text: '#fff' },
-  { id: 'hanbat', label: '한밭대 유학생', color: '#006B3C', text: '#fff' },
-  { id: 'paichai', label: '배재대 유학생', color: '#8B0000', text: '#fff' },
-]
-
 // DB 저장 값 (필터 비교용)
 const BOARD_VALUES = ['전체', '소모임', '자유게시판', '정보공유']
 const BOARD_DB_VALUES = ['자유게시판', '소모임', '정보공유']
@@ -89,24 +81,6 @@ export default function Community({ user, lang, onLoginRequired }) {
           {ct.writeBtn}
         </button>
       </div>
-
-      {/* 소모임 카드 */}
-      <section className="mb-5">
-        <h2 className="font-outfit font-bold text-[#002147] text-sm mb-3">{ct.groupsTitle}</h2>
-        <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-          {GROUPS.map(g => (
-            <div key={g.id} className="flex-shrink-0 rounded-2xl p-4 w-32 text-center shadow-sm"
-              style={{ backgroundColor: g.color }}>
-              <div className="text-xl font-black mb-1" style={{ color: g.text }}>
-                {g.label.split(' ')[0]}
-              </div>
-              <div className="text-[11px] font-bold leading-tight" style={{ color: `${g.text}cc` }}>
-                유학생
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* 게시판 필터 */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-4 no-scrollbar">
