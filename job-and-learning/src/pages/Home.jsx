@@ -21,6 +21,7 @@ const heroStyle = {
 
 export default function Home({ user, onTabChange, lang }) {
   const tr = t[lang] ?? t.ko
+  const isLoggedIn = user && !user.is_anonymous
   const [stats, setStats] = useState({ applications: 0, myPosts: 0, courses: 0 })
   const [recentJobs, setRecentJobs] = useState([])
   const [recentMarket, setRecentMarket] = useState([])
@@ -29,20 +30,28 @@ export default function Home({ user, onTabChange, lang }) {
   useEffect(() => {
     if (!user) return
     async function load() {
-      const [appRes, postRes, jobRes, marketRes, courseRes] = await Promise.all([
-        supabase.from('applications').select('id', { count: 'exact' }).eq('user_id', user.id),
-        supabase.from('market_posts').select('id', { count: 'exact' }).eq('user_id', user.id),
+      const promises = [
         supabase.from('jobs').select('id,title,company,hourly_wage,location,deadline,visa_ok').eq('is_active', true).order('created_at', { ascending: false }).limit(4),
         supabase.from('market_posts').select('id,title,price,image_url,category').eq('is_sold', false).order('created_at', { ascending: false }).limit(4),
-        supabase.from('courses').select('id', { count: 'exact' }),
-      ])
-      setStats({ applications: appRes.count ?? 0, myPosts: postRes.count ?? 0, courses: courseRes.count ?? 0 })
+      ]
+      if (isLoggedIn) {
+        promises.push(
+          supabase.from('applications').select('id', { count: 'exact' }).eq('user_id', user.id),
+          supabase.from('market_posts').select('id', { count: 'exact' }).eq('user_id', user.id),
+          supabase.from('courses').select('id', { count: 'exact' }),
+        )
+      }
+      const results = await Promise.all(promises)
+      const [jobRes, marketRes, appRes, postRes, courseRes] = results
       setRecentJobs(jobRes.data ?? [])
       setRecentMarket(marketRes.data ?? [])
+      if (isLoggedIn) {
+        setStats({ applications: appRes.count ?? 0, myPosts: postRes.count ?? 0, courses: courseRes.count ?? 0 })
+      }
       setLoading(false)
     }
     load()
-  }, [user])
+  }, [user, isLoggedIn])
 
   const summaryValues = [stats.applications, stats.myPosts, stats.courses]
   const summaryColors = ['bg-[#FF8C00]', 'bg-[#002147]', 'bg-emerald-500']
@@ -62,7 +71,7 @@ export default function Home({ user, onTabChange, lang }) {
             {/* 서브 태그 */}
             <div className="inline-flex items-center gap-2 bg-[#FF8C00]/20 text-[#FF8C00] rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6">
               <span className="w-2 h-2 rounded-full bg-[#FF8C00] animate-pulse" />
-              Daejeon · International Students
+              International Students
             </div>
 
             {/* 메인 헤드라인 */}
@@ -117,25 +126,27 @@ export default function Home({ user, onTabChange, lang }) {
           </div>
         </section>
 
-        {/* 나의 활동 요약 */}
-        <section>
-          <h2 className="font-outfit font-bold text-[#002147] text-lg mb-4">{tr.activityTitle}</h2>
-          <div className="grid grid-cols-3 gap-3 md:gap-4">
-            {summaryValues.map((value, i) => (
-              <div key={i} className="bg-white rounded-2xl p-3 md:p-5 border border-gray-100 shadow-sm flex flex-col md:flex-row items-center gap-2 md:gap-4">
-                <div className={`w-10 h-10 md:w-12 md:h-12 ${summaryColors[i]} rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0`}>
-                  <span className="text-white font-outfit font-black text-base md:text-lg">{loading ? '…' : value}</span>
-                </div>
-                <div className="text-center md:text-left min-w-0">
-                  <div className="font-outfit font-bold text-[#002147] text-sm md:text-base whitespace-nowrap">
-                    {loading ? '…' : value}<span className="text-xs md:text-sm font-normal text-gray-400 ml-0.5">{tr.activityUnits[i]}</span>
+        {/* 나의 활동 요약 — 로그인한 회원만 표시 */}
+        {isLoggedIn && (
+          <section>
+            <h2 className="font-outfit font-bold text-[#002147] text-lg mb-4">{tr.activityTitle}</h2>
+            <div className="grid grid-cols-3 gap-3 md:gap-4">
+              {summaryValues.map((value, i) => (
+                <div key={i} className="bg-white rounded-2xl p-3 md:p-5 border border-gray-100 shadow-sm flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                  <div className={`w-10 h-10 md:w-12 md:h-12 ${summaryColors[i]} rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                    <span className="text-white font-outfit font-black text-base md:text-lg">{loading ? '…' : value}</span>
                   </div>
-                  <div className="text-xs text-gray-400 whitespace-nowrap">{tr.activityItems[i]}</div>
+                  <div className="text-center md:text-left min-w-0">
+                    <div className="font-outfit font-bold text-[#002147] text-sm md:text-base whitespace-nowrap">
+                      {loading ? '…' : value}<span className="text-xs md:text-sm font-normal text-gray-400 ml-0.5">{tr.activityUnits[i]}</span>
+                    </div>
+                    <div className="text-xs text-gray-400 whitespace-nowrap">{tr.activityItems[i]}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 최신 공고 + 중고 물품 — 데스크탑 2열 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -210,20 +221,6 @@ export default function Home({ user, onTabChange, lang }) {
               )}
             </div>
           </section>
-        </div>
-
-        {/* 3단계 정주 파이프라인 */}
-        <div className="rounded-2xl bg-[#002147] p-6">
-          <div className="text-sm font-bold text-white/60 uppercase tracking-widest mb-4">{tr.pipeline}</div>
-          <div className="grid grid-cols-3 gap-4">
-            {tr.pipelineSteps.map(([ico, title, sub]) => (
-              <div key={title} className="bg-white/10 rounded-xl p-4 text-center border border-white/10">
-                <div className="text-3xl mb-2">{ico}</div>
-                <div className="font-outfit font-bold text-white text-sm">{title}</div>
-                <div className="text-xs text-white/50 mt-1">{sub}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
       </div>

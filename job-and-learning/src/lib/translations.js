@@ -13,7 +13,7 @@ export const t = {
     anonymous: '익명',
 
     // ── Home ──
-    hero: ['대전 유학생의 정착 파트너,', '잡앤러닝', '취업 · 교육 · 중고거래 · 커뮤니티 · 헬프데스크 👋'],
+    hero: ['유학생의 정착 파트너,', '잡앤러닝', '취업 · 교육 · 중고거래 · 커뮤니티 · 헬프데스크 👋'],
     quickLabel: '바로 시작하기',
     quickActions: ['취업 찾기', '교육 보기', '중고거래', '도움 요청'],
     quickSub: '바로가기 →',
@@ -163,7 +163,7 @@ export const t = {
     close: 'Close',
     anonymous: 'Anonymous',
 
-    hero: ['Your Settlement Partner in Daejeon,', 'Job & Learning', 'Employment · Learning · Used Trade · Community · Help Desk 👋'],
+    hero: ['Your Settlement Partner,', 'Job & Learning', 'Employment · Learning · Used Trade · Community · Help Desk 👋'],
     quickLabel: 'Quick Start',
     quickActions: ['Find Employment', 'View Courses', 'Used Trade', 'Get Help'],
     quickSub: 'Go →',
@@ -307,7 +307,7 @@ export const t = {
     close: 'Đóng',
     anonymous: 'Ẩn danh',
 
-    hero: ['Đối tác định cư của du học sinh Daejeon,', 'Job & Learning', 'Tuyển dụng · Học tập · Giao dịch cũ · Cộng đồng · Hỗ trợ 👋'],
+    hero: ['Đối tác định cư của du học sinh,', 'Job & Learning', 'Tuyển dụng · Học tập · Giao dịch cũ · Cộng đồng · Hỗ trợ 👋'],
     quickLabel: 'Bắt đầu ngay',
     quickActions: ['Tìm việc làm', 'Xem khóa học', 'Giao dịch cũ', 'Nhận hỗ trợ'],
     quickSub: 'Đi →',
