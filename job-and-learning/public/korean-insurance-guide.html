@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한국 건강보험 & 4대 보험 완전 가이드 — 잡앤러닝</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a3a5f;
+      --navy-light: #243f6a;
+      --orange: #FF8C00;
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── 헤더 ── */
+    .hero {
+      background: linear-gradient(135deg, #0f2744 0%, var(--navy) 60%, #1e4d8c 100%);
+      color: #fff;
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,140,0,.2);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,.65);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .hero-divider {
+      width: 48px; height: 3px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin: 24px auto 0;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.8);
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    /* ── 본문 공통 ── */
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+    .section { margin-bottom: 52px; }
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 21px;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--orange);
+      display: inline-block;
+    }
+
+    /* ── 인트로 박스 ── */
+    .intro-box {
+      background: var(--card);
+      border-left: 4px solid var(--navy);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      font-size: 14.5px;
+      color: var(--text);
+      line-height: 1.8;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      margin-bottom: 48px;
+    }
+    .intro-box strong { color: var(--orange); }
+
+    /* ── 4대 보험 개요 그리드 ── */
+    .insurance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .ins-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      text-align: center;
+    }
+    .ins-card .ins-icon { font-size: 30px; margin-bottom: 10px; }
+    .ins-card h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .ins-card p { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+    .ins-card .ins-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-top: 8px;
+    }
+    .badge-must { background: #fee2e2; color: #991b1b; }
+    .badge-cond { background: #fef3c7; color: #92400e; }
+    .badge-auto { background: #d1fae5; color: #065f46; }
+
+    /* ── 단계/절차 카드 ── */
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step {
+      display: flex;
+      gap: 16px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      width: 34px; height: 34px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 900;
+      font-size: 14px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-num.orange { background: var(--orange); }
+    .step-content h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .step-content p  { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+    .step-content .tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+    .tag-doc  { background: #eff6ff; color: #1d4ed8; }
+    .tag-tip  { background: #f0fdf4; color: #166534; }
+    .tag-warn { background: #fef9c3; color: #854d0e; }
+
+    /* ── 정보 테이블 ── */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      font-size: 13.5px;
+    }
+    .info-table thead tr {
+      background: var(--navy);
+      color: #fff;
+    }
+    .info-table th, .info-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-table th { font-weight: 700; font-size: 12.5px; }
+    .info-table tbody tr:last-child td { border-bottom: none; }
+    .info-table tbody tr:nth-child(even) { background: #f8fafc; }
+    .info-table .highlight { color: var(--orange); font-weight: 700; }
+    .info-table .muted { color: var(--muted); font-size: 12px; }
+
+    /* ── 하이라이트 박스 ── */
+    .highlight-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .highlight-box h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+    .highlight-box p, .highlight-box li {
+      font-size: 13.5px;
+      color: #1e40af;
+      line-height: 1.7;
+    }
+    .highlight-box ul { padding-left: 18px; }
+    .highlight-box li { margin-bottom: 4px; }
+
+    .orange-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .orange-box h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #9a3412;
+      margin-bottom: 10px;
+    }
+    .orange-box p, .orange-box li {
+      font-size: 13.5px;
+      color: #c2410c;
+      line-height: 1.7;
+    }
+    .orange-box ul { padding-left: 18px; }
+    .orange-box li { margin-bottom: 4px; }
+
+    .green-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .green-box h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 10px;
+    }
+    .green-box p, .green-box li {
+      font-size: 13.5px;
+      color: #166534;
+      line-height: 1.7;
+    }
+    .green-box ul { padding-left: 18px; }
+    .green-box li { margin-bottom: 4px; }
+
+    /* ── 비교 카드 ── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media(max-width: 560px) { .compare-grid { grid-template-columns: 1fr; } }
+    .cmp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .cmp-card h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cmp-card ul { padding-left: 0; list-style: none; }
+    .cmp-card li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 4px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+    .cmp-card li::before { content: '▸'; position: absolute; left: 0; color: var(--orange); }
+    .cmp-card .price {
+      font-size: 18px;
+      font-weight: 900;
+      font-family: 'Outfit', sans-serif;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+
+    /* ── 병원 이용 단계 ── */
+    .hospital-flow {
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+    .hosp-step {
+      flex: 1;
+      min-width: 140px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      padding: 18px 14px;
+      text-align: center;
+      position: relative;
+    }
+    .hosp-step:first-child { border-radius: 14px 0 0 14px; }
+    .hosp-step:last-child  { border-radius: 0 14px 14px 0; }
+    .hosp-step .hosp-num {
+      width: 28px; height: 28px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px;
+    }
+    .hosp-step h4 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .hosp-step p  { font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .hosp-step .cost { font-size: 12px; font-weight: 700; color: var(--orange); margin-top: 6px; }
+    @media(max-width: 600px) {
+      .hospital-flow { flex-direction: column; }
+      .hosp-step:first-child { border-radius: 14px 14px 0 0; }
+      .hosp-step:last-child  { border-radius: 0 0 14px 14px; }
+    }
+
+    /* ── 주의사항 ── */
+    .warning-list {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .warning-list li {
+      font-size: 13.5px;
+      color: #78350f;
+      padding: 6px 0;
+      list-style: none;
+      padding-left: 26px;
+      position: relative;
+    }
+    .warning-list li::before {
+      content: '⚠';
+      position: absolute;
+      left: 0;
+      font-size: 13px;
+    }
+
+    /* ── 체크리스트 & 연락처 ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media(max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+    .checklist-card, .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .checklist-card h3, .contact-card h3 {
+      font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px;
+    }
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+    }
+    .chk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .chk-box {
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-item .c-icon { font-size: 18px; flex-shrink: 0; }
+    .contact-item .c-label { font-weight: 700; color: var(--navy); font-size: 12px; display: block; }
+    .contact-item .c-value { color: var(--muted); font-size: 12px; }
+
+    /* ── 마무리 CTA ── */
+    .cta-box {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e4d8c 100%);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      color: #fff;
+    }
+    .cta-box .cta-icon { font-size: 36px; margin-bottom: 12px; }
+    .cta-box h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .cta-box p {
+      font-size: 14px;
+      color: rgba(255,255,255,.65);
+      max-width: 440px;
+      margin: 0 auto 20px;
+      line-height: 1.7;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+    }
+    .cta-btn:hover { background: #e07d00; }
+
+    /* ── 인쇄 ── */
+    @media print {
+      .hero { padding: 32px 20px; }
+      .container { padding: 24px 16px 40px; }
+      .section { break-inside: avoid; }
+      .cta-box { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━ HERO ━━━━━━━━━━ -->
+<div class="hero">
+  <div class="badge">🇰🇷 잡앤러닝 한국 생활 가이드</div>
+  <h1>한국 <span>건강보험 &amp; 4대 보험</span><br>외국인 유학생 완전 가이드</h1>
+  <p>아프면 어디로 가야 할까? 보험료는 얼마나 낼까? 아르바이트 중 다치면? 유학생이 꼭 알아야 할 한국 보험 핵심을 정리했습니다.</p>
+  <div class="hero-divider"></div>
+  <div class="hero-tags">
+    <span class="hero-tag">건강보험 의무 가입</span>
+    <span class="hero-tag">국민연금 납부예외</span>
+    <span class="hero-tag">고용보험</span>
+    <span class="hero-tag">산재보험</span>
+    <span class="hero-tag">병원 이용법</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── 인트로 ── -->
+  <div class="intro-box">
+    한국에서 공부하는 외국인 유학생도 <strong>2024년부터 건강보험 의무 가입</strong> 대상입니다. 보험료는 매월 내야 하지만, 병원비를 크게 줄일 수 있어 오히려 유리합니다. 4대 보험(건강보험·국민연금·고용보험·산재보험)이 무엇인지, 유학생에게 어떻게 적용되는지 차근차근 알아봅시다.
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 1 : 4대 보험이란?
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">① 4대 보험이란? 한눈에 보기</div>
+    <div class="insurance-grid">
+      <div class="ins-card">
+        <div class="ins-icon">🏥</div>
+        <h3>건강보험</h3>
+        <p>병원·약국 이용 시 비용 일부를 국가가 지원. 본인부담률 약 20~30%</p>
+        <span class="ins-badge badge-must">유학생 의무 가입</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">👴</div>
+        <h3>국민연금</h3>
+        <p>노후 대비 연금. 취업 시 의무지만 유학생은 납부예외 신청 가능</p>
+        <span class="ins-badge badge-cond">납부예외 가능</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">💼</div>
+        <h3>고용보험</h3>
+        <p>실직 시 실업급여 지원. 아르바이트·인턴십 근무 시 자동 가입</p>
+        <span class="ins-badge badge-cond">취업 시 자동</span>
+      </div>
+      <div class="ins-card">
+        <div class="ins-icon">🦺</div>
+        <h3>산재보험</h3>
+        <p>업무 중 부상·질병 시 치료비·보상금 지급. 고용주가 100% 부담</p>
+        <span class="ins-badge badge-auto">고용주 전액 부담</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 2 : 건강보험 완전 정복
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">② 건강보험 — 가장 중요한 필수 정보</div>
+
+    <div class="highlight-box" style="margin-bottom:20px;">
+      <h3>📌 2024년부터 유학생 건강보험 의무 가입!</h3>
+      <ul>
+        <li>입국 후 <strong>6개월 이상</strong> 체류하는 외국인 유학생은 건강보험 지역가입자로 자동 가입됩니다.</li>
+        <li>D-2(유학), D-4(어학연수) 비자 소지자 모두 해당됩니다.</li>
+        <li>가입하지 않으면 나중에 보험료가 소급 청구되므로, 미루지 마세요.</li>
+      </ul>
+    </div>
+
+    <!-- 지역가입자 vs 직장가입자 -->
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">가입 유형 비교</p>
+    <div class="compare-grid" style="margin-bottom:24px;">
+      <div class="cmp-card">
+        <h3>🏠 지역가입자 (대부분의 유학생)</h3>
+        <div class="price">월 약 74,000원~</div>
+        <ul>
+          <li>학교 재학 중인 유학생 기본 적용</li>
+          <li>소득·재산 없으면 최저보험료 적용</li>
+          <li>2025년 기준 최저 약 74,000원/월</li>
+          <li>국민건강보험공단에서 고지서 발송</li>
+          <li>매월 25일까지 납부</li>
+        </ul>
+      </div>
+      <div class="cmp-card">
+        <h3>🏢 직장가입자 (취업·인턴십 시)</h3>
+        <div class="price">급여의 7.09%</div>
+        <ul>
+          <li>회사에서 급여 받으면 자동 전환</li>
+          <li>본인 50% + 회사 50% 반반 부담</li>
+          <li>급여가 낮으면 지역가입자보다 유리</li>
+          <li>퇴직 시 지역가입자로 재전환</li>
+          <li>임의계속가입으로 유지도 가능</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 가입 방법 -->
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">건강보험 가입 절차</p>
+    <div class="steps" style="margin-bottom:24px;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>입국 후 자동 가입 확인 (6개월 이후)</h3>
+          <p>입국일로부터 6개월이 지나면 국민건강보험공단(NHIS)에서 보험료 고지서가 자동 발송됩니다. 별도로 신청하지 않아도 됩니다.</p>
+          <span class="tag tag-tip">자동 처리 — 기다리면 됩니다</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>건강보험증(보험카드) 발급 신청</h3>
+          <p>가까운 국민건강보험공단 지사 방문 또는 앱(The건강보험)에서 신청. 외국인등록증 지참 필수.</p>
+          <span class="tag tag-doc">필요 서류: 외국인등록증, 여권</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>보험료 납부</h3>
+          <p>고지서(종이 또는 문자)를 받으면 편의점, 은행, 앱(The건강보험 / 국민건강보험)으로 납부. 자동이체 설정 추천.</p>
+          <span class="tag tag-tip">자동이체 시 500원 할인 혜택</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>피부양자 등록 (가족 동반 시)</h3>
+          <p>배우자·자녀가 함께 왔다면 피부양자로 등록하면 추가 보험료 없이 보험 혜택 공유 가능합니다.</p>
+          <span class="tag tag-doc">필요 서류: 가족관계 증명 서류 (번역·공증 필요)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 보험 혜택 요약 테이블 -->
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">건강보험 혜택 — 본인부담률</p>
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>의료기관 종류</th>
+          <th>예시</th>
+          <th>본인부담률</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1차 의원</td>
+          <td>동네 병원, 의원</td>
+          <td class="highlight">30%</td>
+          <td>감기, 소화불량 등</td>
+        </tr>
+        <tr>
+          <td>2차 병원</td>
+          <td>종합병원</td>
+          <td class="highlight">40~50%</td>
+          <td>의원 진료의뢰서 필요시 유리</td>
+        </tr>
+        <tr>
+          <td>3차 상급종합병원</td>
+          <td>대학병원</td>
+          <td class="highlight">60%</td>
+          <td>진료의뢰서 없으면 부담 큼</td>
+        </tr>
+        <tr>
+          <td>약국</td>
+          <td>처방전 있는 약</td>
+          <td class="highlight">30%</td>
+          <td>처방전 없는 약은 100%</td>
+        </tr>
+        <tr>
+          <td>치과·한의원</td>
+          <td>기본 진료</td>
+          <td class="highlight">30~50%</td>
+          <td>임플란트·교정은 비급여</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 3 : 국민연금
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">③ 국민연금 — 납부예외 신청하세요</div>
+
+    <div class="orange-box" style="margin-bottom:20px;">
+      <h3>💡 유학생은 국민연금 납부예외 신청 가능!</h3>
+      <ul>
+        <li>소득이 없는 유학생은 국민연금공단(NPS)에 <strong>납부예외 신청</strong>을 하면 납부 의무가 유예됩니다.</li>
+        <li>취업(아르바이트 포함)을 시작하면 소득이 생겨 가입 의무가 발생할 수 있습니다.</li>
+        <li>한국을 떠날 때 그동안 납부한 연금은 <strong>반환일시금</strong>으로 돌려받을 수 있습니다.</li>
+      </ul>
+    </div>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>상황</th>
+          <th>국민연금 처리</th>
+          <th>보험료율</th>
+          <th>처리 방법</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>소득 없는 유학생</td>
+          <td>납부예외 신청</td>
+          <td class="highlight">0원</td>
+          <td>국민연금공단 지사 방문 또는 전화</td>
+        </tr>
+        <tr>
+          <td>아르바이트·인턴 (월 60만원 이상)</td>
+          <td>가입 의무 발생</td>
+          <td class="highlight">소득의 9%</td>
+          <td>본인 4.5% + 고용주 4.5%</td>
+        </tr>
+        <tr>
+          <td>귀국 예정</td>
+          <td>반환일시금 신청</td>
+          <td class="highlight">납부액 + 이자</td>
+          <td>출국 후 3년 이내 신청</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="green-box" style="margin-top:16px;">
+      <h3>✅ 상호협정 국가 출신이라면?</h3>
+      <p>한국과 사회보장협정을 맺은 국가(미국, 독일, 중국, 베트남 등) 출신은 국민연금 가입이 면제될 수 있습니다. 국민연금공단(1355)에 문의하세요.</p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 4 : 고용보험 & 산재보험
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">④ 고용보험 &amp; 산재보험 — 아르바이트할 때 꼭!</div>
+
+    <div class="compare-grid" style="margin-bottom:20px;">
+      <div class="cmp-card">
+        <h3>💼 고용보험 (아르바이트 포함)</h3>
+        <ul>
+          <li>주 15시간 이상 일하면 자동 가입</li>
+          <li>보험료: 급여의 0.9% (본인 부담)</li>
+          <li>고용주도 급여의 0.9~1.65% 부담</li>
+          <li>실직 시 실업급여 수급 가능</li>
+          <li>D-2 비자는 실업급여 대상 제한 있음</li>
+          <li>가입 여부는 고용주에게 확인 요청</li>
+        </ul>
+      </div>
+      <div class="cmp-card">
+        <h3>🦺 산재보험 (매우 중요!)</h3>
+        <ul>
+          <li>아르바이트·인턴 포함 <strong>모든 근로자</strong> 적용</li>
+          <li>고용주가 100% 부담 — 본인 부담 없음</li>
+          <li>업무 중 사고·질병 치료비 전액 지원</li>
+          <li>출퇴근 중 사고도 적용됩니다</li>
+          <li>산재 신청: 근로복지공단(1588-0075)</li>
+          <li>고용주가 거부해도 직접 신청 가능</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>🚨 아르바이트 중 다쳤다면 이렇게 하세요</h3>
+      <ul>
+        <li>즉시 병원 응급실 방문 → 치료 먼저 받기</li>
+        <li>사고 일시·장소·경위를 사진/메모로 기록</li>
+        <li>고용주에게 산재 신청 요청 (의무 사항)</li>
+        <li>고용주가 거부하면 근로복지공단(1588-0075)에 직접 신청</li>
+        <li>학교 국제학생처·유학생 상담센터에도 도움 요청 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 5 : 병원 이용 가이드
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">⑤ 실전 병원 이용 가이드</div>
+
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;">한국 의료 시스템은 1차→2차→3차로 나뉩니다. 가능하면 <strong>동네 의원(1차)</strong>부터 방문하는 것이 비용을 줄이는 방법입니다.</p>
+
+    <div class="hospital-flow" style="margin-bottom:24px;">
+      <div class="hosp-step">
+        <div class="hosp-num">1</div>
+        <h4>동네 의원</h4>
+        <p>감기, 소화불량, 피부질환 등 가벼운 증상</p>
+        <div class="cost">본인부담 약 5,000~15,000원</div>
+      </div>
+      <div class="hosp-step">
+        <div class="hosp-num">2</div>
+        <h4>종합병원</h4>
+        <p>의원 진료 후 의뢰서 받아 전문 진료 필요 시</p>
+        <div class="cost">본인부담 약 20,000~60,000원</div>
+      </div>
+      <div class="hosp-step">
+        <div class="hosp-num">3</div>
+        <h4>대학병원</h4>
+        <p>중증·수술·전문 치료. 진료의뢰서 필수 권장</p>
+        <div class="cost">본인부담 약 60,000원~</div>
+      </div>
+      <div class="hosp-step">
+        <div class="hosp-num" style="background:var(--orange);">🚑</div>
+        <h4>응급실</h4>
+        <p>생명위협·골절·의식불명 등 응급 상황</p>
+        <div class="cost">119 신고 또는 직접 방문</div>
+      </div>
+    </div>
+
+    <!-- 병원 방문 절차 -->
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">처음 병원 방문 시 절차</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>접수 (원무과 / 데스크)</h3>
+          <p>"처음 왔어요" 또는 "초진입니다"라고 말하세요. 외국인등록증을 제시하면 건강보험 적용을 확인해 줍니다. 영어가 가능한 병원은 외국인 진료실을 운영하기도 합니다.</p>
+          <span class="tag tag-doc">외국인등록증 지참 필수</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>진료 받기</h3>
+          <p>증상을 설명할 때 스마트폰 번역 앱(파파고, DeepL)을 활용하세요. 증상·기간·알레르기 여부를 미리 적어두면 빠릅니다. 통역 서비스가 필요하면 "의료통역 요청"이라고 말하세요.</p>
+          <span class="tag tag-tip">파파고·DeepL 앱 준비 추천</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>처방전 받기 (약이 필요한 경우)</h3>
+          <p>의사가 처방전(처방전)을 줍니다. 병원 근처 약국(약국 간판 초록 십자 모양)에 제출하면 보험 적용 약을 받을 수 있습니다.</p>
+          <span class="tag tag-tip">병원 근처 약국에서 처방약 수령</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>수납 (계산)</h3>
+          <p>건강보험이 적용된 본인부담금만 결제합니다. 카드·현금 모두 가능. 영수증은 꼭 받아두세요 — 연말 의료비 공제나 보험 청구에 필요할 수 있습니다.</p>
+          <span class="tag tag-doc">영수증 보관 (의료비 증빙)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="green-box" style="margin-top:20px;">
+      <h3>📱 유용한 앱 &amp; 웹사이트</h3>
+      <ul>
+        <li><strong>The건강보험 앱</strong> — 보험료 납부, 보험증 발급, 납부 내역 확인</li>
+        <li><strong>건강보험공단 홈페이지 nhis.or.kr</strong> — 각종 민원 처리, 보험료 조회</li>
+        <li><strong>응급의료포털 e-gen.or.kr</strong> — 가까운 응급실·야간 병원 찾기</li>
+        <li><strong>외국인종합안내센터 1345</strong> — 보험 관련 한국어/영어/중국어 상담 (24시간)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 6 : 주의사항
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">⑥ 꼭 알아야 할 주의사항</div>
+    <ul class="warning-list">
+      <li>건강보험료를 3개월 이상 연체하면 보험 급여가 정지됩니다. 납부 기한(매월 25일)을 꼭 지키세요.</li>
+      <li>비급여 항목(성형, 라식, 임플란트, 건강검진 비급여 등)은 건강보험이 적용되지 않아 전액 본인 부담입니다.</li>
+      <li>외국인등록증 없이는 건강보험 혜택을 받기 어렵습니다. 입국 후 14일 이내 외국인등록을 완료하세요.</li>
+      <li>학교를 졸업하거나 비자 상태가 변경되면 건강보험 유형도 변경될 수 있습니다. 국민건강보험공단에 신고하세요.</li>
+      <li>아르바이트를 시작하면 직장가입자로 전환 신고를 해야 합니다. 고용주가 처리하는 것이 원칙입니다.</li>
+      <li>보험료 미납 상태에서 치료받으면 나중에 전액 소급 청구가 올 수 있습니다.</li>
+      <li>불법 취업(D-2 비자 허용 범위 초과)으로 인한 사고는 산재보험 적용이 제한될 수 있습니다.</li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════════════
+       SECTION 7 : 체크리스트 & 연락처
+  ════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">⑦ 체크리스트 &amp; 주요 연락처</div>
+    <div class="two-col">
+      <div class="checklist-card">
+        <h3>✅ 유학생 보험 체크리스트</h3>
+        <div class="checklist-grid">
+          <div class="chk-item"><div class="chk-box"></div><span>입국 후 외국인등록증 발급</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>건강보험 가입 확인 (6개월 후)</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>건강보험증(카드) 발급</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>보험료 자동이체 설정</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>국민연금 납부예외 신청</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>The건강보험 앱 설치</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>가까운 병원·약국 미리 확인</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>아르바이트 시 4대 보험 확인</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>비자 변경 시 공단 신고</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span>귀국 전 반환일시금 확인</span></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>📞 주요 기관 연락처</h3>
+        <div class="contact-item">
+          <span class="c-icon">🏥</span>
+          <div>
+            <span class="c-label">국민건강보험공단</span>
+            <span class="c-value">1577-1000 (한국어·영어·중국어)</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">👴</span>
+          <div>
+            <span class="c-label">국민연금공단</span>
+            <span class="c-value">1355 (외국어 서비스 지원)</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">🦺</span>
+          <div>
+            <span class="c-label">근로복지공단 (산재)</span>
+            <span class="c-value">1588-0075</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">🌐</span>
+          <div>
+            <span class="c-label">외국인종합안내센터</span>
+            <span class="c-value">1345 (24시간, 다국어)</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">🚑</span>
+          <div>
+            <span class="c-label">응급 (Emergency)</span>
+            <span class="c-value">119 (구급대) / 112 (경찰)</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">💼</span>
+          <div>
+            <span class="c-label">고용노동부 (고용보험)</span>
+            <span class="c-value">1350</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 마무리 CTA ── -->
+  <div class="cta-box">
+    <div class="cta-icon">🎓</div>
+    <h3>더 궁금한 게 있으신가요?</h3>
+    <p>잡앤러닝은 대전 외국인 유학생의 한국 생활 정착을 돕는 플랫폼입니다. 보험 관련 궁금증은 커뮤니티에 질문하거나 이메일로 문의하세요.</p>
+    <a href="mailto:jal@jobnlearning.kr" class="cta-btn">✉ 문의하기 — jal@jobnlearning.kr</a>
+  </div>
+
+</div>
+</body>
+</html>
