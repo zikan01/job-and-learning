@@ -120,15 +120,17 @@ export default function Home({ user, onTabChange, lang }) {
         {/* 나의 활동 요약 */}
         <section>
           <h2 className="font-outfit font-bold text-[#002147] text-lg mb-4">{tr.activityTitle}</h2>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-3 md:gap-4">
             {summaryValues.map((value, i) => (
-              <div key={i} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex items-center gap-4">
-                <div className={`w-12 h-12 ${summaryColors[i]} rounded-2xl flex items-center justify-center flex-shrink-0`}>
-                  <span className="text-white font-outfit font-black text-lg">{loading ? '…' : value}</span>
+              <div key={i} className="bg-white rounded-2xl p-3 md:p-5 border border-gray-100 shadow-sm flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                <div className={`w-10 h-10 md:w-12 md:h-12 ${summaryColors[i]} rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                  <span className="text-white font-outfit font-black text-base md:text-lg">{loading ? '…' : value}</span>
                 </div>
-                <div>
-                  <div className="font-outfit font-bold text-[#002147] text-base">{loading ? '…' : value}<span className="text-sm font-normal text-gray-400 ml-1">{tr.activityUnits[i]}</span></div>
-                  <div className="text-sm text-gray-400">{tr.activityItems[i]}</div>
+                <div className="text-center md:text-left min-w-0">
+                  <div className="font-outfit font-bold text-[#002147] text-sm md:text-base whitespace-nowrap">
+                    {loading ? '…' : value}<span className="text-xs md:text-sm font-normal text-gray-400 ml-0.5">{tr.activityUnits[i]}</span>
+                  </div>
+                  <div className="text-xs text-gray-400 whitespace-nowrap">{tr.activityItems[i]}</div>
                 </div>
               </div>
             ))}

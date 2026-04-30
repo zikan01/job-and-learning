@@ -17,13 +17,13 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
     <header className="sticky top-0 z-50 shadow-lg">
       {/* 메인 헤더: 로고 + 탭 + 언어선택 + 로그인 */}
       <div className="bg-[#002147]">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center gap-3 md:gap-6">
           {/* 로고 */}
           <div className="flex items-center flex-shrink-0 overflow-visible">
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-28 w-auto object-contain"
+              className="h-14 md:h-28 w-auto object-contain"
             />
           </div>
 
@@ -49,12 +49,12 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
           <div className="flex-1 md:hidden" />
 
           {/* 언어 선택 버튼 */}
-          <div className="flex items-center gap-1 bg-white/10 rounded-xl p-1 flex-shrink-0">
+          <div className="flex items-center gap-0.5 md:gap-1 bg-white/10 rounded-xl p-1 flex-shrink-0">
             {LANGS.map(({ code, label }) => (
               <button
                 key={code}
                 onClick={() => setLang(code)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-xs font-bold transition-colors ${
                   lang === code
                     ? 'bg-[#FF8C00] text-white shadow'
                     : 'text-white/60 hover:text-white'
@@ -70,21 +70,21 @@ export default function Navbar({ tab, setTab, user, onLoginClick, lang, setLang 
             onClick={onLoginClick}
             className={`flex items-center gap-1.5 transition-all active:scale-95 flex-shrink-0 ${
               isAnon
-                ? 'bg-[#FF8C00] text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md'
-                : 'bg-[#FF8C00]/20 px-3 py-2 rounded-xl'
+                ? 'bg-[#FF8C00] text-white px-3 md:px-4 py-2 rounded-xl text-sm font-bold shadow-md'
+                : 'bg-[#FF8C00]/20 px-2 md:px-3 py-2 rounded-xl'
             }`}
           >
             {isAnon ? (
               <>
                 <span>🔐</span>
-                <span>{tr.login}</span>
+                <span className="hidden sm:inline">{tr.login}</span>
               </>
             ) : (
               <>
                 <div className="w-7 h-7 rounded-full bg-[#FF8C00] flex items-center justify-center text-white text-xs font-bold">
                   {initial}
                 </div>
-                <span className="text-white/80 text-sm font-semibold max-w-[80px] truncate">
+                <span className="hidden sm:inline text-white/80 text-sm font-semibold max-w-[80px] truncate">
                   {user.email?.split('@')[0]}
                 </span>
               </>
