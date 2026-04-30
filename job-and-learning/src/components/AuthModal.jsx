@@ -2,17 +2,18 @@ import { useState, useRef, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const OTP_LEN = 8
 
 function OtpBoxes({ value, onChange }) {
   const refs = useRef([])
-  const digits = Array(6).fill('').map((_, i) => value[i] ?? '')
+  const digits = Array(OTP_LEN).fill('').map((_, i) => value[i] ?? '')
 
   function handleChange(i, e) {
     const v = e.target.value.replace(/\D/g, '').slice(-1)
     const next = [...digits]
     next[i] = v
     onChange(next.join(''))
-    if (v && i < 5) refs.current[i + 1]?.focus()
+    if (v && i < OTP_LEN - 1) refs.current[i + 1]?.focus()
   }
 
   function handleKeyDown(i, e) {
@@ -26,7 +27,7 @@ function OtpBoxes({ value, onChange }) {
       }
     } else if (e.key === 'ArrowLeft' && i > 0) {
       refs.current[i - 1]?.focus()
-    } else if (e.key === 'ArrowRight' && i < 5) {
+    } else if (e.key === 'ArrowRight' && i < OTP_LEN - 1) {
       refs.current[i + 1]?.focus()
     }
   }
@@ -36,7 +37,7 @@ function OtpBoxes({ value, onChange }) {
     const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6)
     onChange(pasted.padEnd(6, '').slice(0, 6).split('').map((c, i) => pasted[i] ?? '').join(''))
     onChange(pasted)
-    const focusIdx = Math.min(pasted.length, 5)
+    const focusIdx = Math.min(pasted.length, OTP_LEN - 1)
     refs.current[focusIdx]?.focus()
   }
 
@@ -45,8 +46,8 @@ function OtpBoxes({ value, onChange }) {
   }
 
   return (
-    <div className="flex gap-2 justify-center" onPaste={handlePaste}>
-      {Array(6).fill(0).map((_, i) => (
+    <div className="flex gap-1.5 justify-center" onPaste={handlePaste}>
+      {Array(OTP_LEN).fill(0).map((_, i) => (
         <input
           key={i}
           ref={el => { refs.current[i] = el }}
@@ -58,7 +59,7 @@ function OtpBoxes({ value, onChange }) {
           onKeyDown={e => handleKeyDown(i, e)}
           onFocus={handleFocus}
           autoFocus={i === 0}
-          className={`w-11 h-14 text-center text-2xl font-black rounded-xl border-2 outline-none transition-all ${
+          className={`w-9 h-12 text-center text-xl font-black rounded-xl border-2 outline-none transition-all ${
             digits[i]
               ? 'border-[#1a3a5f] bg-[#1a3a5f]/5 text-[#1a3a5f]'
               : 'border-gray-200 bg-gray-50 text-gray-800'
@@ -79,7 +80,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
   if (!open) return null
 
   const emailValid = EMAIL_RE.test(email.trim())
-  const tokenValid = token.replace(/\D/g, '').length === 6
+  const tokenValid = token.replace(/\D/g, '').length === OTP_LEN
 
   function reset() {
     setStep('email')
@@ -114,7 +115,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
   async function handleVerifyOtp(e) {
     e.preventDefault()
     const code = token.replace(/\D/g, '')
-    if (code.length !== 6) return
+    if (code.length !== OTP_LEN) return
     setLoading(true)
     setError('')
     const { error: err } = await supabase.auth.verifyOtp({
@@ -188,7 +189,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
               </button>
 
               <p className="text-center text-xs text-gray-400">
-                이메일로 6자리 인증번호를 보내드립니다
+                이메일로 8자리 인증번호를 보내드립니다
               </p>
             </form>
           )}
@@ -208,7 +209,7 @@ export default function AuthModal({ open, onClose, onSuccess }) {
               {/* 6칸 OTP 입력 */}
               <div>
                 <label className="block text-xs font-bold text-[#1a3a5f] uppercase tracking-wide mb-3 text-center">
-                  6자리 인증번호
+                  8자리 인증번호
                 </label>
                 <OtpBoxes value={token} onChange={setToken} />
               </div>
