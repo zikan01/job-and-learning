@@ -178,8 +178,8 @@ export default function Home({ user, onTabChange, lang }) {
                       <div className="text-xs text-gray-400">{job.company} · {job.location}</div>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <div className="text-[#FF8C00] font-outfit font-bold text-sm">{job.hourly_wage?.toLocaleString()}원</div>
-                      <div className="text-xs text-gray-300">/시간</div>
+                      <div className="text-[#FF8C00] font-outfit font-bold text-sm">{tr.pricePrefix}{job.hourly_wage?.toLocaleString()}{tr.priceSuffix}</div>
+                      <div className="text-xs text-gray-300">{tr.rateUnit}</div>
                     </div>
                   </div>
                 ))
@@ -214,7 +214,7 @@ export default function Home({ user, onTabChange, lang }) {
                     </div>
                     <div className="p-3">
                       <div className="text-xs font-semibold text-gray-700 truncate">{item.title}</div>
-                      <div className="text-sm text-[#FF8C00] font-bold mt-0.5">{item.price?.toLocaleString()}원</div>
+                      <div className="text-sm text-[#FF8C00] font-bold mt-0.5">{tr.pricePrefix}{item.price?.toLocaleString()}{tr.priceSuffix}</div>
                     </div>
                   </div>
                 ))

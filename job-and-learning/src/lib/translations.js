@@ -2,6 +2,9 @@ export const t = {
   ko: {
     // ── Navbar / 공통 ──
     noticebar: 'Selected teams will be contacted individually based on the submitted details.',
+    pricePrefix: '',
+    priceSuffix: '원',
+    rateUnit: '/시간',
     tabs: { home: '홈', jobs: '취업', market: '중고거래', learning: '교육', community: '커뮤니티', help: '헬프데스크' },
     navTitles: { home: '잡앤러닝 홈', jobs: '취업 센터', market: '중고거래', learning: '교육 센터', community: '커뮤니티', help: '헬프데스크' },
     login: '로그인',
@@ -66,6 +69,8 @@ export const t = {
       pdfSoon: '📄 자료 준비 중',
       comingSoon: '교육 준비 중',
       comingSoonDesc: '곧 강의 콘텐츠가 업로드될 예정입니다.',
+      pdfBadge: '📄 문서',
+      minuteUnit: '분',
       levelLabels: { '입문': '입문', '초급': '초급', '중급': '중급' },
       catBadge: { ai: '🤖 AI 실무', life: '🇰🇷 생활 가이드' },
       ctaTitle: '1:1 맞춤 코칭 상담',
@@ -152,6 +157,9 @@ export const t = {
 
   en: {
     noticebar: 'Selected teams will be contacted individually based on the submitted details.',
+    pricePrefix: '₩',
+    priceSuffix: '',
+    rateUnit: '/hr',
     tabs: { home: 'Home', jobs: 'Employment', market: 'Used Trade', learning: 'Learning', community: 'Community', help: 'Help Desk' },
     navTitles: { home: 'Job & Learning', jobs: 'Employment Center', market: 'Used Trade', learning: 'Learning Center', community: 'Community', help: 'Help Desk' },
     login: 'Login',
@@ -212,6 +220,8 @@ export const t = {
       pdfSoon: '📄 Materials coming soon',
       comingSoon: 'Course in Preparation',
       comingSoonDesc: 'Content will be uploaded soon.',
+      pdfBadge: '📄 Doc',
+      minuteUnit: 'min',
       levelLabels: { '입문': 'Beginner', '초급': 'Elementary', '중급': 'Intermediate' },
       catBadge: { ai: '🤖 AI Skills', life: '🇰🇷 Life Guide' },
       ctaTitle: '1:1 Personalized Coaching',
@@ -295,6 +305,9 @@ export const t = {
 
   vi: {
     noticebar: 'Các nhóm được chọn sẽ được liên hệ riêng dựa trên thông tin đã gửi.',
+    pricePrefix: '₩',
+    priceSuffix: '',
+    rateUnit: '/giờ',
     tabs: { home: 'Trang chủ', jobs: 'Tuyển dụng', market: 'Giao dịch cũ', learning: 'Học tập', community: 'Cộng đồng', help: 'Hỗ trợ' },
     navTitles: { home: 'Job & Learning', jobs: 'Trung tâm tuyển dụng', market: 'Giao dịch hàng cũ', learning: 'Trung tâm học tập', community: 'Cộng đồng', help: 'Bàn hỗ trợ' },
     login: 'Đăng nhập',
@@ -355,6 +368,8 @@ export const t = {
       pdfSoon: '📄 Tài liệu sắp có',
       comingSoon: 'Khóa học đang chuẩn bị',
       comingSoonDesc: 'Nội dung sẽ sớm được tải lên.',
+      pdfBadge: '📄 Tài liệu',
+      minuteUnit: 'phút',
       levelLabels: { '입문': 'Người mới', '초급': 'Sơ cấp', '중급': 'Trung cấp' },
       catBadge: { ai: '🤖 Kỹ năng AI', life: '🇰🇷 Hướng dẫn' },
       ctaTitle: 'Tư vấn huấn luyện 1:1',

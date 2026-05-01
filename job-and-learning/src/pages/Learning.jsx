@@ -107,7 +107,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
                     <h3 className="font-outfit font-bold text-[#002147] text-base leading-tight">{course.title}</h3>
                     <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
                       <span>👤 {course.instructor}</span>
-                      {course.duration_min && <span>⏱ {course.duration_min}분</span>}
+                      {course.duration_min && <span>⏱ {course.duration_min}{lt.minuteUnit}</span>}
                     </div>
                   </div>
                   <div className="flex flex-col gap-1.5 flex-shrink-0">
@@ -115,7 +115,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
                       <span className="bg-red-50 text-red-500 text-[10px] font-bold px-2 py-1 rounded-lg text-center">{lt.video}</span>
                     )}
                     {course.pdf_url && (
-                      <span className="bg-blue-50 text-blue-500 text-[10px] font-bold px-2 py-1 rounded-lg text-center">📄 문서</span>
+                      <span className="bg-blue-50 text-blue-500 text-[10px] font-bold px-2 py-1 rounded-lg text-center">{lt.pdfBadge}</span>
                     )}
                   </div>
                 </div>

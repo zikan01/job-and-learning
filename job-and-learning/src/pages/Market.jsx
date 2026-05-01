@@ -140,7 +140,7 @@ export default function Market({ user, lang, onLoginRequired }) {
                   {mt.categoryLabels[CATEGORY_VALUES.indexOf(post.category)] ?? post.category}
                 </div>
                 <div className="font-semibold text-[#002147] text-sm leading-tight line-clamp-2">{post.title}</div>
-                <div className="font-outfit font-black text-[#FF8C00] text-base mt-1">{post.price?.toLocaleString()}원</div>
+                <div className="font-outfit font-black text-[#FF8C00] text-base mt-1">{tr.pricePrefix}{post.price?.toLocaleString()}{tr.priceSuffix}</div>
                 {post.description && (
                   <p className="text-[11px] text-gray-400 mt-1 line-clamp-2">{post.description}</p>
                 )}
