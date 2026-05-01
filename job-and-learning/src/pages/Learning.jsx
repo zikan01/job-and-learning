@@ -167,7 +167,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
         <div className="text-2xl mb-2">🎓</div>
         <div className="font-outfit font-bold text-base mb-1">{lt.ctaTitle}</div>
         <div className="text-white/50 text-xs mb-3">{lt.ctaDesc}</div>
-        <a href="mailto:jal@jobnlearning.kr"
+        <a href="mailto:ceo@d2d4.kr"
           className="inline-block bg-[#FF8C00] text-white text-sm font-bold px-6 py-2.5 rounded-xl hover:bg-[#e07d00] transition-colors">
           {lt.ctaBtn}
         </a>

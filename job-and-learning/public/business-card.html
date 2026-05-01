@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>명함 시안 | Shin Dong Ho · Job and Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #eef2f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 52px 24px 64px;
+      font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+      gap: 52px;
+    }
+
+    .page-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    /* ─── Card Wrapper ─── */
+    .card-set {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .card-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+
+    .card {
+      width: 800px;
+      height: 456px;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════
+       FRONT
+    ════════════════════════════ */
+    .card-front {
+      background: #ffffff;
+      border: 1px solid #dde4ed;
+      box-shadow:
+        0 4px 6px rgba(26,58,95,0.04),
+        0 12px 40px rgba(26,58,95,0.10),
+        0 1px 2px rgba(26,58,95,0.06);
+      display: flex;
+    }
+
+    /* Top accent line */
+    .card-front::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #FF8C00 0%, #FF8C00 45%, rgba(255,140,0,0.15) 100%);
+      z-index: 1;
+    }
+
+    /* ── Left ── */
+    .front-left {
+      flex: 0 0 58%;
+      padding: 48px 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .name-block {
+      padding-top: 4px;
+    }
+
+    .name-ko {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: #1a3a5f;
+      letter-spacing: 14px;
+      line-height: 1.0;
+      margin-bottom: 8px;
+    }
+
+    .name-en {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: #1a3a5f;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .title-pip {
+      width: 28px;
+      height: 2px;
+      background: #FF8C00;
+      border-radius: 2px;
+    }
+
+    .title-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #FF8C00;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+    }
+
+    .address-block { }
+
+    .address-ko {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    .address-en {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      color: #94a3b8;
+      line-height: 1.65;
+      margin-top: 3px;
+    }
+
+    /* ── Divider ── */
+    .front-divider {
+      width: 1px;
+      margin: 36px 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #dde4ed 18%,
+        #dde4ed 82%,
+        transparent 100%
+      );
+      flex-shrink: 0;
+    }
+
+    /* ── Right ── */
+    .front-right {
+      flex: 1;
+      padding: 44px 40px 44px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Logo */
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      gap: 1px;
+    }
+
+    .logo-line {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: #FF8C00;
+      letter-spacing: 2px;
+    }
+
+    /* Contact */
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .c-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .c-icon svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .c-text {}
+
+    .c-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      color: #a0aec0;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .c-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #1a3a5f;
+      letter-spacing: 0.3px;
+    }
+
+    /* ════════════════════════════
+       BACK
+    ════════════════════════════ */
+    .card-back {
+      background: #1a3a5f;
+      box-shadow:
+        0 4px 6px rgba(26,58,95,0.15),
+        0 16px 48px rgba(26,58,95,0.30);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Subtle texture overlay */
+    .card-back::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(255,140,0,0.05) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 60%, rgba(255,255,255,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .back-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .back-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .back-logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      gap: 2px;
+    }
+
+    .back-logo-line {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 3px;
+    }
+
+    .back-tagline {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.30);
+      letter-spacing: 3px;
+    }
+
+    /* QR section */
+    .back-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 22px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* QR code */
+    #qr-code {
+      width: 86px;
+      height: 86px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #qr-code canvas,
+    #qr-code img {
+      width: 86px !important;
+      height: 86px !important;
+      display: block;
+    }
+
+    .qr-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .qr-scan-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .qr-site {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 1px;
+    }
+
+    .qr-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 10.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.32);
+      letter-spacing: 1px;
+    }
+
+    /* ─── Print btn ─── */
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: #1a3a5f;
+      color: white;
+    }
+    .btn-primary:hover { background: #22497a; transform: translateY(-1px); }
+
+    @media print {
+      body { background: white; padding: 0; gap: 0; }
+      .page-title, .card-label, .actions { display: none; }
+      .card-set { gap: 0; }
+      .card-group { gap: 0; }
+      .card { page-break-after: always; border-radius: 0; }
+    }
+
+    @media (max-width: 860px) {
+      .card {
+        width: calc(100vw - 32px);
+        height: calc((100vw - 32px) / 1.75);
+      }
+      .front-left { padding: 5% 6% 5% 6%; }
+      .name-ko { font-size: min(44px, 6.5vw); letter-spacing: min(14px, 2vw); }
+      .name-en { font-size: min(25px, 3.8vw); }
+      .front-right { padding: 5% 5% 5% 4%; }
+      .back-logo-line { font-size: min(28px, 4.2vw); }
+      .back-bottom { padding: 3% 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">Business Card Mockup — Shin Dong Ho / Job &amp; Learning</div>
+
+  <div class="card-set">
+
+    <!-- ── FRONT ── -->
+    <div class="card-group">
+      <div class="card-label">Front</div>
+      <div class="card card-front">
+
+        <!-- Left -->
+        <div class="front-left">
+          <div class="name-block">
+            <div class="name-ko">신 동 호</div>
+            <div class="name-en">Shin Dong Ho</div>
+            <div class="title-row">
+              <div class="title-pip"></div>
+              <div class="title-text">CEO · Representative</div>
+            </div>
+          </div>
+          <div class="address-block">
+            <div class="address-ko">대전 중구 대전천서로 501-1, 2층 78호</div>
+            <div class="address-en">
+              78 Office 2F, 501-1 Daejeonchonseoro,<br>
+              Jung-gu, Daejeon, Republic of Korea
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="front-divider"></div>
+
+        <!-- Right -->
+        <div class="front-right">
+          <!-- Logo -->
+          <div class="logo-block">
+            <svg width="44" height="44" viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="27" stroke="#FF8C00" stroke-width="2.5"/>
+              <ellipse cx="30" cy="30" rx="14.5" ry="27" stroke="#FF8C00" stroke-width="2"/>
+              <line x1="3" y1="30" x2="57" y2="30" stroke="#FF8C00" stroke-width="1.5"/>
+              <line x1="7.5" y1="19" x2="52.5" y2="19" stroke="#FF8C00" stroke-width="1.3"/>
+              <line x1="7.5" y1="41" x2="52.5" y2="41" stroke="#FF8C00" stroke-width="1.3"/>
+              <line x1="30" y1="3" x2="30" y2="57" stroke="#FF8C00" stroke-width="1.5"/>
+            </svg>
+            <div class="logo-text-wrap">
+              <div class="logo-line">JOB AND</div>
+              <div class="logo-line">LEARNING</div>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div class="contact-block">
+            <!-- Email -->
+            <div class="contact-item">
+              <div class="c-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m2 7 10 7 10-7"/>
+                </svg>
+              </div>
+              <div class="c-text">
+                <div class="c-label">Email</div>
+                <div class="c-value">ceo@d2d4.kr</div>
+              </div>
+            </div>
+            <!-- Web -->
+            <div class="contact-item">
+              <div class="c-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="c-text">
+                <div class="c-label">Web</div>
+                <div class="c-value">www.d2d4.kr</div>
+              </div>
+            </div>
+            <!-- Phone -->
+            <div class="contact-item">
+              <div class="c-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.98 3.37 2 2 0 0 1 3.95 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="c-text">
+                <div class="c-label">Phone</div>
+                <div class="c-value">010.5069.1926</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /card-front -->
+    </div>
+
+    <!-- ── BACK ── -->
+    <div class="card-group">
+      <div class="card-label">Back</div>
+      <div class="card card-back">
+
+        <div class="back-main">
+          <div class="back-logo-row">
+            <svg width="66" height="66" viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="27" stroke="rgba(255,255,255,0.80)" stroke-width="2.5"/>
+              <ellipse cx="30" cy="30" rx="14.5" ry="27" stroke="rgba(255,255,255,0.80)" stroke-width="2"/>
+              <line x1="3" y1="30" x2="57" y2="30" stroke="rgba(255,255,255,0.80)" stroke-width="1.5"/>
+              <line x1="7.5" y1="19" x2="52.5" y2="19" stroke="rgba(255,255,255,0.80)" stroke-width="1.3"/>
+              <line x1="7.5" y1="41" x2="52.5" y2="41" stroke="rgba(255,255,255,0.80)" stroke-width="1.3"/>
+              <line x1="30" y1="3" x2="30" y2="57" stroke="rgba(255,255,255,0.80)" stroke-width="1.5"/>
+            </svg>
+            <div class="back-logo-text-wrap">
+              <div class="back-logo-line">JOB AND</div>
+              <div class="back-logo-line">LEARNING</div>
+            </div>
+          </div>
+          <div class="back-tagline">외국인 유학생을 위한 취업 &amp; 생활 플랫폼</div>
+          <div class="back-tagline" style="font-size:10px; letter-spacing:2px; margin-top:-10px;">Jobs &amp; Life Platform for International Students</div>
+        </div>
+
+        <!-- QR section -->
+        <div class="back-bottom">
+          <div id="qr-code"></div>
+          <div class="qr-meta">
+            <div class="qr-scan-label">Scan to visit</div>
+            <div class="qr-site">d2d4.kr</div>
+            <div class="qr-desc">외국인 유학생 플랫폼</div>
+          </div>
+        </div>
+
+      </div><!-- /card-back -->
+    </div>
+
+  </div><!-- /card-set -->
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="window.print()">🖨&nbsp; Print / Save as PDF</button>
+  </div>
+
+  <script>
+    new QRCode(document.getElementById('qr-code'), {
+      text: 'https://d2d4.kr',
+      width: 86,
+      height: 86,
+      colorDark: 'rgba(255,255,255,0.88)',
+      colorLight: '#1a3a5f',
+      correctLevel: QRCode.CorrectLevel.H
+    })
+  </script>
+</body>
+</html>
