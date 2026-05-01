@@ -15,7 +15,9 @@ export default function Market({ user, lang, onLoginRequired }) {
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('전체')
   const [showModal, setShowModal] = useState(false)
-  const [form, setForm] = useState({ title: '', price: '', description: '', category: '생활용품', condition: '양호', image_url: '' })
+  const [form, setForm] = useState({ title: '', price: '', description: '', category: '생활용품', condition: '양호' })
+  const [imageFile, setImageFile] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [toast, setToast] = useState('')
 
@@ -36,11 +38,42 @@ export default function Market({ user, lang, onLoginRequired }) {
 
   const change = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
 
+  function handleImageChange(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setImageFile(file)
+    setImagePreview(URL.createObjectURL(file))
+  }
+
+  function resetModal() {
+    setShowModal(false)
+    setForm({ title: '', price: '', description: '', category: '생활용품', condition: '양호' })
+    setImageFile(null)
+    setImagePreview(null)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     if (!user) { showToast(mt.toastLogin); return }
     if (!form.title || !form.price) { showToast(mt.toastValidate); return }
     setSubmitting(true)
+
+    let image_url = null
+    if (imageFile) {
+      const ext = imageFile.name.split('.').pop()
+      const path = `${user.id}/${Date.now()}.${ext}`
+      const { error: uploadError } = await supabase.storage
+        .from('market-images')
+        .upload(path, imageFile, { upsert: true })
+      if (uploadError) {
+        showToast('이미지 업로드 실패: ' + uploadError.message)
+        setSubmitting(false)
+        return
+      }
+      const { data: { publicUrl } } = supabase.storage.from('market-images').getPublicUrl(path)
+      image_url = publicUrl
+    }
+
     const { error } = await supabase.from('market_posts').insert({
       user_id: user.id,
       title: form.title,
@@ -48,12 +81,11 @@ export default function Market({ user, lang, onLoginRequired }) {
       description: form.description,
       category: form.category,
       condition: form.condition,
-      image_url: form.image_url || null,
+      image_url,
     })
     setSubmitting(false)
     if (!error) {
-      setShowModal(false)
-      setForm({ title: '', price: '', description: '', category: '생활용품', condition: '양호', image_url: '' })
+      resetModal()
       showToast(mt.toastSuccess)
     } else {
       showToast(mt.toastError)
@@ -159,7 +191,7 @@ export default function Market({ user, lang, onLoginRequired }) {
                 <span className="bg-[#FF8C00]/10 text-[#FF8C00] text-xs font-bold px-3 py-1 rounded-full">{mt.modalBadge}</span>
                 <h3 className="font-outfit font-black text-[#002147] text-xl mt-2">{mt.modalTitle}</h3>
               </div>
-              <button onClick={() => setShowModal(false)} className="text-gray-400 text-2xl leading-none">×</button>
+              <button onClick={resetModal} className="text-gray-400 text-2xl leading-none">×</button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -195,10 +227,27 @@ export default function Market({ user, lang, onLoginRequired }) {
                 </select>
               </div>
               <div>
-                <label className="text-xs font-bold text-[#002147] uppercase tracking-wide">{mt.labelImageUrl}</label>
-                <input name="image_url" value={form.image_url} onChange={change}
-                  className="mt-1 w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#FF8C00] focus:ring-2 focus:ring-[#FF8C00]/10"
-                  placeholder="https://..." />
+                <label className="text-xs font-bold text-[#002147] uppercase tracking-wide">
+                  이미지 업로드 <span className="text-gray-400 font-normal normal-case">(선택)</span>
+                </label>
+                <label className="mt-1 flex flex-col items-center justify-center w-full border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:border-[#FF8C00] transition-colors overflow-hidden">
+                  {imagePreview ? (
+                    <img src={imagePreview} alt="preview" className="w-full h-40 object-cover" />
+                  ) : (
+                    <div className="py-6 text-center">
+                      <div className="text-3xl mb-1">📷</div>
+                      <p className="text-xs text-gray-400">클릭하여 이미지 선택</p>
+                      <p className="text-[10px] text-gray-300 mt-0.5">JPG, PNG, WEBP</p>
+                    </div>
+                  )}
+                  <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+                </label>
+                {imagePreview && (
+                  <button type="button" onClick={() => { setImageFile(null); setImagePreview(null) }}
+                    className="mt-1.5 text-xs text-red-400 hover:text-red-600">
+                    이미지 제거
+                  </button>
+                )}
               </div>
               <div>
                 <label className="text-xs font-bold text-[#002147] uppercase tracking-wide">{mt.labelDesc}</label>
