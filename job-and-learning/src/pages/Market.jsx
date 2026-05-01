@@ -14,6 +14,7 @@ export default function Market({ user, lang, onLoginRequired }) {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('전체')
+  const [selectedPost, setSelectedPost] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [form, setForm] = useState({ title: '', price: '', description: '', category: '생활용품', condition: '양호' })
   const [imageFile, setImageFile] = useState(null)
@@ -156,7 +157,11 @@ export default function Market({ user, lang, onLoginRequired }) {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {filtered.map(post => (
-            <div key={post.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div
+              key={post.id}
+              onClick={() => setSelectedPost(post)}
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all"
+            >
               <div className="h-36 bg-gray-100 flex items-center justify-center relative">
                 {post.image_url ? (
                   <img src={post.image_url} alt={post.title} className="w-full h-full object-cover" />
@@ -179,6 +184,74 @@ export default function Market({ user, lang, onLoginRequired }) {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* 상품 상세 모달 */}
+      {selectedPost && (
+        <div
+          className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-4 animate-fade-in"
+          onClick={() => setSelectedPost(null)}
+        >
+          <div
+            className="bg-white w-full max-w-md rounded-2xl overflow-hidden animate-slide-up"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* 이미지 */}
+            <div className="relative h-56 bg-gray-100 flex items-center justify-center">
+              {selectedPost.image_url ? (
+                <img src={selectedPost.image_url} alt={selectedPost.title} className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-6xl">📦</span>
+              )}
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="absolute top-3 right-3 w-8 h-8 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center text-lg leading-none transition-colors"
+              >
+                ×
+              </button>
+              <span className="absolute top-3 left-3 bg-white/90 text-gray-600 text-[10px] font-semibold px-2 py-1 rounded-full">
+                {conditionLabel(selectedPost.condition)}
+              </span>
+            </div>
+
+            {/* 본문 */}
+            <div className="p-5">
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex-1">
+                  <span className="text-[10px] text-gray-400 font-medium">
+                    {mt.categoryLabels[CATEGORY_VALUES.indexOf(selectedPost.category)] ?? selectedPost.category}
+                  </span>
+                  <h2 className="font-outfit font-black text-[#002147] text-lg leading-tight mt-0.5">
+                    {selectedPost.title}
+                  </h2>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <div className="font-outfit font-black text-[#FF8C00] text-2xl leading-none">
+                    {selectedPost.price?.toLocaleString()}
+                  </div>
+                  <div className="text-gray-400 text-xs mt-0.5">{tr.priceSuffix || '원'}</div>
+                </div>
+              </div>
+
+              {selectedPost.description && (
+                <p className="text-sm text-gray-500 leading-relaxed bg-gray-50 rounded-xl p-3 mb-4">
+                  {selectedPost.description}
+                </p>
+              )}
+
+              <div className="flex items-center gap-2 text-xs text-gray-400 mb-4">
+                <span>📅 {selectedPost.created_at?.slice(0, 10)}</span>
+              </div>
+
+              <a
+                href={`mailto:firstzikan@gmail.com?subject=${encodeURIComponent(`[중고거래 문의] ${selectedPost.title}`)}&body=${encodeURIComponent(`안녕하세요, "${selectedPost.title}" 상품에 관심이 있습니다.`)}`}
+                className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#FF8C00] text-white font-bold rounded-xl text-sm hover:bg-[#e07d00] transition-colors"
+              >
+                📩 판매자에게 문의하기
+              </a>
+            </div>
+          </div>
         </div>
       )}
 
