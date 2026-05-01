@@ -157,6 +157,32 @@ export const t = {
       toastValidate: '문의 제목을 입력해주세요.',
       toastError: '제출 중 오류가 발생했습니다.',
     },
+
+    // ── About ──
+    about: {
+      heroTitle1: 'Designing Global Careers,',
+      heroTitle2: 'Connecting World-Class Opportunities.',
+      heroSub: '글로벌 커리어의 설계, 세계적 수준의 기회를 잇는 접점 — d2d4',
+      missionTitle: 'Our Mission',
+      missionHead: '인재의 국경을 허무는 기술',
+      missionBody: '전 세계 유능한 인재들이 언어와 문화의 장벽을 넘어 한국에서 유학, 취업, 기술 창업의 꿈을 실현할 수 있도록 혁신적인 AI 가이드와 전문 멘토링을 제공합니다.',
+      visionTitle: 'Our Vision',
+      visionHead: '글로벌 인적 자원 교류의 표준',
+      visionBody: '데이터와 기술을 통해 국가 간 인적 자원 이동을 최적화하고, 글로벌 인재가 한국 사회의 핵심 자산으로 정착하도록 돕는 No.1 글로벌 커리어 플랫폼이 되겠습니다.',
+      servicesTitle: 'Core Global Services',
+      services: [
+        { title: 'Study-Abroad', desc: '한국 대학(원) 입학 전략 및 국내 정주 통합 지원' },
+        { title: 'AI Matching', desc: 'AI 기반 이력서 고도화 및 한국 기업 매칭 시스템' },
+        { title: 'Startup Support', desc: '다국적 인재 기술 창업 및 비즈니스 멘토링' },
+        { title: 'Community', desc: '글로벌 인력을 위한 다국어 커뮤니티 운영' },
+      ],
+      ceoTitle: 'Message from CEO',
+      ceoQuote: '"세상은 넓고 인재는 도처에 있습니다. d2d4는 전 세계 인재들의 열정이 한국이라는 역동적인 무대 위에서 최고의 결실을 맺을 수 있도록 가장 든든한 기술적 조력자가 되겠습니다. 당신의 국적이 어디든, 당신의 꿈이 무엇이든, d2d4가 그 여정의 파트너가 되어 세계를 잇겠습니다."',
+      ceoName: 'Shin Dong Ho',
+      ceoRole: 'CEO, 잡앤러닝(d2d4)',
+      ceoContact: 'Official Contact: ceo@d2d4.kr',
+      navLabel: '회사 소개',
+    },
   },
 
   en: {
@@ -309,6 +335,32 @@ export const t = {
       toastValidate: 'Please enter a title.',
       toastError: 'Error submitting request.',
     },
+
+    // ── About ──
+    about: {
+      heroTitle1: 'Designing Global Careers,',
+      heroTitle2: 'Connecting World-Class Opportunities.',
+      heroSub: 'The hub connecting global careers and world-class opportunities — d2d4',
+      missionTitle: 'Our Mission',
+      missionHead: 'Technology That Breaks Borders for Talent',
+      missionBody: 'We provide innovative AI guidance and expert mentoring to help talented individuals worldwide realize their dreams of studying, working, and entrepreneurship in Korea—beyond language and cultural barriers.',
+      visionTitle: 'Our Vision',
+      visionHead: 'The Standard for Global Human Resource Exchange',
+      visionBody: 'We aim to be the No.1 global career platform that optimizes the movement of human resources between countries using data and technology, helping global talent become a core asset of Korean society.',
+      servicesTitle: 'Core Global Services',
+      services: [
+        { title: 'Study-Abroad', desc: 'Integrated support for Korean university admission and settlement' },
+        { title: 'AI Matching', desc: 'AI-powered resume optimization and Korean company matching system' },
+        { title: 'Startup Support', desc: 'Tech startup and business mentoring for multinational talent' },
+        { title: 'Community', desc: 'Multilingual community platform for global workforce' },
+      ],
+      ceoTitle: 'Message from CEO',
+      ceoQuote: '"The world is vast and talent is everywhere. d2d4 will be the most reliable technological ally, ensuring that the passion of talented people from around the world bears its greatest fruit on the dynamic stage of Korea. Wherever you are from, whatever your dream, d2d4 will be your partner on that journey."',
+      ceoName: 'Shin Dong Ho',
+      ceoRole: 'CEO, Job & Learning (d2d4)',
+      ceoContact: 'Official Contact: ceo@d2d4.kr',
+      navLabel: 'About Us',
+    },
   },
 
   vi: {
@@ -460,6 +512,32 @@ export const t = {
       doneNote: 'Selected teams will be contacted individually based on the submitted details.',
       toastValidate: 'Vui lòng nhập tiêu đề.',
       toastError: 'Lỗi khi gửi yêu cầu.',
+    },
+
+    // ── About ──
+    about: {
+      heroTitle1: 'Thiết Kế Sự Nghiệp Toàn Cầu,',
+      heroTitle2: 'Kết Nối Cơ Hội Đẳng Cấp Thế Giới.',
+      heroSub: 'Trung tâm kết nối sự nghiệp toàn cầu và cơ hội đẳng cấp thế giới — d2d4',
+      missionTitle: 'Our Mission',
+      missionHead: 'Công Nghệ Xóa Bỏ Biên Giới Nhân Tài',
+      missionBody: 'Chúng tôi cung cấp hướng dẫn AI sáng tạo và cố vấn chuyên nghiệp để giúp những nhân tài trên toàn thế giới hiện thực hóa ước mơ du học, làm việc và khởi nghiệp tại Hàn Quốc.',
+      visionTitle: 'Our Vision',
+      visionHead: 'Tiêu Chuẩn Trao Đổi Nhân Lực Toàn Cầu',
+      visionBody: 'Chúng tôi hướng tới trở thành nền tảng sự nghiệp toàn cầu số 1, tối ưu hóa sự di chuyển nguồn nhân lực giữa các quốc gia bằng dữ liệu và công nghệ.',
+      servicesTitle: 'Core Global Services',
+      services: [
+        { title: 'Study-Abroad', desc: 'Hỗ trợ toàn diện nhập học đại học Hàn Quốc và định cư' },
+        { title: 'AI Matching', desc: 'Tối ưu hóa CV bằng AI và hệ thống kết nối doanh nghiệp Hàn Quốc' },
+        { title: 'Startup Support', desc: 'Khởi nghiệp công nghệ và cố vấn kinh doanh cho nhân tài đa quốc gia' },
+        { title: 'Community', desc: 'Nền tảng cộng đồng đa ngôn ngữ cho lực lượng lao động toàn cầu' },
+      ],
+      ceoTitle: 'Message from CEO',
+      ceoQuote: '"Thế giới rộng lớn và nhân tài có khắp nơi. d2d4 sẽ là người đồng hành công nghệ đáng tin cậy nhất, đảm bảo rằng niềm đam mê của những người tài năng từ khắp nơi trên thế giới sẽ đạt được kết quả tốt nhất trên sân khấu năng động của Hàn Quốc."',
+      ceoName: 'Shin Dong Ho',
+      ceoRole: 'CEO, Job & Learning (d2d4)',
+      ceoContact: 'Official Contact: ceo@d2d4.kr',
+      navLabel: 'Giới thiệu',
     },
   },
 }

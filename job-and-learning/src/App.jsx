@@ -11,9 +11,10 @@ import Market from './pages/Market'
 import Learning from './pages/Learning'
 import Community from './pages/Community'
 import Help from './pages/Help'
+import About from './pages/About'
 
 
-function Footer({ lang }) {
+function Footer({ lang, onTabChange }) {
   const tr = t[lang] ?? t.ko
   return (
     <footer className="bg-[#002147] text-white/40 py-6 px-4">
@@ -22,6 +23,13 @@ function Footer({ lang }) {
           {tr.footerReg}: <span className="text-white/60 font-semibold">J1700020240003</span>
         </p>
         <p className="text-[11px] flex items-center justify-center gap-3">
+          <button
+            onClick={() => onTabChange('about')}
+            className="underline underline-offset-2 hover:text-white/80 transition-colors cursor-pointer"
+          >
+            {tr.about.navLabel}
+          </button>
+          <span className="text-white/20">|</span>
           <a
             href="/Job_And_Learning_Terms_v1.html"
             target="_blank"
@@ -92,8 +100,8 @@ export default function App() {
     setShowAuth(true)
   }
 
-  const pages = { home: Home, jobs: Jobs, market: Market, learning: Learning, community: Community, help: Help }
-  const Page = pages[tab]
+  const pages = { home: Home, jobs: Jobs, market: Market, learning: Learning, community: Community, help: Help, about: About }
+  const Page = pages[tab] ?? Home
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -115,7 +123,7 @@ export default function App() {
           onLoginRequired={handleLoginRequired}
         />
       </main>
-      <Footer lang={lang} />
+      <Footer lang={lang} onTabChange={setTab} />
       <BottomNav tab={tab} setTab={setTab} lang={lang} />
       <MyPageModal
         open={showMyPage}
