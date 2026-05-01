@@ -115,7 +115,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
                       <span className="bg-red-50 text-red-500 text-[10px] font-bold px-2 py-1 rounded-lg text-center">{lt.video}</span>
                     )}
                     {course.pdf_url && (
-                      <span className="bg-blue-50 text-blue-500 text-[10px] font-bold px-2 py-1 rounded-lg text-center">📄 PDF</span>
+                      <span className="bg-blue-50 text-blue-500 text-[10px] font-bold px-2 py-1 rounded-lg text-center">📄 문서</span>
                     )}
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full py-3 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm hover:bg-[#243f6a] transition-colors"
                     >
-                      📄 {lt.pdfDownload}
+                      {lt.pdfDownload}
                     </a>
                   ) : (
                     <div className="text-center">
