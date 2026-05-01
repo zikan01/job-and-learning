@@ -165,7 +165,7 @@ export default function App() {
         />
       </main>
       <Footer lang={lang} />
-      <BottomNav tab={tab} setTab={setTab} />
+      <BottomNav tab={tab} setTab={setTab} lang={lang} />
       <MyPageModal
         open={showMyPage}
         onClose={() => setShowMyPage(false)}

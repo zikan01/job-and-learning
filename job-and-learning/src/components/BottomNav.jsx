@@ -51,31 +51,40 @@ function HelpIcon({ active }) {
   )
 }
 
-const TABS = [
-  { id: 'home',      label: '홈',     icon: HomeIcon },
-  { id: 'jobs',      label: '알바',   icon: BriefcaseIcon },
-  { id: 'market',    label: '장터',   icon: ShoppingIcon },
-  { id: 'learning',  label: '교육',   icon: BookIcon },
-  { id: 'community', label: '소모임', icon: UsersIcon },
-  { id: 'help',      label: '헬프',   icon: HelpIcon },
-]
+import { t } from '../lib/translations'
 
-export default function BottomNav({ tab, setTab }) {
+const TAB_ICONS = {
+  home:      HomeIcon,
+  jobs:      BriefcaseIcon,
+  market:    ShoppingIcon,
+  learning:  BookIcon,
+  community: UsersIcon,
+  help:      HelpIcon,
+}
+
+const TAB_IDS = ['home', 'jobs', 'market', 'learning', 'community', 'help']
+
+export default function BottomNav({ tab, setTab, lang }) {
+  const tr = t[lang] ?? t.ko
+
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 pb-safe">
       <div className="max-w-2xl mx-auto flex">
-        {TABS.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            className="flex-1 flex flex-col items-center gap-0.5 py-2 transition-colors"
-          >
-            <Icon active={tab === id} />
-            <span className={`text-[9px] font-semibold ${tab === id ? 'text-[#FF8C00]' : 'text-gray-400'}`}>
-              {label}
-            </span>
-          </button>
-        ))}
+        {TAB_IDS.map(id => {
+          const Icon = TAB_ICONS[id]
+          return (
+            <button
+              key={id}
+              onClick={() => setTab(id)}
+              className="flex-1 flex flex-col items-center gap-0.5 py-2 transition-colors"
+            >
+              <Icon active={tab === id} />
+              <span className={`text-[9px] font-semibold truncate w-full text-center px-0.5 ${tab === id ? 'text-[#FF8C00]' : 'text-gray-400'}`}>
+                {tr.tabs[id]}
+              </span>
+            </button>
+          )
+        })}
       </div>
     </nav>
   )

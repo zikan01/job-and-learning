@@ -19,11 +19,11 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
       <div className="bg-[#002147]">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center gap-3 md:gap-6">
           {/* 로고 */}
-          <div className="flex items-center flex-shrink-0 overflow-visible">
+          <div className="flex items-center flex-shrink-0">
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-14 md:h-28 w-auto object-contain"
+              className="h-9 md:h-10 w-auto object-contain"
             />
           </div>
 

@@ -193,11 +193,11 @@ export default function Community({ user, lang, onLoginRequired }) {
       {/* 게시글 상세 + 댓글 모달 */}
       {selectedPost && (
         <div
-          className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center pt-4 px-4 pb-20 sm:p-4 animate-fade-in"
           onClick={() => setSelectedPost(null)}
         >
           <div
-            className="bg-white w-full max-w-lg rounded-2xl overflow-hidden animate-slide-up max-h-[85vh] flex flex-col"
+            className="bg-white w-full max-w-lg rounded-2xl overflow-hidden animate-slide-up max-h-[75vh] sm:max-h-[85vh] flex flex-col"
             onClick={e => e.stopPropagation()}
           >
             {/* 헤더 */}
