@@ -17,13 +17,13 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
     <header className="sticky top-0 z-50 shadow-lg">
       {/* 메인 헤더: 로고 + 탭 + 언어선택 + 로그인 */}
       <div className="bg-[#002147]">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center gap-3 md:gap-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center gap-3 md:gap-6">
           {/* 로고 */}
           <div className="flex items-center flex-shrink-0">
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="h-9 md:h-10 w-auto object-contain"
+              className="w-auto object-contain"
             />
           </div>
 
@@ -33,13 +33,13 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
               <button
                 key={id}
                 onClick={() => setTab(id)}
-                className={`flex-shrink-0 px-5 h-16 text-sm font-semibold transition-colors relative whitespace-nowrap ${
+                className={`flex-shrink-0 px-5 py-4 text-sm font-semibold transition-colors relative whitespace-nowrap ${
                   tab === id ? 'text-[#FF8C00]' : 'text-white/60 hover:text-white'
                 }`}
               >
                 {tr.tabs[id]}
                 {tab === id && (
-                  <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#FF8C00] rounded-full" />
+                  <span className="absolute bottom-1 left-2 right-2 h-0.5 bg-[#FF8C00] rounded-full" />
                 )}
               </button>
             ))}
