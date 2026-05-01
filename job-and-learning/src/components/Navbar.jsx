@@ -23,7 +23,7 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
             <img
               src="/logo.png"
               alt="Job and Learning"
-              className="w-auto object-contain"
+              className="h-8 w-auto object-contain"
             />
           </div>
 
