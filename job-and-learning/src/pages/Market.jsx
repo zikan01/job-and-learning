@@ -15,6 +15,10 @@ export default function Market({ user, lang, onLoginRequired }) {
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('전체')
   const [selectedPost, setSelectedPost] = useState(null)
+  const [comments, setComments] = useState([])
+  const [commentCounts, setCommentCounts] = useState({})
+  const [commentText, setCommentText] = useState('')
+  const [commentSubmitting, setCommentSubmitting] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [form, setForm] = useState({ title: '', price: '', description: '', category: '생활용품', condition: '양호' })
   const [imageFile, setImageFile] = useState(null)
@@ -31,10 +35,53 @@ export default function Market({ user, lang, onLoginRequired }) {
     return () => supabase.removeChannel(channel)
   }, [])
 
+  useEffect(() => {
+    if (selectedPost) {
+      setComments([])
+      setCommentText('')
+      fetchComments(selectedPost.id)
+    }
+  }, [selectedPost?.id])
+
   async function fetchPosts() {
     const { data } = await supabase.from('market_posts').select('*').eq('is_sold', false).order('created_at', { ascending: false })
     setPosts(data ?? [])
     setLoading(false)
+    if (data?.length) {
+      const { data: counts } = await supabase
+        .from('market_comments')
+        .select('post_id')
+        .in('post_id', data.map(p => p.id))
+      const map = {}
+      counts?.forEach(r => { map[r.post_id] = (map[r.post_id] ?? 0) + 1 })
+      setCommentCounts(map)
+    }
+  }
+
+  async function fetchComments(postId) {
+    const { data } = await supabase
+      .from('market_comments')
+      .select('*')
+      .eq('post_id', postId)
+      .order('created_at', { ascending: true })
+    setComments(data ?? [])
+  }
+
+  async function handleAddComment() {
+    if (!commentText.trim()) return
+    if (isAnon) { onLoginRequired?.('댓글을 작성하려면 로그인이 필요합니다.'); return }
+    setCommentSubmitting(true)
+    const { error } = await supabase.from('market_comments').insert({
+      post_id: selectedPost.id,
+      user_id: user.id,
+      content: commentText.trim(),
+    })
+    setCommentSubmitting(false)
+    if (!error) {
+      setCommentText('')
+      fetchComments(selectedPost.id)
+      setCommentCounts(prev => ({ ...prev, [selectedPost.id]: (prev[selectedPost.id] ?? 0) + 1 }))
+    }
   }
 
   const change = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))
@@ -173,8 +220,15 @@ export default function Market({ user, lang, onLoginRequired }) {
                 </span>
               </div>
               <div className="p-3">
-                <div className="text-[10px] text-gray-400 mb-0.5">
-                  {mt.categoryLabels[CATEGORY_VALUES.indexOf(post.category)] ?? post.category}
+                <div className="flex items-center justify-between mb-0.5">
+                  <div className="text-[10px] text-gray-400">
+                    {mt.categoryLabels[CATEGORY_VALUES.indexOf(post.category)] ?? post.category}
+                  </div>
+                  {commentCounts[post.id] > 0 && (
+                    <span className="flex items-center gap-0.5 text-[10px] font-bold text-[#FF8C00] bg-[#FF8C00]/10 px-1.5 py-0.5 rounded-full">
+                      💬 문의 {commentCounts[post.id]}
+                    </span>
+                  )}
                 </div>
                 <div className="font-semibold text-[#002147] text-sm leading-tight line-clamp-2">{post.title}</div>
                 <div className="font-outfit font-black text-[#FF8C00] text-base mt-1">{tr.pricePrefix}{post.price?.toLocaleString()}{tr.priceSuffix}</div>
@@ -242,14 +296,53 @@ export default function Market({ user, lang, onLoginRequired }) {
 
               <div className="flex items-center gap-2 text-xs text-gray-400 mb-4">
                 <span>📅 {selectedPost.created_at?.slice(0, 10)}</span>
+                {commentCounts[selectedPost.id] > 0 && (
+                  <span className="text-[#FF8C00] font-bold">💬 문의 {commentCounts[selectedPost.id]}개</span>
+                )}
               </div>
 
-              <a
-                href={`mailto:firstzikan@gmail.com?subject=${encodeURIComponent(`[중고거래 문의] ${selectedPost.title}`)}&body=${encodeURIComponent(`안녕하세요, "${selectedPost.title}" 상품에 관심이 있습니다.`)}`}
-                className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#FF8C00] text-white font-bold rounded-xl text-sm hover:bg-[#e07d00] transition-colors"
-              >
-                📩 판매자에게 문의하기
-              </a>
+              {/* 댓글 목록 */}
+              <div className="border-t border-gray-100 pt-4 mb-3">
+                <p className="text-xs font-bold text-[#002147] mb-3">
+                  💬 문의 {comments.length > 0 ? `(${comments.length})` : ''}
+                </p>
+                {comments.length === 0 ? (
+                  <p className="text-xs text-gray-400 text-center py-3">아직 문의가 없습니다.</p>
+                ) : (
+                  <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
+                    {comments.map(c => (
+                      <div key={c.id} className="bg-gray-50 rounded-xl px-3 py-2.5">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] font-bold text-[#002147]">
+                            {c.user_id === selectedPost.user_id ? '🏷️ 판매자' : '🙋 구매문의'}
+                          </span>
+                          <span className="text-[10px] text-gray-300">{c.created_at?.slice(0, 10)}</span>
+                        </div>
+                        <p className="text-xs text-gray-600 leading-relaxed">{c.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* 댓글 입력 */}
+              <div className="flex gap-2">
+                <input
+                  value={commentText}
+                  onChange={e => setCommentText(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleAddComment()}
+                  placeholder={isAnon ? '로그인 후 문의하세요' : '문의 내용을 입력하세요'}
+                  disabled={isAnon}
+                  className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#FF8C00] focus:ring-2 focus:ring-[#FF8C00]/10 disabled:bg-gray-50 disabled:text-gray-400"
+                />
+                <button
+                  onClick={handleAddComment}
+                  disabled={isAnon || !commentText.trim() || commentSubmitting}
+                  className="px-4 py-2.5 bg-[#FF8C00] text-white font-bold rounded-xl text-sm disabled:opacity-40 hover:bg-[#e07d00] transition-colors flex-shrink-0"
+                >
+                  {commentSubmitting ? '…' : '전송'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
