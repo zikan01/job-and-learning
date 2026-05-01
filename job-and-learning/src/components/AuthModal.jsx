@@ -81,7 +81,6 @@ export default function AuthModal({ open, onClose, onSuccess, reason }) {
   return (
     <div
       className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center p-4 animate-fade-in"
-      onClick={e => e.target === e.currentTarget && handleClose()}
     >
       <div className="bg-white w-full max-w-sm rounded-2xl shadow-2xl animate-slide-up overflow-hidden">
 
