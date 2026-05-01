@@ -19,13 +19,13 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
       <div className="bg-[#002147]">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center gap-3 md:gap-6">
           {/* 로고 */}
-          <div className="flex items-center flex-shrink-0">
+          <button onClick={() => setTab('home')} className="flex items-center flex-shrink-0 active:opacity-70 transition-opacity">
             <img
               src="/logo.png"
               alt="Job and Learning"
               className="h-8 w-auto object-contain"
             />
-          </div>
+          </button>
 
           {/* 탭 네비게이션 (데스크탑 전용) */}
           <nav className="flex-1 hidden md:flex items-center overflow-x-auto no-scrollbar">
