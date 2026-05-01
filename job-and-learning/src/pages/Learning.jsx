@@ -146,14 +146,12 @@ export default function Learning({ user, lang, onLoginRequired }) {
                     </div>
                   )}
                   {course.video_url && (
-                    <a
-                      href={course.video_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full py-3 bg-red-500 text-white font-bold rounded-xl text-sm hover:bg-red-600 transition-colors"
+                    <button
+                      disabled
+                      className="flex items-center justify-center gap-2 w-full py-3 bg-gray-200 text-gray-400 font-bold rounded-xl text-sm cursor-not-allowed"
                     >
                       ▶ {lt.videoWatch}
-                    </a>
+                    </button>
                   )}
                 </div>
               )}
