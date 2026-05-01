@@ -78,7 +78,7 @@ export default function Market({ user, lang, onLoginRequired }) {
         </div>
         <button
           onClick={() => {
-            if (isAnon) { onLoginRequired?.('중고 거래 등록은 로그인이 필요합니다.'); return }
+            if (isAnon) { onLoginRequired?.(mt.loginPrompt); return }
             setShowModal(true)
           }}
           className="bg-[#FF8C00] text-white font-bold text-sm px-4 py-2 rounded-xl shadow-md hover:bg-[#e07d00] active:scale-95 transition-all"
@@ -113,7 +113,7 @@ export default function Market({ user, lang, onLoginRequired }) {
           <p className="text-gray-400 text-sm">{mt.noResults}</p>
           <button
             onClick={() => {
-              if (isAnon) { onLoginRequired?.('중고 거래 등록은 로그인이 필요합니다.'); return }
+              if (isAnon) { onLoginRequired?.(mt.loginPrompt); return }
               setShowModal(true)
             }}
             className="mt-4 text-[#FF8C00] font-bold text-sm"

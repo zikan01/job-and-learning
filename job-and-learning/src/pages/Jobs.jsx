@@ -174,7 +174,7 @@ export default function Jobs({ user, lang, onLoginRequired }) {
                     <button
                       onClick={() => {
                         if (isApplied) return
-                        if (isAnon) { onLoginRequired?.('취업 지원은 로그인이 필요합니다.'); return }
+                        if (isAnon) { onLoginRequired?.(jt.loginPrompt); return }
                         setApplyModal(job)
                       }}
                       disabled={isApplied}

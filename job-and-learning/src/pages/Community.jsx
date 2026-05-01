@@ -74,7 +74,7 @@ export default function Community({ user, lang, onLoginRequired }) {
         </div>
         <button
           onClick={() => {
-            if (isAnon) { onLoginRequired?.('커뮤니티 글쓰기는 로그인이 필요합니다.'); return }
+            if (isAnon) { onLoginRequired?.(ct.loginPrompt); return }
             setShowWrite(true)
           }}
           className="bg-[#FF8C00] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md active:scale-95">

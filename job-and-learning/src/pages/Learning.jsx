@@ -87,7 +87,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
               <div
                 className="p-4 cursor-pointer"
                 onClick={() => {
-                  if (isAnon) { onLoginRequired?.('강의 내용은 로그인 후 확인할 수 있습니다.'); return }
+                  if (isAnon) { onLoginRequired?.(lt.loginPrompt); return }
                   setExpanded(expanded === course.id ? null : course.id)
                 }}
               >
