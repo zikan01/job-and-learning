@@ -136,6 +136,7 @@ export default function App() {
         onClose={() => { setShowAuth(false); setAuthReason('') }}
         onSuccess={() => { setShowAuth(false); setAuthReason(''); setTab('home') }}
         reason={authReason}
+        lang={lang}
       />
     </div>
   )
