@@ -6,6 +6,13 @@ import { t } from '../lib/translations'
 const CATEGORY_VALUES = ['전체', '서비스업', '유통', '사무보조', '스포츠', '기타']
 const LOCATION_VALUES = ['전체 지역', '대전 유성구', '대전 서구', '대전 중구', '대전 동구', '대전 대덕구']
 
+// lang에 맞는 DB 컬럼 선택, 없으면 한국어 fallback
+const loc = (item, field, lang) => {
+  if (lang === 'en' && item[`${field}_en`]) return item[`${field}_en`]
+  if (lang === 'vi' && item[`${field}_vi`]) return item[`${field}_vi`]
+  return item[field]
+}
+
 export default function Jobs({ user, lang, onLoginRequired }) {
   const tr = t[lang] ?? t.ko
   const jt = tr.jobs
@@ -154,14 +161,14 @@ export default function Jobs({ user, lang, onLoginRequired }) {
                         </span>
                       )}
                     </div>
-                    <div className="font-outfit font-bold text-[#002147] text-base leading-tight">{job.title}</div>
+                    <div className="font-outfit font-bold text-[#002147] text-base leading-tight">{loc(job, 'title', lang)}</div>
                     <div className="text-xs text-gray-500 mt-1">{job.company}</div>
                     <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
                       <span>📍 {job.location}</span>
                       {job.deadline && <span>📅 {job.deadline}</span>}
                     </div>
                     {job.description && (
-                      <p className="text-xs text-gray-400 mt-2 line-clamp-2">{job.description}</p>
+                      <p className="text-xs text-gray-400 mt-2 line-clamp-2">{loc(job, 'description', lang)}</p>
                     )}
                   </div>
                   <div className="flex flex-col items-end gap-2 flex-shrink-0">
@@ -202,11 +209,11 @@ export default function Jobs({ user, lang, onLoginRequired }) {
               <span className="bg-[#FF8C00]/10 text-[#FF8C00] text-xs font-bold px-3 py-1 rounded-full">{jt.applyConfirm}</span>
               <button onClick={() => setApplyModal(null)} className="text-gray-400 text-xl leading-none">×</button>
             </div>
-            <h3 className="font-outfit font-black text-[#002147] text-xl mb-1">{applyModal.title}</h3>
+            <h3 className="font-outfit font-black text-[#002147] text-xl mb-1">{loc(applyModal, 'title', lang)}</h3>
             <p className="text-gray-500 text-sm mb-1">{applyModal.company} · {applyModal.location}</p>
             <p className="text-[#FF8C00] font-bold text-lg mb-4">{applyModal.hourly_wage?.toLocaleString()}{jt.perHour}</p>
             {applyModal.description && (
-              <p className="text-gray-600 text-sm bg-gray-50 rounded-xl p-3 mb-4">{applyModal.description}</p>
+              <p className="text-gray-600 text-sm bg-gray-50 rounded-xl p-3 mb-4">{loc(applyModal, 'description', lang)}</p>
             )}
             <div className="flex gap-3">
               <button onClick={() => setApplyModal(null)} className="flex-1 py-3 border border-gray-200 rounded-xl text-gray-500 text-sm font-semibold">

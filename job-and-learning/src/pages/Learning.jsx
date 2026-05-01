@@ -4,6 +4,12 @@ import { t } from '../lib/translations'
 
 // DB 저장 값 (필터 비교용)
 const TAB_VALUES = ['전체', 'AI 실무(Vibe Coding)', '한국 생활 가이드']
+
+const loc = (item, field, lang) => {
+  if (lang === 'en' && item[`${field}_en`]) return item[`${field}_en`]
+  if (lang === 'vi' && item[`${field}_vi`]) return item[`${field}_vi`]
+  return item[field]
+}
 const LEVEL_KEYS = ['입문', '초급', '중급']
 const LEVEL_STYLES = { '입문': 'bg-emerald-100 text-emerald-700', '초급': 'bg-blue-100 text-blue-700', '중급': 'bg-purple-100 text-purple-700' }
 
@@ -104,7 +110,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
                         <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2 py-0.5 rounded-full">{lt.free}</span>
                       )}
                     </div>
-                    <h3 className="font-outfit font-bold text-[#002147] text-base leading-tight">{course.title}</h3>
+                    <h3 className="font-outfit font-bold text-[#002147] text-base leading-tight">{loc(course, 'title', lang)}</h3>
                     <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
                       <span>👤 {course.instructor}</span>
                       {course.duration_min && <span>⏱ {course.duration_min}{lt.minuteUnit}</span>}
