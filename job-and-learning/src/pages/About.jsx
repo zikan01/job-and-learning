@@ -100,17 +100,19 @@ export default function About({ lang }) {
             <blockquote className="text-white/80 text-base md:text-lg leading-relaxed italic mb-8 border-l-2 border-[#FF8C00] pl-5">
               {at.ceoQuote}
             </blockquote>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#FF8C00] flex items-center justify-center font-outfit font-black text-white text-lg flex-shrink-0">
-                S
-              </div>
-              <div>
-                <p className="font-outfit font-black text-white text-lg">{at.ceoName}</p>
-                <p className="text-white/40 text-sm">{at.ceoRole}</p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#FF8C00] flex items-center justify-center font-outfit font-black text-white text-lg flex-shrink-0">
+                  S
+                </div>
+                <div>
+                  <p className="font-outfit font-black text-white text-lg">{at.ceoName}</p>
+                  <p className="text-white/40 text-sm">{at.ceoRole}</p>
+                </div>
               </div>
               <a
                 href="mailto:ceo@d2d4.kr"
-                className="ml-auto flex items-center gap-2 text-[#FF8C00] text-sm font-semibold hover:underline flex-shrink-0"
+                className="sm:ml-auto flex items-center gap-2 text-[#FF8C00] text-sm font-semibold hover:underline"
               >
                 <Mail size={14} />
                 {at.ceoContact}
