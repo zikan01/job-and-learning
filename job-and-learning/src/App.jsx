@@ -17,7 +17,7 @@ import About from './pages/About'
 function Footer({ lang, onTabChange }) {
   const tr = t[lang] ?? t.ko
   return (
-    <footer className="bg-[#002147] text-white/40 py-6 px-4">
+    <footer className="bg-[#002147] text-white/40 pt-6 pb-24 md:py-6 px-4">
       <div className="max-w-3xl mx-auto text-center space-y-1.5">
         <p className="text-xs">
           {tr.footerReg}: <span className="text-white/60 font-semibold">J1700020240003</span>
