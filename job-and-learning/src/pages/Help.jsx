@@ -36,16 +36,8 @@ export default function Help({ user, lang }) {
       detail: form.detail, contact: form.contact, user_id: user.id,
     })
     setSubmitting(false)
+    if (error) console.error('[Help] insert error:', error)
     if (!error) {
-      const subject = encodeURIComponent(`[d2d4 헬프데스크] ${selectedCategory ? `[${selectedCategory}] ` : ''}${form.title}`)
-      const body = encodeURIComponent(
-        `카테고리: ${selectedCategory || '미선택'}\n` +
-        `제목: ${form.title}\n\n` +
-        `내용:\n${form.detail || '(없음)'}\n\n` +
-        `연락처: ${form.contact || '(미입력)'}\n\n` +
-        `작성자 ID: ${user.id}`
-      )
-      window.open(`mailto:ceo@d2d4.kr?subject=${subject}&body=${body}`, '_blank')
       setDone(true)
     } else {
       showToast(ht.toastError)
