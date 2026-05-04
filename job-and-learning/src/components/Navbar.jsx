@@ -6,7 +6,7 @@ const LANGS = [
   { code: 'vi', label: 'VI' },
 ]
 
-const TAB_IDS = ['home', 'jobs', 'market', 'learning', 'community', 'help']
+const TAB_IDS = ['home', 'jobs', 'learning', 'community', 'market', 'help']
 
 export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick, onLogout, lang, setLang }) {
   const tr = t[lang] ?? t.ko

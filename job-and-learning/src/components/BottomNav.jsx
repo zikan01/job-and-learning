@@ -62,7 +62,7 @@ const TAB_ICONS = {
   help:      HelpIcon,
 }
 
-const TAB_IDS = ['home', 'jobs', 'market', 'learning', 'community', 'help']
+const TAB_IDS = ['home', 'jobs', 'learning', 'community', 'market', 'help']
 
 export default function BottomNav({ tab, setTab, lang }) {
   const tr = t[lang] ?? t.ko
