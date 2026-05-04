@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { supabase } from '../lib/supabase'
 import { t } from '../lib/translations'
 
@@ -38,6 +39,18 @@ export default function Help({ user, lang }) {
     setSubmitting(false)
     if (error) console.error('[Help] insert error:', error)
     if (!error) {
+      emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          category: selectedCategory || '미선택',
+          title: form.title,
+          detail: form.detail || '(없음)',
+          contact: form.contact || '(미입력)',
+          user_id: user.id,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      ).catch(err => console.error('[EmailJS] send error:', err))
       setDone(true)
     } else {
       showToast(ht.toastError)
