@@ -6,258 +6,95 @@
   <title>한국 비자 완벽 가이드 D-2→D-10 | 잡앤러닝</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@700;900&display=swap" rel="stylesheet" />
   <style>
+    html[data-lang="ko"] .en,html[data-lang="ko"] .vi,
+    html[data-lang="en"] .ko,html[data-lang="en"] .vi,
+    html[data-lang="vi"] .ko,html[data-lang="vi"] .en{display:none!important}
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #1a3a5f;
-      --navy-light: #243f6a;
-      --orange: #FF8C00;
-      --bg: #f7f8fa;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #e2e8f0;
-    }
-
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── 헤더 ── */
-    .hero {
-      background: linear-gradient(135deg, #0f2744 0%, var(--navy) 60%, #1e4d8c 100%);
-      color: #fff;
-      padding: 56px 24px 48px;
-      text-align: center;
-    }
-    .hero .badge {
-      display: inline-block;
-      background: rgba(255,140,0,.2);
-      color: var(--orange);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: 'Outfit', 'Noto Sans KR', sans-serif;
-      font-size: clamp(24px, 5vw, 40px);
-      font-weight: 900;
-      line-height: 1.25;
-      margin-bottom: 16px;
-    }
+    :root { --navy: #1a3a5f; --navy-light: #243f6a; --orange: #FF8C00; --bg: #f7f8fa; --card: #ffffff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .hero { background: linear-gradient(135deg, #0f2744 0%, var(--navy) 60%, #1e4d8c 100%); color: #fff; padding: 56px 24px 48px; text-align: center; }
+    .hero .badge { display: inline-block; background: rgba(255,140,0,.2); color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 4px 14px; border-radius: 999px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Outfit', 'Noto Sans KR', sans-serif; font-size: clamp(24px, 5vw, 40px); font-weight: 900; line-height: 1.25; margin-bottom: 16px; }
     .hero h1 span { color: var(--orange); }
-    .hero p {
-      font-size: 15px;
-      color: rgba(255,255,255,.65);
-      max-width: 560px;
-      margin: 0 auto;
-    }
+    .hero p { font-size: 15px; color: rgba(255,255,255,.65); max-width: 560px; margin: 0 auto; }
     .hero-divider { width: 48px; height: 3px; background: var(--orange); border-radius: 2px; margin: 24px auto 0; }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 24px; }
-    .hero-tag {
-      background: rgba(255,255,255,.1); color: rgba(255,255,255,.8);
-      font-size: 12px; padding: 4px 12px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.15);
-    }
-
-    /* ── 본문 공통 ── */
+    .hero-tag { background: rgba(255,255,255,.1); color: rgba(255,255,255,.8); font-size: 12px; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.15); }
     .container { max-width: 820px; margin: 0 auto; padding: 48px 20px 80px; }
     .section { margin-bottom: 52px; }
-    .section-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 21px; font-weight: 900; color: var(--navy);
-      margin-bottom: 20px; padding-bottom: 10px;
-      border-bottom: 2px solid var(--orange); display: inline-block;
-    }
-
-    /* ── 인트로 박스 ── */
-    .intro-box {
-      background: var(--card); border-left: 4px solid var(--navy);
-      border-radius: 0 12px 12px 0; padding: 20px 24px;
-      font-size: 14.5px; color: var(--text); line-height: 1.8;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 48px;
-    }
+    .section-title { font-family: 'Outfit', sans-serif; font-size: 21px; font-weight: 900; color: var(--navy); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--orange); display: inline-block; }
+    .intro-box { background: var(--card); border-left: 4px solid var(--navy); border-radius: 0 12px 12px 0; padding: 20px 24px; font-size: 14.5px; color: var(--text); line-height: 1.8; box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 48px; }
     .intro-box strong { color: var(--orange); }
-
-    /* ── 비자 로드맵 ── */
-    .roadmap {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05);
-      margin-bottom: 24px;
-    }
-    .roadmap-step {
-      flex: 1;
-      padding: 22px 16px;
-      text-align: center;
-      position: relative;
-    }
-    .roadmap-step:not(:last-child)::after {
-      content: '→';
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 18px;
-      color: var(--orange);
-      font-weight: 900;
-      z-index: 1;
-    }
+    .roadmap { display: flex; align-items: stretch; gap: 0; background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.05); margin-bottom: 24px; }
+    .roadmap-step { flex: 1; padding: 22px 16px; text-align: center; position: relative; }
+    .roadmap-step:not(:last-child)::after { content: '→'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--orange); font-weight: 900; z-index: 1; }
     .roadmap-step:nth-child(odd) { background: #f8fafc; }
-    .roadmap-step .r-visa {
-      font-family: 'Outfit', sans-serif;
-      font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 4px;
-    }
+    .roadmap-step .r-visa { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 4px; }
     .roadmap-step .r-label { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
-    .roadmap-step .r-badge {
-      display: inline-block; font-size: 10px; font-weight: 700;
-      padding: 2px 8px; border-radius: 999px; margin-top: 8px;
-    }
-    @media(max-width: 580px) {
-      .roadmap { flex-direction: column; }
-      .roadmap-step:not(:last-child)::after { content: '↓'; right: auto; top: auto; bottom: -12px; left: 50%; transform: translateX(-50%); }
-    }
-
-    /* ── 비자 종류 그리드 ── */
+    .roadmap-step .r-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-top: 8px; }
+    @media(max-width: 580px) { .roadmap { flex-direction: column; } .roadmap-step:not(:last-child)::after { content: '↓'; right: auto; top: auto; bottom: -12px; left: 50%; transform: translateX(-50%); } }
     .visa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-    .visa-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 18px 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,.04);
-    }
-    .visa-card .v-code {
-      font-family: 'Outfit', sans-serif;
-      font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 4px;
-    }
+    .visa-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; box-shadow: 0 2px 6px rgba(0,0,0,.04); }
+    .visa-card .v-code { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 4px; }
     .visa-card h3 { font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
-    .visa-card p  { font-size: 12px; color: var(--muted); line-height: 1.6; }
-    .visa-card .v-badge {
-      display: inline-block; font-size: 10px; font-weight: 700;
-      padding: 2px 8px; border-radius: 999px; margin-top: 8px;
-    }
-    .badge-d2   { background: #dbeafe; color: #1e40af; }
-    .badge-d10  { background: #fef3c7; color: #92400e; }
-    .badge-e    { background: #d1fae5; color: #065f46; }
+    .visa-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .visa-card .v-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-top: 8px; }
+    .badge-d2 { background: #dbeafe; color: #1e40af; }
+    .badge-d10 { background: #fef3c7; color: #92400e; }
+    .badge-e { background: #d1fae5; color: #065f46; }
     .badge-warn { background: #fee2e2; color: #991b1b; }
-
-    /* ── 단계 카드 ── */
     .steps { display: flex; flex-direction: column; gap: 14px; }
-    .step {
-      display: flex; gap: 16px; background: var(--card);
-      border-radius: 14px; padding: 18px 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05); border: 1px solid var(--border);
-    }
-    .step-num {
-      width: 34px; height: 34px; background: var(--navy); color: #fff;
-      font-weight: 900; font-size: 14px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
+    .step { display: flex; gap: 16px; background: var(--card); border-radius: 14px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.05); border: 1px solid var(--border); }
+    .step-num { width: 34px; height: 34px; background: var(--navy); color: #fff; font-weight: 900; font-size: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .step-num.orange { background: var(--orange); }
     .step-content h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-    .step-content p  { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
-    .step-content .tag {
-      display: inline-block; font-size: 10.5px; font-weight: 700;
-      padding: 2px 8px; border-radius: 4px; margin-top: 6px;
-    }
-    .tag-doc  { background: #eff6ff; color: #1d4ed8; }
-    .tag-tip  { background: #f0fdf4; color: #166534; }
+    .step-content p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+    .step-content .tag { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+    .tag-doc { background: #eff6ff; color: #1d4ed8; }
+    .tag-tip { background: #f0fdf4; color: #166534; }
     .tag-warn { background: #fef9c3; color: #854d0e; }
-
-    /* ── 테이블 ── */
-    .info-table {
-      width: 100%; border-collapse: collapse;
-      background: var(--card); border-radius: 14px;
-      overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.05); font-size: 13.5px;
-    }
+    .info-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.05); font-size: 13.5px; }
     .info-table thead tr { background: var(--navy); color: #fff; }
     .info-table th, .info-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
     .info-table th { font-weight: 700; font-size: 12.5px; }
     .info-table tbody tr:last-child td { border-bottom: none; }
     .info-table tbody tr:nth-child(even) { background: #f8fafc; }
-    .info-table .hl  { color: var(--orange); font-weight: 700; }
-    .info-table .ok  { color: #16a34a; font-weight: 700; }
+    .info-table .hl { color: var(--orange); font-weight: 700; }
+    .info-table .ok { color: #16a34a; font-weight: 700; }
     .info-table .bad { color: #dc2626; font-weight: 700; }
-
-    /* ── 색상 박스 ── */
-    .highlight-box {
-      background: #eff6ff; border: 1px solid #bfdbfe;
-      border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
-    }
+    .highlight-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; }
     .highlight-box h3 { font-size: 14px; font-weight: 700; color: #1e3a8a; margin-bottom: 10px; }
     .highlight-box p, .highlight-box li { font-size: 13.5px; color: #1e40af; line-height: 1.7; }
     .highlight-box ul { padding-left: 18px; }
     .highlight-box li { margin-bottom: 4px; }
-
-    .orange-box {
-      background: #fff7ed; border: 1px solid #fed7aa;
-      border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
-    }
+    .orange-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; }
     .orange-box h3 { font-size: 14px; font-weight: 700; color: #9a3412; margin-bottom: 10px; }
     .orange-box p, .orange-box li { font-size: 13.5px; color: #c2410c; line-height: 1.7; }
     .orange-box ul { padding-left: 18px; }
     .orange-box li { margin-bottom: 4px; }
-
-    .green-box {
-      background: #f0fdf4; border: 1px solid #bbf7d0;
-      border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
-    }
+    .green-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; }
     .green-box h3 { font-size: 14px; font-weight: 700; color: #14532d; margin-bottom: 10px; }
     .green-box p, .green-box li { font-size: 13.5px; color: #166534; line-height: 1.7; }
     .green-box ul { padding-left: 18px; }
     .green-box li { margin-bottom: 4px; }
-
-    .red-box {
-      background: #fff1f2; border: 1px solid #fecdd3;
-      border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
-    }
+    .red-box { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; }
     .red-box h3 { font-size: 14px; font-weight: 700; color: #9f1239; margin-bottom: 10px; }
     .red-box p, .red-box li { font-size: 13.5px; color: #be123c; line-height: 1.7; }
     .red-box ul { padding-left: 18px; }
     .red-box li { margin-bottom: 4px; }
-
-    /* ── 비교 카드 ── */
     .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media(max-width: 560px) { .compare-grid { grid-template-columns: 1fr; } }
-    .cmp-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.05);
-    }
-    .cmp-card h3 {
-      font-size: 13.5px; font-weight: 700; color: var(--navy);
-      margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
-    }
+    .cmp-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+    .cmp-card h3 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
     .cmp-card ul { padding-left: 0; list-style: none; }
     .cmp-card li { font-size: 13px; color: var(--muted); padding: 4px 0; padding-left: 18px; position: relative; }
     .cmp-card li::before { content: '▸'; position: absolute; left: 0; color: var(--orange); }
-
-    /* ── 주의사항 ── */
     .warning-list { background: #fffbeb; border: 1px solid #fde68a; border-radius: 14px; padding: 20px 24px; }
-    .warning-list li {
-      font-size: 13.5px; color: #78350f;
-      padding: 6px 0; list-style: none; padding-left: 26px; position: relative;
-    }
+    .warning-list li { font-size: 13.5px; color: #78350f; padding: 6px 0; list-style: none; padding-left: 26px; position: relative; }
     .warning-list li::before { content: '⚠'; position: absolute; left: 0; font-size: 13px; }
-
-    /* ── 체크리스트 & 연락처 ── */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media(max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
-    .checklist-card, .contact-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.05);
-    }
+    .checklist-card, .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
     .checklist-card h3, .contact-card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
     .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
     .chk-item { display: flex; align-items: flex-start; gap: 7px; font-size: 12.5px; color: var(--text); line-height: 1.5; }
@@ -267,458 +104,505 @@
     .contact-item .c-icon { font-size: 18px; flex-shrink: 0; }
     .contact-item .c-label { font-weight: 700; color: var(--navy); font-size: 12px; display: block; }
     .contact-item .c-value { color: var(--muted); font-size: 12px; }
-
-    /* ── CTA ── */
-    .cta-box {
-      background: linear-gradient(135deg, var(--navy) 0%, #1e4d8c 100%);
-      border-radius: 20px; padding: 36px 28px; text-align: center; color: #fff;
-    }
+    .cta-box { background: linear-gradient(135deg, var(--navy) 0%, #1e4d8c 100%); border-radius: 20px; padding: 36px 28px; text-align: center; color: #fff; }
     .cta-box .cta-icon { font-size: 36px; margin-bottom: 12px; }
     .cta-box h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; margin-bottom: 10px; }
     .cta-box p { font-size: 14px; color: rgba(255,255,255,.65); max-width: 440px; margin: 0 auto 20px; line-height: 1.7; }
-    .cta-btn {
-      display: inline-block; background: var(--orange); color: #fff;
-      font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 12px; text-decoration: none;
-    }
+    .cta-btn { display: inline-block; background: var(--orange); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 12px; text-decoration: none; }
     .cta-btn:hover { background: #e07d00; }
-
-    @media print {
-      .hero { padding: 32px 20px; }
-      .container { padding: 24px 16px 40px; }
-      .section { break-inside: avoid; }
-      .cta-box { display: none; }
-    }
+    @media print { .hero { padding: 32px 20px; } .container { padding: 24px 16px 40px; } .section { break-inside: avoid; } .cta-box { display: none; } }
   </style>
 </head>
 <body>
+<script>(function(){var l=(new URLSearchParams(location.search).get('lang')||'ko').replace(/[^a-z]/g,'');document.documentElement.setAttribute('data-lang',l);})();</script>
 
-<!-- ━━━━━━ HERO ━━━━━━ -->
 <div class="hero">
-  <div class="badge">🇰🇷 잡앤러닝 한국 생활 가이드</div>
-  <h1>한국 비자 완벽 가이드<br><span>D-2 → D-10</span> 외국인 유학생 로드맵</h1>
-  <p>D-2 학생 비자 유지부터 졸업 후 D-10 구직 비자 전환, 취업 비자까지 — 비자의 모든 것을 단계별로 정리했습니다.</p>
+  <div class="badge">
+    <span class="ko">🇰🇷 잡앤러닝 한국 생활 가이드</span>
+    <span class="en">🇰🇷 Job&amp;Learning Korea Life Guide</span>
+    <span class="vi">🇰🇷 Job&amp;Learning Hướng dẫn cuộc sống Hàn Quốc</span>
+  </div>
+  <h1>
+    <span class="ko">한국 비자 완벽 가이드<br><span>D-2 → D-10</span> 외국인 유학생 로드맵</span>
+    <span class="en">Korea Visa Complete Guide<br><span>D-2 → D-10</span> International Student Roadmap</span>
+    <span class="vi">Hướng dẫn visa Hàn Quốc<br><span>D-2 → D-10</span> Lộ trình du học sinh</span>
+  </h1>
+  <p>
+    <span class="ko">D-2 학생 비자 유지부터 졸업 후 D-10 구직 비자 전환, 취업 비자까지 — 비자의 모든 것을 단계별로 정리했습니다.</span>
+    <span class="en">From maintaining your D-2 student visa to D-10 job-seeking visa after graduation to work visa — everything about Korean visas, step by step.</span>
+    <span class="vi">Từ duy trì visa học sinh D-2 đến chuyển đổi visa tìm việc D-10 sau tốt nghiệp và visa lao động — tất cả về visa Hàn Quốc, từng bước một.</span>
+  </p>
   <div class="hero-divider"></div>
   <div class="hero-tags">
-    <span class="hero-tag">D-2 유학 비자</span>
-    <span class="hero-tag">D-2 연장</span>
-    <span class="hero-tag">아르바이트 허가</span>
-    <span class="hero-tag">D-10 구직 비자</span>
-    <span class="hero-tag">취업 비자 전환</span>
+    <span class="hero-tag"><span class="ko">D-2 유학 비자</span><span class="en">D-2 Student Visa</span><span class="vi">Visa học sinh D-2</span></span>
+    <span class="hero-tag"><span class="ko">D-2 연장</span><span class="en">D-2 Extension</span><span class="vi">Gia hạn D-2</span></span>
+    <span class="hero-tag"><span class="ko">아르바이트 허가</span><span class="en">Part-time Work Permit</span><span class="vi">Phép làm thêm</span></span>
+    <span class="hero-tag"><span class="ko">D-10 구직 비자</span><span class="en">D-10 Job-seeking Visa</span><span class="vi">Visa tìm việc D-10</span></span>
+    <span class="hero-tag"><span class="ko">취업 비자 전환</span><span class="en">Work Visa Conversion</span><span class="vi">Chuyển đổi visa lao động</span></span>
   </div>
 </div>
 
 <div class="container">
 
-  <!-- 인트로 -->
   <div class="intro-box">
-    한국에서 공부하는 외국인 유학생에게 비자는 체류의 근거이자 아르바이트·취업까지 연결되는 핵심입니다. <strong>비자 만료를 단 하루라도 넘기면 불법 체류자가 됩니다.</strong> D-2 비자 취득·연장 방법부터 졸업 후 D-10 구직 비자로 전환하는 전략까지 한눈에 정리했습니다.
+    <span class="ko">한국에서 공부하는 외국인 유학생에게 비자는 체류의 근거이자 아르바이트·취업까지 연결되는 핵심입니다. <strong>비자 만료를 단 하루라도 넘기면 불법 체류자가 됩니다.</strong> D-2 비자 취득·연장 방법부터 졸업 후 D-10 구직 비자로 전환하는 전략까지 한눈에 정리했습니다.</span>
+    <span class="en">For international students in Korea, the visa is the basis of your stay and the key to part-time work and employment. <strong>Even one day over the expiry date makes you an illegal stayer.</strong> From getting and extending a D-2 visa to converting to D-10 after graduation — all at a glance.</span>
+    <span class="vi">Đối với du học sinh nước ngoài tại Hàn Quốc, visa là cơ sở cư trú và chìa khóa để làm thêm và tìm việc. <strong>Chỉ một ngày quá hạn là bạn đã ở lại bất hợp pháp.</strong> Từ lấy và gia hạn visa D-2 đến chuyển đổi sang D-10 sau tốt nghiệp — tất cả trong một tổng quan.</span>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 1 : 비자 로드맵
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">① 유학생 비자 전체 로드맵</div>
+    <div class="section-title">
+      <span class="ko">① 유학생 비자 전체 로드맵</span>
+      <span class="en">① Student Visa Roadmap</span>
+      <span class="vi">① Lộ trình visa du học sinh</span>
+    </div>
 
     <div class="roadmap">
       <div class="roadmap-step">
         <div class="r-visa">D-4</div>
-        <div class="r-label">어학연수<br>한국어 공부 중</div>
-        <span class="r-badge" style="background:#f3e8ff;color:#7e22ce;">어학 단계</span>
+        <div class="r-label"><span class="ko">어학연수<br>한국어 공부 중</span><span class="en">Language Training<br>Studying Korean</span><span class="vi">Học ngôn ngữ<br>Đang học tiếng Hàn</span></div>
+        <span class="r-badge" style="background:#f3e8ff;color:#7e22ce;"><span class="ko">어학 단계</span><span class="en">Language Stage</span><span class="vi">Giai đoạn ngôn ngữ</span></span>
       </div>
       <div class="roadmap-step">
         <div class="r-visa">D-2</div>
-        <div class="r-label">학사·석사·박사<br>재학 중</div>
-        <span class="r-badge badge-d2">재학 단계</span>
+        <div class="r-label"><span class="ko">학사·석사·박사<br>재학 중</span><span class="en">Bachelor/Master/PhD<br>Currently enrolled</span><span class="vi">Cử nhân/Thạc sĩ/Tiến sĩ<br>Đang theo học</span></div>
+        <span class="r-badge badge-d2"><span class="ko">재학 단계</span><span class="en">Study Stage</span><span class="vi">Giai đoạn học</span></span>
       </div>
       <div class="roadmap-step">
         <div class="r-visa">D-10</div>
-        <div class="r-label">졸업 후<br>구직 활동 중</div>
-        <span class="r-badge badge-d10">구직 단계</span>
+        <div class="r-label"><span class="ko">졸업 후<br>구직 활동 중</span><span class="en">After graduation<br>Job-seeking</span><span class="vi">Sau tốt nghiệp<br>Đang tìm việc</span></div>
+        <span class="r-badge badge-d10"><span class="ko">구직 단계</span><span class="en">Job-seeking Stage</span><span class="vi">Giai đoạn tìm việc</span></span>
       </div>
       <div class="roadmap-step">
         <div class="r-visa">E-7</div>
-        <div class="r-label">취업·특정 활동<br>정규직 근무 중</div>
-        <span class="r-badge badge-e">취업 단계</span>
+        <div class="r-label"><span class="ko">취업·특정 활동<br>정규직 근무 중</span><span class="en">Employment<br>Full-time work</span><span class="vi">Việc làm<br>Đang làm toàn thời gian</span></div>
+        <span class="r-badge badge-e"><span class="ko">취업 단계</span><span class="en">Work Stage</span><span class="vi">Giai đoạn làm việc</span></span>
       </div>
     </div>
 
     <div class="highlight-box">
-      <h3>📌 핵심 원칙 — 비자 기간 안에 미리 준비하세요</h3>
+      <h3>
+        <span class="ko">📌 핵심 원칙 — 비자 기간 안에 미리 준비하세요</span>
+        <span class="en">📌 Key Rule — Prepare before visa expires</span>
+        <span class="vi">📌 Nguyên tắc quan trọng — Chuẩn bị trước khi visa hết hạn</span>
+      </h3>
       <ul>
-        <li>비자 만료일 <strong>최소 4주 전</strong>에 연장 또는 변경 신청을 해야 합니다.</li>
-        <li>신청은 가까운 <strong>출입국·외국인청(HiKorea)</strong> 또는 <strong>온라인(hikorea.go.kr)</strong>에서 가능합니다.</li>
-        <li>비자와 외국인등록증은 별개입니다. 비자는 입국 허가, 외국인등록증은 국내 체류 신분증입니다.</li>
+        <li><span class="ko">비자 만료일 <strong>최소 4주 전</strong>에 연장 또는 변경 신청을 해야 합니다.</span><span class="en">Apply for extension or change <strong>at least 4 weeks before</strong> expiry.</span><span class="vi">Nộp đơn gia hạn hoặc thay đổi <strong>ít nhất 4 tuần trước</strong> ngày hết hạn.</span></li>
+        <li><span class="ko">신청은 가까운 <strong>출입국·외국인청(HiKorea)</strong> 또는 <strong>온라인(hikorea.go.kr)</strong>에서 가능합니다.</span><span class="en">Apply at the nearest <strong>immigration office (HiKorea)</strong> or <strong>online (hikorea.go.kr)</strong>.</span><span class="vi">Nộp đơn tại <strong>cục xuất nhập cảnh (HiKorea)</strong> gần nhất hoặc <strong>trực tuyến (hikorea.go.kr)</strong>.</span></li>
+        <li><span class="ko">비자와 외국인등록증은 별개입니다. 비자는 입국 허가, 외국인등록증은 국내 체류 신분증입니다.</span><span class="en">Visa and ARC are separate. Visa = entry permit; ARC = domestic ID card.</span><span class="vi">Visa và ARC là hai thứ khác nhau. Visa = giấy phép nhập cảnh; ARC = thẻ căn cước nội địa.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 2 : D-2 비자 완전 정복
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">② D-2 유학 비자 — 종류 &amp; 조건</div>
+    <div class="section-title">
+      <span class="ko">② D-2 유학 비자 — 종류 &amp; 조건</span>
+      <span class="en">② D-2 Student Visa — Types &amp; Conditions</span>
+      <span class="vi">② Visa học sinh D-2 — Loại &amp; Điều kiện</span>
+    </div>
 
-    <p style="font-size:13.5px;color:var(--muted);margin-bottom:16px;">D-2 비자는 한국 대학·대학원에 정규 과정으로 입학한 유학생에게 발급됩니다. 학위 과정별로 세부 코드가 다릅니다.</p>
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:16px;">
+      <span class="ko">D-2 비자는 한국 대학·대학원에 정규 과정으로 입학한 유학생에게 발급됩니다. 학위 과정별로 세부 코드가 다릅니다.</span>
+      <span class="en">D-2 visa is issued to students enrolled in regular degree programs at Korean universities. Each degree level has a sub-code.</span>
+      <span class="vi">Visa D-2 được cấp cho sinh viên theo học chương trình chính quy tại các trường đại học Hàn Quốc. Mỗi cấp độ học có mã phụ khác nhau.</span>
+    </p>
 
     <div class="visa-grid" style="margin-bottom:24px;">
       <div class="visa-card">
         <div class="v-code">D-2-1</div>
-        <h3>전문학사 과정</h3>
-        <p>전문대학(2~3년제) 재학생. 졸업 후 D-2-2 또는 D-10 전환 가능</p>
-        <span class="v-badge badge-d2">전문대학</span>
+        <h3><span class="ko">전문학사 과정</span><span class="en">Associate Degree</span><span class="vi">Bằng cao đẳng</span></h3>
+        <p><span class="ko">전문대학(2~3년제) 재학생. 졸업 후 D-2-2 또는 D-10 전환 가능</span><span class="en">2–3 year college student. Can convert to D-2-2 or D-10 after graduation</span><span class="vi">Sinh viên cao đẳng 2–3 năm. Có thể chuyển sang D-2-2 hoặc D-10 sau tốt nghiệp</span></p>
+        <span class="v-badge badge-d2"><span class="ko">전문대학</span><span class="en">College</span><span class="vi">Cao đẳng</span></span>
       </div>
       <div class="visa-card">
         <div class="v-code">D-2-2</div>
-        <h3>학사 과정</h3>
-        <p>4년제 대학 재학생. 가장 일반적인 유학생 비자. 재학 기간 연장 가능</p>
-        <span class="v-badge badge-d2">4년제 대학</span>
+        <h3><span class="ko">학사 과정</span><span class="en">Bachelor's Degree</span><span class="vi">Bằng cử nhân</span></h3>
+        <p><span class="ko">4년제 대학 재학생. 가장 일반적인 유학생 비자. 재학 기간 연장 가능</span><span class="en">4-year university student. Most common international student visa. Extendable during enrollment</span><span class="vi">Sinh viên đại học 4 năm. Visa du học sinh phổ biến nhất. Có thể gia hạn trong thời gian học</span></p>
+        <span class="v-badge badge-d2"><span class="ko">4년제 대학</span><span class="en">University</span><span class="vi">Đại học</span></span>
       </div>
       <div class="visa-card">
         <div class="v-code">D-2-3</div>
-        <h3>석사 과정</h3>
-        <p>대학원 석사 과정. 학위 수여 후 D-10 또는 E계열 취업비자로 전환</p>
-        <span class="v-badge badge-d2">대학원 석사</span>
+        <h3><span class="ko">석사 과정</span><span class="en">Master's Degree</span><span class="vi">Bằng thạc sĩ</span></h3>
+        <p><span class="ko">대학원 석사 과정. 학위 수여 후 D-10 또는 E계열 취업비자로 전환</span><span class="en">Graduate school master's program. Convert to D-10 or E-series after graduation</span><span class="vi">Chương trình thạc sĩ. Chuyển sang D-10 hoặc E-series sau tốt nghiệp</span></p>
+        <span class="v-badge badge-d2"><span class="ko">대학원 석사</span><span class="en">Master's</span><span class="vi">Thạc sĩ</span></span>
       </div>
       <div class="visa-card">
         <div class="v-code">D-2-4</div>
-        <h3>박사 과정</h3>
-        <p>대학원 박사 과정. 연구 활동 병행 허용 범위 넓음</p>
-        <span class="v-badge badge-d2">대학원 박사</span>
+        <h3><span class="ko">박사 과정</span><span class="en">Doctoral Degree</span><span class="vi">Bằng tiến sĩ</span></h3>
+        <p><span class="ko">대학원 박사 과정. 연구 활동 병행 허용 범위 넓음</span><span class="en">PhD program. Wide scope for research activities</span><span class="vi">Chương trình tiến sĩ. Phạm vi nghiên cứu rộng</span></p>
+        <span class="v-badge badge-d2"><span class="ko">박사</span><span class="en">PhD</span><span class="vi">Tiến sĩ</span></span>
       </div>
       <div class="visa-card">
         <div class="v-code">D-2-6</div>
-        <h3>교환학생</h3>
-        <p>교환학생 협정에 따른 단기 유학. 보통 1학기~1년 체류</p>
-        <span class="v-badge badge-d2">교환학생</span>
+        <h3><span class="ko">교환학생</span><span class="en">Exchange Student</span><span class="vi">Sinh viên trao đổi</span></h3>
+        <p><span class="ko">교환학생 협정에 따른 단기 유학. 보통 1학기~1년 체류</span><span class="en">Short-term study under exchange agreement. Usually 1 semester–1 year</span><span class="vi">Học ngắn hạn theo hiệp định trao đổi. Thường 1 học kỳ–1 năm</span></p>
+        <span class="v-badge badge-d2"><span class="ko">교환학생</span><span class="en">Exchange</span><span class="vi">Trao đổi</span></span>
       </div>
       <div class="visa-card">
         <div class="v-code">D-2-7</div>
-        <h3>비학위 과정</h3>
-        <p>어학당 수료 후 정규 입학 전 대기, 청강생 등 비학위 과정</p>
-        <span class="v-badge" style="background:#f3e8ff;color:#7e22ce;">비학위</span>
+        <h3><span class="ko">비학위 과정</span><span class="en">Non-degree Program</span><span class="vi">Chương trình không lấy bằng</span></h3>
+        <p><span class="ko">어학당 수료 후 정규 입학 전 대기, 청강생 등 비학위 과정</span><span class="en">Non-degree program after language school, before regular enrollment</span><span class="vi">Chương trình không lấy bằng sau học ngôn ngữ, trước khi nhập học chính thức</span></p>
+        <span class="v-badge" style="background:#f3e8ff;color:#7e22ce;"><span class="ko">비학위</span><span class="en">Non-degree</span><span class="vi">Không lấy bằng</span></span>
       </div>
     </div>
 
-    <!-- D-2 비자 조건 -->
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">D-2 비자 유지 조건</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">
+      <span class="ko">D-2 비자 유지 조건</span><span class="en">D-2 Visa Maintenance Conditions</span><span class="vi">Điều kiện duy trì visa D-2</span>
+    </p>
     <table class="info-table" style="margin-bottom:20px;">
       <thead>
-        <tr><th>조건</th><th>기준</th><th>위반 시</th></tr>
+        <tr>
+          <th><span class="ko">조건</span><span class="en">Condition</span><span class="vi">Điều kiện</span></th>
+          <th><span class="ko">기준</span><span class="en">Standard</span><span class="vi">Tiêu chuẩn</span></th>
+          <th><span class="ko">위반 시</span><span class="en">If Violated</span><span class="vi">Nếu vi phạm</span></th>
+        </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>학업 성적</strong></td>
-          <td>매 학기 학점 유지 (보통 2.0/4.5 이상)</td>
-          <td class="bad">비자 연장 거절 가능</td>
+          <td><strong><span class="ko">학업 성적</span><span class="en">Academic Performance</span><span class="vi">Kết quả học tập</span></strong></td>
+          <td><span class="ko">매 학기 학점 유지 (보통 2.0/4.5 이상)</span><span class="en">Maintain GPA each semester (usually 2.0/4.5+)</span><span class="vi">Duy trì GPA mỗi học kỳ (thường ≥2.0/4.5)</span></td>
+          <td class="bad"><span class="ko">비자 연장 거절 가능</span><span class="en">Extension may be denied</span><span class="vi">Có thể bị từ chối gia hạn</span></td>
         </tr>
         <tr>
-          <td><strong>등록금 납부</strong></td>
-          <td>매 학기 정상 등록 완료</td>
-          <td class="bad">재학 상태 취소 → 비자 실효</td>
+          <td><strong><span class="ko">등록금 납부</span><span class="en">Tuition Payment</span><span class="vi">Đóng học phí</span></strong></td>
+          <td><span class="ko">매 학기 정상 등록 완료</span><span class="en">Normal enrollment every semester</span><span class="vi">Đăng ký bình thường mỗi học kỳ</span></td>
+          <td class="bad"><span class="ko">재학 상태 취소 → 비자 실효</span><span class="en">Enrollment canceled → visa void</span><span class="vi">Hủy đăng ký → visa mất hiệu lực</span></td>
         </tr>
         <tr>
-          <td><strong>출석률</strong></td>
-          <td>학기당 출석률 70% 이상 권장</td>
-          <td class="bad">제적 → 비자 자동 취소</td>
+          <td><strong><span class="ko">출석률</span><span class="en">Attendance Rate</span><span class="vi">Tỷ lệ điểm danh</span></strong></td>
+          <td><span class="ko">학기당 출석률 70% 이상 권장</span><span class="en">70%+ attendance per semester recommended</span><span class="vi">Khuyến nghị ≥70% điểm danh mỗi học kỳ</span></td>
+          <td class="bad"><span class="ko">제적 → 비자 자동 취소</span><span class="en">Expulsion → visa auto-canceled</span><span class="vi">Đuổi học → visa tự động bị hủy</span></td>
         </tr>
         <tr>
-          <td><strong>아르바이트 시간</strong></td>
-          <td>학기 중 주 20시간 이내 / 방학 중 제한 없음</td>
-          <td class="bad">불법 취업 → 강제 출국</td>
+          <td><strong><span class="ko">아르바이트 시간</span><span class="en">Part-time Work Hours</span><span class="vi">Số giờ làm thêm</span></strong></td>
+          <td><span class="ko">학기 중 주 20시간 이내 / 방학 중 제한 없음</span><span class="en">Up to 20 hrs/week during semester / no limit during vacation</span><span class="vi">Tối đa 20 giờ/tuần trong học kỳ / không giới hạn trong kỳ nghỉ</span></td>
+          <td class="bad"><span class="ko">불법 취업 → 강제 출국</span><span class="en">Illegal employment → deportation</span><span class="vi">Việc làm bất hợp pháp → bị trục xuất</span></td>
         </tr>
         <tr>
-          <td><strong>주소 변경 신고</strong></td>
-          <td>이사 후 14일 이내 외국인청 신고</td>
-          <td class="bad">과태료 부과</td>
+          <td><strong><span class="ko">주소 변경 신고</span><span class="en">Address Change Notification</span><span class="vi">Thông báo thay đổi địa chỉ</span></strong></td>
+          <td><span class="ko">이사 후 14일 이내 신고</span><span class="en">Report within 14 days of moving</span><span class="vi">Báo cáo trong vòng 14 ngày sau khi chuyển nhà</span></td>
+          <td class="bad"><span class="ko">과태료 부과</span><span class="en">Fine imposed</span><span class="vi">Bị phạt tiền</span></td>
         </tr>
       </tbody>
     </table>
 
     <div class="orange-box">
-      <h3>⏰ 아르바이트 시간 제한 — 반드시 지키세요</h3>
+      <h3>
+        <span class="ko">⏰ 아르바이트 시간 제한 — 반드시 지키세요</span>
+        <span class="en">⏰ Part-time Work Hour Limits — Must Follow</span>
+        <span class="vi">⏰ Giới hạn giờ làm thêm — Phải tuân thủ</span>
+      </h3>
       <ul>
-        <li><strong>학기 중:</strong> 주 20시간 이내 (1일 최대 8시간, 주 5일 × 4시간 등)</li>
-        <li><strong>방학 중:</strong> 시간 제한 없음 (단, 단순 노무·허용된 직종에 한함)</li>
-        <li><strong>허용 직종:</strong> 음식점, 편의점, 카페, 학원 보조, 번역·통역, 가정교사 등</li>
-        <li><strong>불허 직종:</strong> 유흥업소, 안마시술소, 사행성 게임장, 일부 단순 노무</li>
-        <li>주 20시간 초과 적발 시 비자 취소 및 강제 출국 처분을 받을 수 있습니다.</li>
+        <li><span class="ko"><strong>학기 중:</strong> 주 20시간 이내</span><span class="en"><strong>During semester:</strong> Up to 20 hrs/week</span><span class="vi"><strong>Trong học kỳ:</strong> Tối đa 20 giờ/tuần</span></li>
+        <li><span class="ko"><strong>방학 중:</strong> 시간 제한 없음 (단, 허용된 직종에 한함)</span><span class="en"><strong>During vacation:</strong> No time limit (permitted jobs only)</span><span class="vi"><strong>Trong kỳ nghỉ:</strong> Không giới hạn thời gian (chỉ ngành nghề được phép)</span></li>
+        <li><span class="ko"><strong>허용 직종:</strong> 음식점, 편의점, 카페, 학원 보조, 번역·통역, 가정교사 등</span><span class="en"><strong>Permitted jobs:</strong> Restaurants, convenience stores, cafes, tutoring, translation, private tutor, etc.</span><span class="vi"><strong>Ngành nghề được phép:</strong> Nhà hàng, cửa hàng tiện lợi, quán cafe, trợ giảng, phiên dịch, gia sư, v.v.</span></li>
+        <li><span class="ko"><strong>불허 직종:</strong> 유흥업소, 안마시술소, 사행성 게임장, 일부 단순 노무</span><span class="en"><strong>Prohibited jobs:</strong> Entertainment venues, massage parlors, gambling arcades, some manual labor</span><span class="vi"><strong>Ngành nghề bị cấm:</strong> Cơ sở giải trí, tiệm massage, sòng bạc, một số lao động thủ công</span></li>
+        <li><span class="ko">주 20시간 초과 적발 시 비자 취소 및 강제 출국 처분을 받을 수 있습니다.</span><span class="en">Exceeding 20 hrs/week can result in visa cancellation and deportation.</span><span class="vi">Vượt quá 20 giờ/tuần có thể bị hủy visa và trục xuất.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 3 : D-2 비자 연장
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">③ D-2 비자 연장 — 절차 &amp; 서류</div>
+    <div class="section-title">
+      <span class="ko">③ D-2 비자 연장 — 절차 &amp; 서류</span>
+      <span class="en">③ D-2 Visa Extension — Steps &amp; Documents</span>
+      <span class="vi">③ Gia hạn visa D-2 — Các bước &amp; Giấy tờ</span>
+    </div>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h3>연장 시기 확인 — 만료일 4주 전 시작</h3>
-          <p>외국인등록증 뒷면 또는 HiKorea 앱에서 체류 만료일을 확인합니다. 만료일 <strong>4주(28일) 전부터</strong> 신청 가능합니다. 너무 일찍 신청하면 접수가 안 될 수 있으니 4~3주 전이 가장 적절합니다.</p>
-          <span class="tag tag-warn">만료일 당일 또는 초과 신청 시 과태료 + 출국 명령</span>
+          <h3><span class="ko">연장 시기 확인 — 만료일 4주 전 시작</span><span class="en">Check Extension Timing — Start 4 weeks before expiry</span><span class="vi">Kiểm tra thời điểm gia hạn — Bắt đầu 4 tuần trước khi hết hạn</span></h3>
+          <p><span class="ko">외국인등록증 뒷면 또는 HiKorea 앱에서 체류 만료일을 확인합니다. 만료일 <strong>4주(28일) 전부터</strong> 신청 가능합니다.</span><span class="en">Check expiry date on back of ARC or in HiKorea app. Applications accepted <strong>from 4 weeks (28 days) before</strong> expiry.</span><span class="vi">Kiểm tra ngày hết hạn ở mặt sau ARC hoặc app HiKorea. Có thể nộp đơn <strong>từ 4 tuần (28 ngày) trước</strong> ngày hết hạn.</span></p>
+          <span class="tag tag-warn"><span class="ko">만료일 당일 또는 초과 신청 시 과태료 + 출국 명령</span><span class="en">Fine + deportation order if applied on or after expiry</span><span class="vi">Phạt tiền + lệnh trục xuất nếu nộp đơn vào ngày hoặc sau ngày hết hạn</span></span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h3>서류 준비</h3>
-          <p>① 통합신청서 (출입국·외국인청 비치, hikorea.go.kr 다운로드) ② 여권 원본 ③ 외국인등록증 ④ 재학증명서 (학교 행정실 발급) ⑤ 성적증명서 (지난 학기) ⑥ 등록금 납부 영수증 ⑦ 수수료 60,000원 (현장 납부 또는 온라인 결제)</p>
-          <span class="tag tag-doc">재학증명서·성적증명서는 최근 1개월 발급본</span>
+          <h3><span class="ko">서류 준비</span><span class="en">Prepare Documents</span><span class="vi">Chuẩn bị giấy tờ</span></h3>
+          <p><span class="ko">① 통합신청서 ② 여권 원본 ③ 외국인등록증 ④ 재학증명서 ⑤ 성적증명서 (지난 학기) ⑥ 등록금 납부 영수증 ⑦ 수수료 60,000원</span><span class="en">① Application form ② Passport ③ ARC ④ Enrollment certificate ⑤ Transcript (last semester) ⑥ Tuition payment receipt ⑦ Fee ₩60,000</span><span class="vi">① Mẫu đơn ② Hộ chiếu ③ ARC ④ Giấy chứng nhận học ⑤ Bảng điểm (học kỳ qua) ⑥ Biên lai học phí ⑦ Phí 60.000 won</span></p>
+          <span class="tag tag-doc"><span class="ko">재학증명서·성적증명서는 최근 1개월 발급본</span><span class="en">Certificates must be issued within the last month</span><span class="vi">Giấy tờ phải được cấp trong tháng gần nhất</span></span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h3>신청 방법 선택</h3>
-          <p><strong>① 온라인:</strong> hikorea.go.kr 접속 → 로그인 → 체류 연장 신청. 서류는 스캔본 업로드. 처리 기간 약 2~4주. <strong>② 방문:</strong> 가까운 출입국·외국인청 방문 (대전출입국·외국인청: 대전광역시 서구 청사로 189). 당일 예약 필수 (hikorea 예약 시스템).</p>
-          <span class="tag tag-tip">온라인 신청이 방문보다 대기 시간 없이 편리</span>
+          <h3><span class="ko">신청 방법 선택</span><span class="en">Choose Application Method</span><span class="vi">Chọn phương thức nộp đơn</span></h3>
+          <p><span class="ko"><strong>① 온라인:</strong> hikorea.go.kr 접속 → 체류 연장 신청. 처리 기간 약 2~4주. <strong>② 방문:</strong> 대전출입국·외국인청 방문 (대전광역시 서구 청사로 189). 예약 필수.</span><span class="en"><strong>① Online:</strong> hikorea.go.kr → apply for stay extension. Processing ~2–4 weeks. <strong>② In-person:</strong> Daejeon Immigration Office (189 Cheongsa-ro, Seo-gu). Appointment required.</span><span class="vi"><strong>① Trực tuyến:</strong> hikorea.go.kr → đăng ký gia hạn cư trú. Xử lý ~2–4 tuần. <strong>② Trực tiếp:</strong> Cục Xuất nhập cảnh Daejeon (189 Cheongsa-ro, Seo-gu). Cần đặt lịch.</span></p>
+          <span class="tag tag-tip"><span class="ko">온라인 신청이 방문보다 대기 시간 없이 편리</span><span class="en">Online application is more convenient than visiting</span><span class="vi">Nộp đơn trực tuyến tiện lợi hơn đến trực tiếp</span></span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <h3>처리 결과 확인 및 스티커 수령</h3>
-          <p>온라인 신청 후 문자·이메일로 결과를 받습니다. 승인되면 외국인등록증에 체류 기간 연장 스티커를 부착하거나 재발급 받습니다. 방문 신청 시 처리 기간(보통 1~2주) 내에 다시 방문하여 수령합니다.</p>
-          <span class="tag tag-tip">처리 중이라도 체류 기간은 신청일 기준으로 자동 연장</span>
+          <h3><span class="ko">처리 결과 확인 및 스티커 수령</span><span class="en">Check Result and Receive Sticker</span><span class="vi">Kiểm tra kết quả và nhận nhãn dán</span></h3>
+          <p><span class="ko">온라인 신청 후 문자·이메일로 결과를 받습니다. 승인되면 외국인등록증에 체류 기간 연장 스티커를 부착합니다. 처리 중이라도 체류 기간은 신청일 기준으로 자동 연장됩니다.</span><span class="en">After online application, results arrive by SMS/email. If approved, a sticker is attached to your ARC. Your stay period is automatically extended from the date of application during processing.</span><span class="vi">Sau khi nộp trực tuyến, kết quả đến qua SMS/email. Nếu được chấp thuận, nhãn dán sẽ được dán vào ARC. Thời gian cư trú tự động gia hạn từ ngày nộp đơn trong khi xử lý.</span></p>
+          <span class="tag tag-tip"><span class="ko">처리 중이라도 신청일 기준으로 체류 자동 연장</span><span class="en">Stay auto-extended from application date during processing</span><span class="vi">Cư trú tự động gia hạn từ ngày nộp đơn trong quá trình xử lý</span></span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 4 : D-10 구직 비자
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">④ D-10 구직 비자 — 졸업 후 한국에서 취업 준비</div>
+    <div class="section-title">
+      <span class="ko">④ D-10 구직 비자 — 졸업 후 한국에서 취업 준비</span>
+      <span class="en">④ D-10 Job-Seeking Visa — Job Search After Graduation</span>
+      <span class="vi">④ Visa tìm việc D-10 — Tìm kiếm việc làm sau tốt nghiệp</span>
+    </div>
 
     <div class="highlight-box" style="margin-bottom:20px;">
-      <h3>🎓 D-10이란? 졸업 후 주어지는 황금 기회</h3>
+      <h3>
+        <span class="ko">🎓 D-10이란? 졸업 후 주어지는 황금 기회</span>
+        <span class="en">🎓 What is D-10? A golden opportunity after graduation</span>
+        <span class="vi">🎓 D-10 là gì? Cơ hội vàng sau tốt nghiệp</span>
+      </h3>
       <ul>
-        <li>D-2(학생) 비자로 한국 대학을 졸업한 외국인이 <strong>취업을 준비하는 동안</strong> 합법적으로 체류할 수 있는 비자입니다.</li>
-        <li>체류 기간: 최초 <strong>6개월</strong>, 최대 <strong>2년</strong>까지 연장 가능합니다.</li>
-        <li>D-10 체류 중에도 <strong>아르바이트·인턴십</strong>이 허용됩니다 (주 20시간 이내).</li>
-        <li>취업에 성공하면 E-7 등 취업 비자로 변경 신청을 해야 합니다.</li>
+        <li><span class="ko">D-2 비자로 한국 대학을 졸업한 외국인이 <strong>취업을 준비하는 동안</strong> 합법적으로 체류할 수 있는 비자입니다.</span><span class="en">A visa for foreigners who graduated from Korean universities with a D-2 visa to <strong>legally stay while job-seeking</strong>.</span><span class="vi">Visa cho người nước ngoài tốt nghiệp đại học Hàn Quốc với visa D-2 để <strong>ở lại hợp pháp khi tìm việc</strong>.</span></li>
+        <li><span class="ko">체류 기간: 최초 <strong>6개월</strong>, 최대 <strong>2년</strong>까지 연장 가능합니다.</span><span class="en">Stay period: Initial <strong>6 months</strong>, extendable up to <strong>2 years</strong>.</span><span class="vi">Thời gian cư trú: Ban đầu <strong>6 tháng</strong>, có thể gia hạn đến <strong>2 năm</strong>.</span></li>
+        <li><span class="ko">D-10 체류 중에도 <strong>아르바이트·인턴십</strong>이 허용됩니다 (주 20시간 이내).</span><span class="en"><strong>Part-time work and internships</strong> are allowed during D-10 stay (up to 20 hrs/week).</span><span class="vi"><strong>Làm thêm và thực tập</strong> được phép trong thời gian cư trú D-10 (tối đa 20 giờ/tuần).</span></li>
+        <li><span class="ko">취업에 성공하면 E-7 등 취업 비자로 변경 신청을 해야 합니다.</span><span class="en">After getting a job, you must apply to change to E-7 or other work visa.</span><span class="vi">Sau khi có việc làm, bạn phải nộp đơn đổi sang E-7 hoặc visa lao động khác.</span></li>
       </ul>
     </div>
 
-    <!-- D-10 자격 요건 -->
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">D-10 신청 자격</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">
+      <span class="ko">D-10 신청 자격</span><span class="en">D-10 Eligibility</span><span class="vi">Điều kiện đủ tư cách D-10</span>
+    </p>
     <table class="info-table" style="margin-bottom:20px;">
       <thead>
-        <tr><th>구분</th><th>자격 요건</th><th>체류 기간</th></tr>
+        <tr>
+          <th><span class="ko">구분</span><span class="en">Category</span><span class="vi">Danh mục</span></th>
+          <th><span class="ko">자격 요건</span><span class="en">Eligibility</span><span class="vi">Điều kiện</span></th>
+          <th><span class="ko">체류 기간</span><span class="en">Stay Period</span><span class="vi">Thời gian cư trú</span></th>
+        </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>학사 졸업자</strong></td>
-          <td>한국 내 4년제 대학 학사 학위 취득</td>
-          <td class="ok">6개월 (최대 1년 연장)</td>
+          <td><strong><span class="ko">학사 졸업자</span><span class="en">Bachelor's graduate</span><span class="vi">Tốt nghiệp cử nhân</span></strong></td>
+          <td><span class="ko">한국 내 4년제 대학 학사 학위 취득</span><span class="en">Bachelor's degree from 4-year Korean university</span><span class="vi">Bằng cử nhân từ đại học 4 năm tại Hàn Quốc</span></td>
+          <td class="ok"><span class="ko">6개월 (최대 1년 연장)</span><span class="en">6 months (max 1 year extension)</span><span class="vi">6 tháng (gia hạn tối đa 1 năm)</span></td>
         </tr>
         <tr>
-          <td><strong>석·박사 졸업자</strong></td>
-          <td>한국 내 대학원 석사·박사 학위 취득</td>
-          <td class="ok">6개월 (최대 2년 연장)</td>
+          <td><strong><span class="ko">석·박사 졸업자</span><span class="en">Master's/PhD graduate</span><span class="vi">Tốt nghiệp thạc sĩ/tiến sĩ</span></strong></td>
+          <td><span class="ko">한국 내 대학원 석사·박사 학위 취득</span><span class="en">Master's/PhD from Korean graduate school</span><span class="vi">Bằng thạc sĩ/tiến sĩ từ trường sau đại học Hàn Quốc</span></td>
+          <td class="ok"><span class="ko">6개월 (최대 2년 연장)</span><span class="en">6 months (max 2 year extension)</span><span class="vi">6 tháng (gia hạn tối đa 2 năm)</span></td>
         </tr>
         <tr>
-          <td><strong>해외 학사 이상</strong></td>
-          <td>해외 대학 졸업 후 한국 취업 목적 입국</td>
-          <td class="ok">6개월 (연장 가능)</td>
-        </tr>
-        <tr>
-          <td><strong>글로벌 스타트업비자</strong></td>
-          <td>창업 목적의 D-10 (법무부 사전 허가)</td>
-          <td class="ok">최대 2년</td>
+          <td><strong><span class="ko">해외 학사 이상</span><span class="en">Overseas bachelor's+</span><span class="vi">Cử nhân trở lên ở nước ngoài</span></strong></td>
+          <td><span class="ko">해외 대학 졸업 후 한국 취업 목적 입국</span><span class="en">Entry for employment after graduating overseas</span><span class="vi">Nhập cảnh để tìm việc làm sau tốt nghiệp đại học ở nước ngoài</span></td>
+          <td class="ok"><span class="ko">6개월 (연장 가능)</span><span class="en">6 months (extendable)</span><span class="vi">6 tháng (có thể gia hạn)</span></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- D-2 → D-10 전환 절차 -->
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">D-2 → D-10 전환 절차</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:700;">
+      <span class="ko">D-2 → D-10 전환 절차</span><span class="en">D-2 → D-10 Conversion Steps</span><span class="vi">Các bước chuyển đổi D-2 → D-10</span>
+    </p>
     <div class="steps" style="margin-bottom:20px;">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h3>졸업 확정 후 바로 신청 준비</h3>
-          <p>졸업식 또는 학위수여일이 확정되면 즉시 D-10 전환 준비를 시작하세요. <strong>D-2 비자 만료 전</strong>에 신청해야 합니다. 졸업 후 D-2 비자가 자동으로 취소되는 것은 아니지만, 재학 상태가 아니면 연장이 불가능합니다.</p>
-          <span class="tag tag-warn">졸업 후 D-2 만료 전에 D-10 신청 완료 필수</span>
+          <h3><span class="ko">졸업 확정 후 바로 신청 준비</span><span class="en">Prepare right after graduation is confirmed</span><span class="vi">Chuẩn bị ngay sau khi tốt nghiệp được xác nhận</span></h3>
+          <p><span class="ko">졸업식 또는 학위수여일이 확정되면 즉시 D-10 전환 준비를 시작하세요. <strong>D-2 비자 만료 전</strong>에 신청해야 합니다.</span><span class="en">Once graduation date is confirmed, start D-10 preparation immediately. Must apply <strong>before D-2 visa expires</strong>.</span><span class="vi">Sau khi ngày tốt nghiệp được xác nhận, bắt đầu chuẩn bị D-10 ngay lập tức. Phải nộp đơn <strong>trước khi visa D-2 hết hạn</strong>.</span></p>
+          <span class="tag tag-warn"><span class="ko">졸업 후 D-2 만료 전에 D-10 신청 완료 필수</span><span class="en">Must complete D-10 application before D-2 expires after graduation</span><span class="vi">Phải hoàn thành đơn D-10 trước khi D-2 hết hạn sau tốt nghiệp</span></span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h3>필요 서류 준비</h3>
-          <p>① 통합신청서 ② 여권 원본 ③ 외국인등록증 ④ <strong>학위증 또는 졸업증명서</strong> ⑤ 구직 활동 계획서 (자유 양식, 한글 또는 영문) ⑥ 수수료 130,000원 ⑦ 구직 활동 증빙 (인턴십 확인서, 채용 공고 지원 내역 등 - 있으면 유리)</p>
-          <span class="tag tag-doc">학위증은 학교 행정실에서 발급 (한국어·영어 각 1부)</span>
+          <h3><span class="ko">필요 서류 준비</span><span class="en">Prepare Required Documents</span><span class="vi">Chuẩn bị giấy tờ cần thiết</span></h3>
+          <p><span class="ko">① 통합신청서 ② 여권 원본 ③ 외국인등록증 ④ <strong>학위증 또는 졸업증명서</strong> ⑤ 구직 활동 계획서 (자유 양식) ⑥ 수수료 130,000원 ⑦ 구직 활동 증빙 (있으면 유리)</span><span class="en">① Application form ② Passport ③ ARC ④ <strong>Degree certificate or graduation certificate</strong> ⑤ Job search plan (free format) ⑥ Fee ₩130,000 ⑦ Job search evidence (advantageous if available)</span><span class="vi">① Mẫu đơn ② Hộ chiếu ③ ARC ④ <strong>Bằng tốt nghiệp hoặc giấy chứng nhận tốt nghiệp</strong> ⑤ Kế hoạch tìm việc (mẫu tự do) ⑥ Phí 130.000 won ⑦ Bằng chứng tìm việc (có lợi nếu có)</span></p>
+          <span class="tag tag-doc"><span class="ko">학위증은 학교 행정실에서 발급</span><span class="en">Degree certificate issued by school admin office</span><span class="vi">Bằng tốt nghiệp cấp bởi phòng hành chính trường</span></span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h3>출입국·외국인청 방문 또는 온라인 신청</h3>
-          <p>온라인(hikorea.go.kr) 또는 대전출입국·외국인청 방문 신청. 방문 시 예약 필수. 처리 기간은 약 2~4주입니다. 신청 중에도 기존 D-2 비자 기간 내라면 합법 체류입니다.</p>
-          <span class="tag tag-tip">대전출입국: 042-250-3400 (예약 필수)</span>
+          <h3><span class="ko">출입국·외국인청 방문 또는 온라인 신청</span><span class="en">Visit Immigration Office or Apply Online</span><span class="vi">Đến cục xuất nhập cảnh hoặc nộp đơn trực tuyến</span></h3>
+          <p><span class="ko">온라인(hikorea.go.kr) 또는 대전출입국·외국인청 방문 신청. 방문 시 예약 필수. 처리 기간은 약 2~4주입니다.</span><span class="en">Apply online (hikorea.go.kr) or visit Daejeon Immigration Office. Appointment required in person. Processing ~2–4 weeks.</span><span class="vi">Nộp đơn trực tuyến (hikorea.go.kr) hoặc đến Cục Xuất nhập cảnh Daejeon. Cần đặt lịch khi đến trực tiếp. Xử lý ~2–4 tuần.</span></p>
+          <span class="tag tag-tip"><span class="ko">대전출입국: 042-250-3400 (예약 필수)</span><span class="en">Daejeon Immigration: 042-250-3400 (appointment required)</span><span class="vi">Xuất nhập cảnh Daejeon: 042-250-3400 (cần đặt lịch)</span></span>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <h3>D-10 발급 후 구직 활동 시작</h3>
-          <p>D-10 비자가 발급되면 합법적으로 6개월~2년 동안 취업 준비를 할 수 있습니다. 인턴십, 아르바이트(주 20시간 이내), 기업 면접 등이 모두 허용됩니다. 취업에 성공하면 반드시 E-7 등 취업 비자로 전환 신청하세요.</p>
-          <span class="tag tag-tip">취업 성공 후 E-7 전환까지 고용주와 함께 진행</span>
+          <h3><span class="ko">D-10 발급 후 구직 활동 시작</span><span class="en">Start Job Search After D-10 is Issued</span><span class="vi">Bắt đầu tìm việc sau khi D-10 được cấp</span></h3>
+          <p><span class="ko">D-10 비자가 발급되면 합법적으로 6개월~2년 동안 취업 준비를 할 수 있습니다. 취업에 성공하면 반드시 E-7 등 취업 비자로 전환 신청하세요.</span><span class="en">Once D-10 is issued, you can legally prepare for employment for 6 months–2 years. Upon getting a job, apply to convert to E-7 or other work visa.</span><span class="vi">Sau khi D-10 được cấp, bạn có thể hợp pháp chuẩn bị tìm việc trong 6 tháng–2 năm. Khi có việc làm, nộp đơn chuyển sang E-7 hoặc visa lao động khác.</span></p>
+          <span class="tag tag-tip"><span class="ko">취업 성공 후 E-7 전환까지 고용주와 함께 진행</span><span class="en">Work with employer to process E-7 conversion after getting hired</span><span class="vi">Làm cùng chủ sử dụng để xử lý chuyển đổi E-7 sau khi được tuyển dụng</span></span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 5 : D-10 → 취업 비자
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">⑤ D-10 이후 — 취업 비자(E-7) 전환</div>
+    <div class="section-title">
+      <span class="ko">⑤ D-10 이후 — 취업 비자(E-7) 전환</span>
+      <span class="en">⑤ After D-10 — Converting to Work Visa (E-7)</span>
+      <span class="vi">⑤ Sau D-10 — Chuyển đổi sang Visa lao động (E-7)</span>
+    </div>
 
-    <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;">D-10으로 구직 활동 중 취업에 성공하면, 고용주와 함께 취업 비자로 변경해야 합니다. 취업 비자의 종류는 직종에 따라 다릅니다.</p>
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;">
+      <span class="ko">D-10으로 구직 활동 중 취업에 성공하면, 고용주와 함께 취업 비자로 변경해야 합니다. 취업 비자의 종류는 직종에 따라 다릅니다.</span>
+      <span class="en">Once you get a job during D-10 job-seeking, you must change to a work visa with your employer. The type of work visa depends on the occupation.</span>
+      <span class="vi">Khi tìm được việc làm trong thời gian D-10, bạn phải đổi sang visa lao động cùng với chủ sử dụng. Loại visa lao động phụ thuộc vào ngành nghề.</span>
+    </p>
 
     <div class="compare-grid" style="margin-bottom:20px;">
       <div class="cmp-card">
-        <h3>💼 E-7 특정활동 (가장 일반적)</h3>
+        <h3><span class="ko">💼 E-7 특정활동 (가장 일반적)</span><span class="en">💼 E-7 Specific Activities (Most Common)</span><span class="vi">💼 E-7 Hoạt động cụ thể (Phổ biến nhất)</span></h3>
         <ul>
-          <li>전문직·사무직·IT 개발·통·번역 등</li>
-          <li>고용주가 법무부에 고용 허가 신청</li>
-          <li>연봉 GNI 80% 이상 기준 충족 필요</li>
-          <li>거주(F-2) → 영주권(F-5) 경로 연결</li>
-          <li>체류 기간: 1~3년, 연장 가능</li>
-          <li>한국 대학 졸업자 가산점 있음</li>
+          <li><span class="ko">전문직·사무직·IT 개발·통·번역 등</span><span class="en">Professional, office, IT development, translation, etc.</span><span class="vi">Chuyên nghiệp, văn phòng, phát triển IT, phiên dịch, v.v.</span></li>
+          <li><span class="ko">고용주가 법무부에 고용 허가 신청</span><span class="en">Employer applies to Ministry of Justice for employment permit</span><span class="vi">Chủ sử dụng nộp đơn cho Bộ Tư pháp xin phép tuyển dụng</span></li>
+          <li><span class="ko">연봉 GNI 80% 이상 기준 충족 필요</span><span class="en">Salary must meet GNI 80%+ standard</span><span class="vi">Lương phải đáp ứng tiêu chuẩn GNI ≥80%</span></li>
+          <li><span class="ko">거주(F-2) → 영주권(F-5) 경로 연결</span><span class="en">Path to F-2 (residence) → F-5 (permanent residence)</span><span class="vi">Con đường đến F-2 (cư trú) → F-5 (thường trú)</span></li>
+          <li><span class="ko">체류 기간: 1~3년, 연장 가능</span><span class="en">Stay: 1–3 years, extendable</span><span class="vi">Cư trú: 1–3 năm, có thể gia hạn</span></li>
+          <li><span class="ko">한국 대학 졸업자 가산점 있음</span><span class="en">Bonus points for Korean university graduates</span><span class="vi">Điểm cộng cho sinh viên tốt nghiệp đại học Hàn Quốc</span></li>
         </ul>
       </div>
       <div class="cmp-card">
-        <h3>📋 기타 취업 비자 종류</h3>
+        <h3><span class="ko">📋 기타 취업 비자 종류</span><span class="en">📋 Other Work Visa Types</span><span class="vi">📋 Các loại visa lao động khác</span></h3>
         <ul>
-          <li><strong>E-1</strong> 교수 — 대학·연구기관 강의</li>
-          <li><strong>E-2</strong> 회화지도 — 영어 등 외국어 강사</li>
-          <li><strong>E-3</strong> 연구 — 연구소·기업 연구직</li>
-          <li><strong>E-4</strong> 기술지도 — 외국인 기술 전수</li>
-          <li><strong>F-2</strong> 거주 — 장기 거주, 취업 자유</li>
-          <li><strong>F-5</strong> 영주 — 영주권 (5년+ 체류 후 신청)</li>
+          <li><span class="ko"><strong>E-1</strong> 교수 — 대학·연구기관 강의</span><span class="en"><strong>E-1</strong> Professor — university/research lectures</span><span class="vi"><strong>E-1</strong> Giáo sư — giảng dạy đại học/nghiên cứu</span></li>
+          <li><span class="ko"><strong>E-2</strong> 회화지도 — 영어 등 외국어 강사</span><span class="en"><strong>E-2</strong> Conversation instructor — foreign language teacher</span><span class="vi"><strong>E-2</strong> Giáo viên hội thoại — giảng dạy ngoại ngữ</span></li>
+          <li><span class="ko"><strong>E-3</strong> 연구 — 연구소·기업 연구직</span><span class="en"><strong>E-3</strong> Research — research institute/company researcher</span><span class="vi"><strong>E-3</strong> Nghiên cứu — nhà nghiên cứu viện/công ty</span></li>
+          <li><span class="ko"><strong>E-4</strong> 기술지도 — 외국인 기술 전수</span><span class="en"><strong>E-4</strong> Technical guidance — tech transfer</span><span class="vi"><strong>E-4</strong> Hướng dẫn kỹ thuật — chuyển giao công nghệ</span></li>
+          <li><span class="ko"><strong>F-2</strong> 거주 — 장기 거주, 취업 자유</span><span class="en"><strong>F-2</strong> Residence — long-term, free to work</span><span class="vi"><strong>F-2</strong> Cư trú — dài hạn, tự do làm việc</span></li>
+          <li><span class="ko"><strong>F-5</strong> 영주 — 영주권 (5년+ 체류 후 신청)</span><span class="en"><strong>F-5</strong> Permanent — permanent residence (apply after 5+ years)</span><span class="vi"><strong>F-5</strong> Thường trú — thường trú (nộp đơn sau ≥5 năm)</span></li>
         </ul>
       </div>
     </div>
 
     <div class="green-box">
-      <h3>✅ 한국 대학 졸업 외국인의 E-7 우대 혜택</h3>
+      <h3>
+        <span class="ko">✅ 한국 대학 졸업 외국인의 E-7 우대 혜택</span>
+        <span class="en">✅ E-7 Advantages for Korean University Graduates</span>
+        <span class="vi">✅ Ưu đãi E-7 cho người tốt nghiệp đại học Hàn Quốc</span>
+      </h3>
       <ul>
-        <li>한국 소재 대학에서 학사 이상 학위를 취득한 외국인은 <strong>점수제 심사에서 가산점</strong>을 받습니다.</li>
-        <li>TOPIK 4급 이상 보유 시 추가 가산점 → 취업 비자 승인 가능성 높아집니다.</li>
-        <li>취업 후 2년 이상 E-7 유지 → F-2(거주) → 5년 후 F-5(영주권) 신청 경로 가능.</li>
-        <li>고용주가 중소기업이라면 인력 부족 직종에 한해 심사가 더 유연하게 적용됩니다.</li>
+        <li><span class="ko">한국 소재 대학에서 학사 이상 학위를 취득한 외국인은 <strong>점수제 심사에서 가산점</strong>을 받습니다.</span><span class="en">Foreigners with a bachelor's+ degree from Korean universities receive <strong>bonus points in the scoring system</strong>.</span><span class="vi">Người nước ngoài có bằng cử nhân trở lên từ đại học Hàn Quốc nhận <strong>điểm cộng trong hệ thống tính điểm</strong>.</span></li>
+        <li><span class="ko">TOPIK 4급 이상 보유 시 추가 가산점 → 취업 비자 승인 가능성 높아집니다.</span><span class="en">TOPIK level 4+ provides additional bonus points → higher chance of work visa approval.</span><span class="vi">TOPIK cấp 4 trở lên cung cấp điểm cộng bổ sung → cơ hội được phê duyệt visa lao động cao hơn.</span></li>
+        <li><span class="ko">취업 후 2년 이상 E-7 유지 → F-2(거주) → 5년 후 F-5(영주권) 신청 경로 가능.</span><span class="en">2+ years E-7 → F-2 (residence) → F-5 (permanent residence) after 5 years.</span><span class="vi">Giữ E-7 ≥2 năm → F-2 (cư trú) → F-5 (thường trú) sau 5 năm.</span></li>
+        <li><span class="ko">고용주가 중소기업이라면 인력 부족 직종에 한해 심사가 더 유연하게 적용됩니다.</span><span class="en">If employer is an SME, screening is more flexible for labor-shortage occupations.</span><span class="vi">Nếu chủ sử dụng là SME, việc xét duyệt linh hoạt hơn cho các ngành thiếu lao động.</span></li>
       </ul>
     </div>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 6 : 주의사항
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">⑥ 절대 하면 안 되는 것 — 주의사항</div>
+    <div class="section-title">
+      <span class="ko">⑥ 절대 하면 안 되는 것 — 주의사항</span>
+      <span class="en">⑥ What You Must Never Do — Precautions</span>
+      <span class="vi">⑥ Những điều tuyệt đối không được làm — Lưu ý</span>
+    </div>
 
     <div class="red-box" style="margin-bottom:20px;">
-      <h3>🚨 불법 체류·불법 취업의 결과</h3>
+      <h3>
+        <span class="ko">🚨 불법 체류·불법 취업의 결과</span>
+        <span class="en">🚨 Consequences of Illegal Stay / Illegal Work</span>
+        <span class="vi">🚨 Hậu quả của cư trú bất hợp pháp / làm việc bất hợp pháp</span>
+      </h3>
       <ul>
-        <li>비자 만료 후 체류 → <strong>강제 출국 + 입국 금지 (최대 10년)</strong></li>
-        <li>주 20시간 초과 아르바이트 → <strong>비자 취소 + 강제 출국</strong></li>
-        <li>허가되지 않은 직종 취업 → <strong>고용주도 처벌, 본인 강제 출국</strong></li>
-        <li>타인 명의 취업 → <strong>형사 처벌</strong></li>
+        <li><span class="ko">비자 만료 후 체류 → <strong>강제 출국 + 입국 금지 (최대 10년)</strong></span><span class="en">Staying after visa expiry → <strong>deportation + entry ban (up to 10 years)</strong></span><span class="vi">Ở lại sau khi visa hết hạn → <strong>trục xuất + cấm nhập cảnh (đến 10 năm)</strong></span></li>
+        <li><span class="ko">주 20시간 초과 아르바이트 → <strong>비자 취소 + 강제 출국</strong></span><span class="en">Part-time work exceeding 20 hrs/week → <strong>visa cancellation + deportation</strong></span><span class="vi">Làm thêm quá 20 giờ/tuần → <strong>hủy visa + trục xuất</strong></span></li>
+        <li><span class="ko">허가되지 않은 직종 취업 → <strong>고용주도 처벌, 본인 강제 출국</strong></span><span class="en">Working in unauthorized jobs → <strong>employer punished too, deportation</strong></span><span class="vi">Làm việc trong ngành nghề không được phép → <strong>chủ sử dụng cũng bị phạt, bị trục xuất</strong></span></li>
+        <li><span class="ko">타인 명의 취업 → <strong>형사 처벌</strong></span><span class="en">Working under someone else's name → <strong>criminal punishment</strong></span><span class="vi">Làm việc dưới tên người khác → <strong>xử phạt hình sự</strong></span></li>
       </ul>
     </div>
 
     <ul class="warning-list">
-      <li>비자 만료일을 반드시 달력에 표시해 두세요. 만료일 4주 전부터 연장 준비를 시작하세요.</li>
-      <li>D-2 비자로 허가받은 학교를 중퇴하거나 제적되면 비자가 자동으로 취소됩니다. 반드시 학교 측에 사전 상담하세요.</li>
-      <li>아르바이트를 시작하기 전에 고용주에게 비자 종류를 알리고 취업 허가 여부를 확인하세요.</li>
-      <li>이사·학교 변경·결혼 등 신분 변화가 있을 때마다 출입국·외국인청에 신고해야 합니다.</li>
-      <li>해외 여행 후 재입국 시 여권과 비자 유효 기간을 반드시 확인하세요. 단수 비자는 출국하면 소멸됩니다.</li>
-      <li>비자 연장·변경 중에는 여권에 기록되는 스탬프가 중요합니다. 여권을 분실하면 즉시 대사관에 신고하세요.</li>
-      <li>불법 브로커를 통한 비자 대행은 절대 이용하지 마세요. 사기 피해 후 법적 보호를 받기 어렵습니다.</li>
+      <li><span class="ko">비자 만료일을 반드시 달력에 표시해 두세요. 만료일 4주 전부터 연장 준비를 시작하세요.</span><span class="en">Mark the expiry date on your calendar. Start extension prep 4 weeks before.</span><span class="vi">Đánh dấu ngày hết hạn trên lịch. Bắt đầu chuẩn bị gia hạn 4 tuần trước.</span></li>
+      <li><span class="ko">D-2 비자로 허가받은 학교를 중퇴하거나 제적되면 비자가 자동으로 취소됩니다. 반드시 학교 측에 사전 상담하세요.</span><span class="en">Dropping out or being expelled from your D-2 school automatically cancels your visa. Consult the school first.</span><span class="vi">Bỏ học hoặc bị đuổi khỏi trường đăng ký D-2 tự động hủy visa. Tham vấn trường trước.</span></li>
+      <li><span class="ko">아르바이트를 시작하기 전에 고용주에게 비자 종류를 알리고 취업 허가 여부를 확인하세요.</span><span class="en">Before starting a job, tell your employer your visa type and confirm work is permitted.</span><span class="vi">Trước khi bắt đầu làm việc, cho chủ sử dụng biết loại visa và xác nhận việc làm được phép.</span></li>
+      <li><span class="ko">이사·학교 변경·결혼 등 신분 변화가 있을 때마다 출입국·외국인청에 신고해야 합니다.</span><span class="en">Any change in status (moving, changing schools, marriage) must be reported to the immigration office.</span><span class="vi">Bất kỳ thay đổi trạng thái nào (chuyển nhà, đổi trường, kết hôn) phải được báo cáo cho cục xuất nhập cảnh.</span></li>
+      <li><span class="ko">해외 여행 후 재입국 시 여권과 비자 유효 기간을 반드시 확인하세요. 단수 비자는 출국하면 소멸됩니다.</span><span class="en">When re-entering after overseas travel, check passport and visa validity. Single-entry visas expire upon departure.</span><span class="vi">Khi nhập cảnh lại sau chuyến đi nước ngoài, kiểm tra hộ chiếu và thời hạn visa. Visa một lần hết hạn khi xuất cảnh.</span></li>
+      <li><span class="ko">불법 브로커를 통한 비자 대행은 절대 이용하지 마세요. 사기 피해 후 법적 보호를 받기 어렵습니다.</span><span class="en">Never use illegal visa brokers. It's hard to get legal protection after being scammed.</span><span class="vi">Không bao giờ sử dụng môi giới visa bất hợp pháp. Khó được bảo vệ pháp lý sau khi bị lừa đảo.</span></li>
+      <li><span class="ko">비자 연장·변경 중에는 여권을 분실하면 즉시 대사관에 신고하세요.</span><span class="en">If you lose your passport during extension/change processing, report to the embassy immediately.</span><span class="vi">Nếu mất hộ chiếu trong quá trình gia hạn/thay đổi, báo cáo ngay cho đại sứ quán.</span></li>
     </ul>
   </div>
 
-  <!-- ════════════════════════
-       SECTION 7 : 체크리스트 & 연락처
-  ════════════════════════ -->
   <div class="section">
-    <div class="section-title">⑦ 비자 관리 체크리스트 &amp; 연락처</div>
+    <div class="section-title">
+      <span class="ko">⑦ 비자 관리 체크리스트 &amp; 연락처</span>
+      <span class="en">⑦ Visa Management Checklist &amp; Contacts</span>
+      <span class="vi">⑦ Danh sách kiểm tra quản lý visa &amp; Liên hệ</span>
+    </div>
     <div class="two-col">
       <div class="checklist-card">
-        <h3>✅ 유학생 비자 체크리스트</h3>
+        <h3><span class="ko">✅ 유학생 비자 체크리스트</span><span class="en">✅ Student Visa Checklist</span><span class="vi">✅ Danh sách kiểm tra visa du học sinh</span></h3>
         <div class="checklist-grid">
-          <div class="chk-item"><div class="chk-box"></div><span>체류 만료일 달력 등록</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>만료 4주 전 연장 준비</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>매 학기 재학증명서 보관</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>성적 2.0 이상 유지</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>아르바이트 주 20시간 체크</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>이사 후 14일내 주소 신고</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>졸업 전 D-10 준비 시작</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>학위증·성적증명서 발급</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>TOPIK 자격증 취득 도전</span></div>
-          <div class="chk-item"><div class="chk-box"></div><span>HiKorea 앱 설치·등록</span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">체류 만료일 달력 등록</span><span class="en">Mark expiry on calendar</span><span class="vi">Đánh dấu ngày hết hạn</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">만료 4주 전 연장 준비</span><span class="en">Prep extension 4 wks before</span><span class="vi">Chuẩn bị 4 tuần trước</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">매 학기 재학증명서 보관</span><span class="en">Keep enrollment cert each semester</span><span class="vi">Giữ giấy chứng nhận học mỗi học kỳ</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">성적 2.0 이상 유지</span><span class="en">Maintain GPA 2.0+</span><span class="vi">Duy trì GPA ≥2.0</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">아르바이트 주 20시간 체크</span><span class="en">Check 20 hrs/week limit</span><span class="vi">Kiểm tra giới hạn 20 giờ/tuần</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">이사 후 14일내 주소 신고</span><span class="en">Report address in 14 days</span><span class="vi">Báo cáo địa chỉ trong 14 ngày</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">졸업 전 D-10 준비 시작</span><span class="en">Start D-10 prep before graduation</span><span class="vi">Bắt đầu chuẩn bị D-10 trước tốt nghiệp</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">학위증·성적증명서 발급</span><span class="en">Get degree &amp; transcript</span><span class="vi">Lấy bằng và bảng điểm</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">TOPIK 자격증 취득 도전</span><span class="en">Try to get TOPIK certificate</span><span class="vi">Cố gắng lấy chứng chỉ TOPIK</span></span></div>
+          <div class="chk-item"><div class="chk-box"></div><span><span class="ko">HiKorea 앱 설치·등록</span><span class="en">Install &amp; register HiKorea app</span><span class="vi">Cài và đăng ký app HiKorea</span></span></div>
         </div>
       </div>
       <div class="contact-card">
-        <h3>📞 주요 기관 연락처</h3>
+        <h3><span class="ko">📞 주요 기관 연락처</span><span class="en">📞 Key Contacts</span><span class="vi">📞 Liên hệ các cơ quan quan trọng</span></h3>
         <div class="contact-item">
           <span class="c-icon">🏛</span>
           <div>
-            <span class="c-label">대전출입국·외국인청</span>
-            <span class="c-value">042-250-3400 (예약 필수)</span>
+            <span class="c-label"><span class="ko">대전출입국·외국인청</span><span class="en">Daejeon Immigration Office</span><span class="vi">Cục Xuất nhập cảnh Daejeon</span></span>
+            <span class="c-value">042-250-3400</span>
           </div>
         </div>
         <div class="contact-item">
           <span class="c-icon">🌐</span>
           <div>
-            <span class="c-label">Hi Korea 온라인 민원</span>
-            <span class="c-value">hikorea.go.kr (24시간)</span>
+            <span class="c-label"><span class="ko">Hi Korea 온라인 민원</span><span class="en">Hi Korea Online Services</span><span class="vi">Dịch vụ trực tuyến Hi Korea</span></span>
+            <span class="c-value">hikorea.go.kr</span>
           </div>
         </div>
         <div class="contact-item">
           <span class="c-icon">📱</span>
           <div>
-            <span class="c-label">외국인종합안내센터</span>
-            <span class="c-value">1345 (24시간, 다국어)</span>
+            <span class="c-label"><span class="ko">외국인종합안내센터</span><span class="en">Foreigner Information Center</span><span class="vi">Trung tâm thông tin người nước ngoài</span></span>
+            <span class="c-value">1345 (<span class="ko">24시간</span><span class="en">24h</span><span class="vi">24h</span>)</span>
           </div>
         </div>
         <div class="contact-item">
           <span class="c-icon">💼</span>
           <div>
-            <span class="c-label">고용노동부 (취업 비자 문의)</span>
+            <span class="c-label"><span class="ko">고용노동부</span><span class="en">Ministry of Employment &amp; Labor</span><span class="vi">Bộ Việc làm và Lao động</span></span>
             <span class="c-value">1350</span>
           </div>
         </div>
         <div class="contact-item">
           <span class="c-icon">📝</span>
           <div>
-            <span class="c-label">TOPIK 시험 접수</span>
+            <span class="c-label">TOPIK</span>
             <span class="c-value">topik.go.kr</span>
           </div>
         </div>
         <div class="contact-item">
           <span class="c-icon">⚖</span>
           <div>
-            <span class="c-label">법률구조공단 (무료 상담)</span>
-            <span class="c-value">132 (평일 09~18시)</span>
+            <span class="c-label"><span class="ko">법률구조공단 (무료 상담)</span><span class="en">Korea Legal Aid Corporation (free)</span><span class="vi">Công ty trợ giúp pháp lý Hàn Quốc (miễn phí)</span></span>
+            <span class="c-value">132</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CTA -->
   <div class="cta-box">
     <div class="cta-icon">🛂</div>
-    <h3>비자 문제로 고민 중이신가요?</h3>
-    <p>잡앤러닝 커뮤니티에서 같은 상황의 유학생들과 정보를 나누거나, 1:1 코칭 상담을 통해 취업·비자 전략을 함께 세워보세요.</p>
-    <a href="mailto:zikan@naver.com" class="cta-btn">✉ 문의하기 — zikan@naver.com</a>
+    <h3>
+      <span class="ko">비자 문제로 고민 중이신가요?</span>
+      <span class="en">Worried about visa issues?</span>
+      <span class="vi">Đang lo lắng về vấn đề visa?</span>
+    </h3>
+    <p>
+      <span class="ko">잡앤러닝 커뮤니티에서 같은 상황의 유학생들과 정보를 나누거나, 1:1 코칭 상담을 통해 취업·비자 전략을 함께 세워보세요.</span>
+      <span class="en">Share information with students in similar situations in the Job&amp;Learning community, or plan your employment and visa strategy through 1-on-1 coaching.</span>
+      <span class="vi">Chia sẻ thông tin với các sinh viên trong tình huống tương tự trong cộng đồng Job&amp;Learning, hoặc lên kế hoạch chiến lược việc làm và visa qua buổi tư vấn 1-1.</span>
+    </p>
+    <a href="mailto:ceo@d2d4.kr" class="cta-btn">✉ <span class="ko">문의하기</span><span class="en">Contact Us</span><span class="vi">Liên hệ</span> — ceo@d2d4.kr</a>
   </div>
 
 </div>

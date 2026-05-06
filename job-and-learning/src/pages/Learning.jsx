@@ -131,7 +131,7 @@ export default function Learning({ user, lang, onLoginRequired }) {
                 <div className="border-t border-gray-100 p-5 bg-gray-50 space-y-3">
                   {course.pdf_url ? (
                     <a
-                      href={course.pdf_url}
+                      href={`${course.pdf_url}?lang=${lang}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full py-3 bg-[#1a3a5f] text-white font-bold rounded-xl text-sm hover:bg-[#243f6a] transition-colors"
