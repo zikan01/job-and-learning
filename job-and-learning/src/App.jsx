@@ -130,6 +130,7 @@ export default function App() {
         onClose={() => setShowMyPage(false)}
         user={user}
         onLogout={handleLogout}
+        lang={lang}
       />
       <AuthModal
         open={showAuth}

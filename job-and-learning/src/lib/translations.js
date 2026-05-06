@@ -197,6 +197,19 @@ export const t = {
       },
     },
 
+    // ── MyPage ──
+    mypage: {
+      member: '회원',
+      appliedJobs: '지원한 취업 공고',
+      noApplications: '아직 지원한 공고가 없습니다',
+      myPosts: '작성한 게시글',
+      noPosts: '작성한 게시글이 없습니다',
+      startupTitle: '준비 중인 창업 아이템',
+      startupMgmt: '창업 아이템 관리',
+      startupDesc: '곧 오픈 예정입니다.\n나만의 창업 아이디어를 기록하고 관리하세요.',
+      logout: '로그아웃',
+    },
+
     // ── About ──
     about: {
       heroTitle1: 'Designing Global Careers,',
@@ -414,6 +427,19 @@ export const t = {
       },
     },
 
+    // ── MyPage ──
+    mypage: {
+      member: 'Member',
+      appliedJobs: 'Applied Jobs',
+      noApplications: 'No applications yet',
+      myPosts: 'My Posts',
+      noPosts: 'No posts yet',
+      startupTitle: 'Startup Items',
+      startupMgmt: 'Startup Management',
+      startupDesc: 'Coming soon.\nRecord and manage your startup ideas.',
+      logout: 'Logout',
+    },
+
     // ── About ──
     about: {
       heroTitle1: 'Designing Global Careers,',
@@ -629,6 +655,19 @@ export const t = {
         'User already registered': 'Email đã được đăng ký. Vui lòng thử đăng nhập.',
         'Password should be at least 6 characters': 'Mật khẩu phải có ít nhất 6 ký tự.',
       },
+    },
+
+    // ── MyPage ──
+    mypage: {
+      member: 'Thành viên',
+      appliedJobs: 'Việc đã ứng tuyển',
+      noApplications: 'Chưa có đơn ứng tuyển',
+      myPosts: 'Bài đăng của tôi',
+      noPosts: 'Chưa có bài đăng',
+      startupTitle: 'Dự án khởi nghiệp',
+      startupMgmt: 'Quản lý khởi nghiệp',
+      startupDesc: 'Sắp ra mắt.\nGhi lại và quản lý ý tưởng khởi nghiệp của bạn.',
+      logout: 'Đăng xuất',
     },
 
     // ── About ──

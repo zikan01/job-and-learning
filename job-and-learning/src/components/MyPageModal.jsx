@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { t } from '../lib/translations'
 
-export default function MyPageModal({ open, onClose, user, onLogout }) {
+export default function MyPageModal({ open, onClose, user, onLogout, lang }) {
+  const mp = (t[lang] ?? t.ko).mypage
   const [applications, setApplications] = useState([])
   const [myPosts, setMyPosts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -68,7 +70,7 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
               <div className="text-white font-outfit font-black text-lg truncate">{emailId}</div>
               <div className="text-white/50 text-xs truncate">{user?.email}</div>
               <span className="inline-block mt-1 bg-[#FF8C00]/20 text-[#FF8C00] text-[10px] font-bold px-2 py-0.5 rounded-full">
-                회원
+                {mp.member}
               </span>
             </div>
           </div>
@@ -79,7 +81,7 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
           {/* 지원한 취업 */}
           <section>
             <h3 className="text-xs font-bold text-[#1a3a5f] uppercase tracking-widest mb-3">
-              지원한 취업 공고
+              {mp.appliedJobs}
             </h3>
             {loading ? (
               <div className="space-y-2">
@@ -87,7 +89,7 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
               </div>
             ) : applications.length === 0 ? (
               <div className="text-center py-5 text-gray-400 text-xs bg-gray-50 rounded-xl">
-                아직 지원한 공고가 없습니다
+                {mp.noApplications}
               </div>
             ) : (
               <div className="space-y-2">
@@ -112,7 +114,7 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
           {/* 작성한 게시글 */}
           <section>
             <h3 className="text-xs font-bold text-[#1a3a5f] uppercase tracking-widest mb-3">
-              작성한 게시글
+              {mp.myPosts}
             </h3>
             {loading ? (
               <div className="space-y-2">
@@ -120,7 +122,7 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
               </div>
             ) : myPosts.length === 0 ? (
               <div className="text-center py-5 text-gray-400 text-xs bg-gray-50 rounded-xl">
-                작성한 게시글이 없습니다
+                {mp.noPosts}
               </div>
             ) : (
               <div className="space-y-2">
@@ -140,12 +142,12 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
           {/* 준비 중인 창업 아이템 */}
           <section>
             <h3 className="text-xs font-bold text-[#1a3a5f] uppercase tracking-widest mb-3">
-              준비 중인 창업 아이템
+              {mp.startupTitle}
             </h3>
             <div className="bg-gradient-to-br from-[#1a3a5f]/5 to-[#FF8C00]/5 border border-dashed border-[#1a3a5f]/20 rounded-xl p-5 text-center">
               <div className="text-3xl mb-2">🚀</div>
-              <div className="text-sm font-bold text-[#1a3a5f] mb-1">창업 아이템 관리</div>
-              <div className="text-xs text-gray-400">곧 오픈 예정입니다.<br />나만의 창업 아이디어를 기록하고 관리하세요.</div>
+              <div className="text-sm font-bold text-[#1a3a5f] mb-1">{mp.startupMgmt}</div>
+              <div className="text-xs text-gray-400 whitespace-pre-line">{mp.startupDesc}</div>
             </div>
           </section>
 
@@ -157,7 +159,7 @@ export default function MyPageModal({ open, onClose, user, onLogout }) {
             onClick={handleLogout}
             className="w-full py-3 border-2 border-red-100 text-red-400 font-bold rounded-xl text-sm hover:bg-red-50 hover:border-red-200 transition-colors"
           >
-            로그아웃
+            {mp.logout}
           </button>
         </div>
       </div>
