@@ -140,6 +140,17 @@ export default function Market({ user, lang, onLoginRequired }) {
     }
   }
 
+  async function handleDeletePost(postId) {
+    if (!window.confirm('게시글을 삭제하시겠습니까?')) return
+    const { error } = await supabase.from('market_posts').delete().eq('id', postId).eq('user_id', user.id)
+    if (!error) {
+      setSelectedPost(null)
+      showToast('게시글이 삭제되었습니다.')
+    } else {
+      showToast('삭제 중 오류가 발생했습니다.')
+    }
+  }
+
   function showToast(msg) {
     setToast(msg)
     setTimeout(() => setToast(''), 3000)
@@ -218,6 +229,15 @@ export default function Market({ user, lang, onLoginRequired }) {
                 <span className="absolute top-2 right-2 bg-white/90 text-gray-500 text-[10px] font-semibold px-2 py-0.5 rounded-full">
                   {conditionLabel(post.condition)}
                 </span>
+                {user?.id === post.user_id && (
+                  <button
+                    onClick={e => { e.stopPropagation(); handleDeletePost(post.id) }}
+                    className="absolute top-2 left-2 w-6 h-6 bg-red-500/80 hover:bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold z-10 transition-colors"
+                    title="삭제"
+                  >
+                    ×
+                  </button>
+                )}
               </div>
               <div className="p-3">
                 <div className="flex items-center justify-between mb-0.5">
@@ -294,10 +314,20 @@ export default function Market({ user, lang, onLoginRequired }) {
                 </p>
               )}
 
-              <div className="flex items-center gap-2 text-xs text-gray-400 mb-4">
-                <span>📅 {selectedPost.created_at?.slice(0, 10)}</span>
-                {commentCounts[selectedPost.id] > 0 && (
-                  <span className="text-[#FF8C00] font-bold">💬 문의 {commentCounts[selectedPost.id]}개</span>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <span>📅 {selectedPost.created_at?.slice(0, 10)}</span>
+                  {commentCounts[selectedPost.id] > 0 && (
+                    <span className="text-[#FF8C00] font-bold">💬 문의 {commentCounts[selectedPost.id]}개</span>
+                  )}
+                </div>
+                {user?.id === selectedPost.user_id && (
+                  <button
+                    onClick={() => handleDeletePost(selectedPost.id)}
+                    className="text-xs font-bold text-red-400 hover:text-red-600 border border-red-200 hover:border-red-400 px-3 py-1 rounded-full transition-colors"
+                  >
+                    🗑 삭제
+                  </button>
                 )}
               </div>
 
