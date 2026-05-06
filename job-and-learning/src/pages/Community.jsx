@@ -107,6 +107,17 @@ export default function Community({ user, lang, onLoginRequired }) {
     }
   }
 
+  async function handleDeletePost(postId) {
+    if (!window.confirm('게시글을 삭제하시겠습니까?')) return
+    const { error } = await supabase.from('community_posts').delete().eq('id', postId).eq('user_id', user.id)
+    if (!error) {
+      setSelectedPost(null)
+      showToast('게시글이 삭제되었습니다.')
+    } else {
+      showToast('삭제 중 오류가 발생했습니다.')
+    }
+  }
+
   function showToast(msg) {
     setToast(msg)
     setTimeout(() => setToast(''), 3000)
@@ -184,6 +195,15 @@ export default function Community({ user, lang, onLoginRequired }) {
                     {post.author_email?.split('@')[0] ?? tr.anonymous} · {new Date(post.created_at).toLocaleDateString()}
                   </div>
                 </div>
+                {user?.id === post.user_id && (
+                  <button
+                    onClick={e => { e.stopPropagation(); handleDeletePost(post.id) }}
+                    className="flex-shrink-0 w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 hover:text-red-600 rounded-full flex items-center justify-center text-xs font-bold transition-colors"
+                    title="삭제"
+                  >
+                    ×
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -211,7 +231,17 @@ export default function Community({ user, lang, onLoginRequired }) {
                   {selectedPost.author_email?.split('@')[0] ?? tr.anonymous} · {new Date(selectedPost.created_at).toLocaleDateString()}
                 </p>
               </div>
-              <button onClick={() => setSelectedPost(null)} className="text-white/60 hover:text-white text-2xl leading-none flex-shrink-0 transition-colors">×</button>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {user?.id === selectedPost.user_id && (
+                  <button
+                    onClick={() => handleDeletePost(selectedPost.id)}
+                    className="text-red-300 hover:text-red-200 text-xs font-bold border border-red-300/40 hover:border-red-200/60 px-2.5 py-1 rounded-full transition-colors"
+                  >
+                    🗑 삭제
+                  </button>
+                )}
+                <button onClick={() => setSelectedPost(null)} className="text-white/60 hover:text-white text-2xl leading-none transition-colors">×</button>
+              </div>
             </div>
 
             {/* 본문 + 댓글 스크롤 영역 */}
