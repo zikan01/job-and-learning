@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# 검색엔진에 불필요한 파일 차단
+Disallow: /business-card.html
+Disallow: /terms.html
+Disallow: /d2d4-terms-of-service.html
+
+Sitemap: https://d2d4.kr/sitemap.xml
