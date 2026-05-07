@@ -10,6 +10,7 @@ const LOCATION_VALUES = ['전체 지역', '대전 유성구', '대전 서구', '
 const loc = (item, field, lang) => {
   if (lang === 'en' && item[`${field}_en`]) return item[`${field}_en`]
   if (lang === 'vi' && item[`${field}_vi`]) return item[`${field}_vi`]
+  if (lang === 'ja' && item[`${field}_ja`]) return item[`${field}_ja`]
   return item[field]
 }
 

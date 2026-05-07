@@ -8,6 +8,7 @@ const TAB_VALUES = ['전체', 'AI 실무(Vibe Coding)', '한국 생활 가이드
 const loc = (item, field, lang) => {
   if (lang === 'en' && item[`${field}_en`]) return item[`${field}_en`]
   if (lang === 'vi' && item[`${field}_vi`]) return item[`${field}_vi`]
+  if (lang === 'ja' && item[`${field}_ja`]) return item[`${field}_ja`]
   return item[field]
 }
 const LEVEL_KEYS = ['입문', '초급', '중급']
