@@ -4,6 +4,7 @@ const LANGS = [
   { code: 'ko', label: '🇰🇷 한국어' },
   { code: 'en', label: '🇺🇸 English' },
   { code: 'vi', label: '🇻🇳 Tiếng Việt' },
+  { code: 'ja', label: '🇯🇵 日本語' },
 ]
 
 const TAB_IDS = ['home', 'jobs', 'learning', 'community', 'market', 'help']
