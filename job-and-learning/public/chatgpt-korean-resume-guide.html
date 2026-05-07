@@ -7,9 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html[data-lang="ko"] .en,html[data-lang="ko"] .vi,
-    html[data-lang="en"] .ko,html[data-lang="en"] .vi,
-    html[data-lang="vi"] .ko,html[data-lang="vi"] .en{display:none!important}
+    html[data-lang="ko"] .en,html[data-lang="ko"] .vi,html[data-lang="ko"] .ja,
+    html[data-lang="en"] .ko,html[data-lang="en"] .vi,html[data-lang="en"] .ja,
+    html[data-lang="vi"] .ko,html[data-lang="vi"] .en,html[data-lang="vi"] .ja,
+    html[data-lang="ja"] .ko,html[data-lang="ja"] .en,html[data-lang="ja"] .vi{display:none!important}
     :root {
       --navy: #1a3a5f; --navy-light: #243f6a; --orange: #FF8C00;
       --bg: #f7f8fa; --card: #ffffff; --text: #1e293b; --muted: #64748b; --border: #e2e8f0;
@@ -65,12 +66,6 @@
     .tools-section li { font-size: 12.5px; color: var(--muted); padding: 2px 0; }
     .tools-section li::before { content: '· '; color: var(--orange); font-weight: 700; }
     .chat-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
-    .chat-row { margin-bottom: 16px; }
-    .chat-speaker { font-size: 11px; font-weight: 700; letter-spacing: .06em; margin-bottom: 6px; }
-    .chat-speaker.user { color: var(--navy); }
-    .chat-speaker.ai { color: var(--orange); }
-    .chat-bubble { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 13.5px; color: var(--text); line-height: 1.75; white-space: pre-wrap; }
-    .chat-bubble.ai { background: #fff7ed; border-color: #fed7aa; }
     .closing { background: linear-gradient(135deg, var(--navy) 0%, #1e4d8c 100%); border-radius: 18px; padding: 32px 28px; color: #fff; }
     .closing h2 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; margin-bottom: 14px; }
     .closing p { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.8; }
@@ -83,157 +78,168 @@
 <body>
 <script>(function(){var l=(new URLSearchParams(location.search).get('lang')||'ko').replace(/[^a-z]/g,'');document.documentElement.setAttribute('data-lang',l);})();</script>
 
-<!-- 헤더 -->
 <div class="hero">
   <div class="badge">
     <span class="ko">실전 가이드 2025 · 잡앤러닝</span>
     <span class="en">Practical Guide 2025 · Job&amp;Learning</span>
     <span class="vi">Hướng dẫn thực chiến 2025 · Job&amp;Learning</span>
+    <span class="ja">実践ガイド 2025 · Job&amp;Learning</span>
   </div>
   <h1>
     <span class="ko">ChatGPT로 완성하는<br><span>한국어 이력서 작성 가이드</span></span>
     <span class="en">Write Your Korean Resume<br><span>with ChatGPT — Complete Guide</span></span>
     <span class="vi">Viết CV tiếng Hàn<br><span>hoàn hảo với ChatGPT</span></span>
+    <span class="ja">ChatGPTで仕上げる<br><span>韓国語履歴書作成ガイド</span></span>
   </h1>
   <p>
     <span class="ko">취업 경쟁에서 돋보이는 이력서를 AI와 함께 만드는 방법</span>
     <span class="en">How to create a standout resume for the Korean job market using AI</span>
     <span class="vi">Cách tạo CV nổi bật trong thị trường việc làm Hàn Quốc với AI</span>
+    <span class="ja">AIを活用して韓国の就職市場で際立つ履歴書を作成する方法</span>
   </p>
   <div class="hero-divider"></div>
 </div>
 
 <div class="container">
 
-  <!-- 인트로 -->
   <div class="intro-box">
-    <span class="ko">채용 담당자는 한 장의 이력서를 평균 <strong>6~10초</strong> 안에 검토합니다.
-    ChatGPT는 강점을 빠르게 언어화하고, 직무 맞춤 문장을 다듬는 데 탁월한 도구입니다.
-    단, AI는 <em>초안 작성 조수</em>일 뿐 — 사실 확인과 최종 판단은 반드시 본인이 해야 합니다.</span>
+    <span class="ko">채용 담당자는 한 장의 이력서를 평균 <strong>6~10초</strong> 안에 검토합니다. ChatGPT는 강점을 빠르게 언어화하고, 직무 맞춤 문장을 다듬는 데 탁월한 도구입니다. 단, AI는 <em>초안 작성 조수</em>일 뿐 — 사실 확인과 최종 판단은 반드시 본인이 해야 합니다.</span>
     <span class="en">Recruiters spend an average of <strong>6–10 seconds</strong> reviewing a resume. ChatGPT is an excellent tool for quickly articulating your strengths and refining job-specific language. Remember: AI is only a <em>drafting assistant</em> — you must verify all facts and make final decisions yourself.</span>
     <span class="vi">Nhà tuyển dụng chỉ dành trung bình <strong>6–10 giây</strong> để xem xét một CV. ChatGPT là công cụ tuyệt vời để nhanh chóng diễn đạt điểm mạnh và chỉnh sửa câu văn phù hợp với vị trí ứng tuyển. Tuy nhiên, AI chỉ là <em>trợ lý soạn thảo</em> — bạn phải tự xác minh thông tin và đưa ra quyết định cuối cùng.</span>
+    <span class="ja">採用担当者は1枚の履歴書を平均<strong>6〜10秒</strong>で確認します。ChatGPTは強みを素早く言語化し、職務に合った文章を磨くのに優れたツールです。ただしAIはあくまで<em>下書きアシスタント</em> — 事実確認と最終判断は必ず自分で行ってください。</span>
   </div>
 
-  <!-- 핵심 구성 요소 -->
   <div class="section">
     <div class="section-title">
       <span class="ko">한국 이력서의 핵심 구성 요소</span>
       <span class="en">Key Components of a Korean Resume</span>
       <span class="vi">Các thành phần chính của CV Hàn Quốc</span>
+      <span class="ja">韓国履歴書の核心構成要素</span>
     </div>
     <div class="components-grid">
       <div class="comp-card">
-        <h3><span class="ko">① 인적사항</span><span class="en">① Personal Info</span><span class="vi">① Thông tin cá nhân</span></h3>
+        <h3><span class="ko">① 인적사항</span><span class="en">① Personal Info</span><span class="vi">① Thông tin cá nhân</span><span class="ja">① 個人情報</span></h3>
         <p><span class="ko">이름·연락처·이메일·주소(시/도 단위)<br>사진: 정장 착용, 3×4cm 규격</span>
            <span class="en">Name, phone, email, address (city level)<br>Photo: formal attire, 3×4 cm</span>
-           <span class="vi">Họ tên, điện thoại, email, địa chỉ (cấp thành phố)<br>Ảnh: trang phục lịch sự, cỡ 3×4 cm</span></p>
-        <p class="note"><span class="ko">* 생년월일·성별은 최근 생략 추세</span><span class="en">* Date of birth/gender often omitted recently</span><span class="vi">* Ngày sinh/giới tính thường được bỏ qua gần đây</span></p>
+           <span class="vi">Họ tên, điện thoại, email, địa chỉ (cấp thành phố)<br>Ảnh: trang phục lịch sự, cỡ 3×4 cm</span>
+           <span class="ja">氏名・連絡先・メール・住所（市区町村レベル）<br>写真：正装着用、3×4cm規格</span></p>
+        <p class="note"><span class="ko">* 생년월일·성별은 최근 생략 추세</span><span class="en">* Date of birth/gender often omitted recently</span><span class="vi">* Ngày sinh/giới tính thường được bỏ qua gần đây</span><span class="ja">* 生年月日・性別は近年省略傾向</span></p>
       </div>
       <div class="comp-card">
-        <h3><span class="ko">② 학력사항</span><span class="en">② Education</span><span class="vi">② Học vấn</span></h3>
+        <h3><span class="ko">② 학력사항</span><span class="en">② Education</span><span class="vi">② Học vấn</span><span class="ja">② 学歴</span></h3>
         <p><span class="ko">최신순 기재, 전공·학점(3.0/4.5 이상 권장) 명시<br>교환학생·복수전공 포함 가능</span>
            <span class="en">List newest first; include major and GPA (3.0/4.5+ recommended)<br>Can include exchange/double major</span>
-           <span class="vi">Liệt kê mới nhất trước; ghi chuyên ngành và điểm GPA (khuyến nghị 3.0/4.5+)<br>Có thể bao gồm trao đổi/đôi ngành</span></p>
-        <p class="note"><span class="ko">* 졸업 예정자는 예정일 기재</span><span class="en">* Expected graduates: note expected date</span><span class="vi">* Sắp tốt nghiệp: ghi ngày dự kiến</span></p>
+           <span class="vi">Liệt kê mới nhất trước; ghi chuyên ngành và điểm GPA (khuyến nghị 3.0/4.5+)<br>Có thể bao gồm trao đổi/đôi ngành</span>
+           <span class="ja">新しい順に記載、専攻・GPA（3.0/4.5以上推奨）記入<br>交換留学・ダブル専攻も記載可</span></p>
+        <p class="note"><span class="ko">* 졸업 예정자는 예정일 기재</span><span class="en">* Expected graduates: note expected date</span><span class="vi">* Sắp tốt nghiệp: ghi ngày dự kiến</span><span class="ja">* 卒業見込みの場合は予定日を記載</span></p>
       </div>
       <div class="comp-card">
-        <h3><span class="ko">③ 경력 / 경험사항</span><span class="en">③ Work Experience</span><span class="vi">③ Kinh nghiệm làm việc</span></h3>
+        <h3><span class="ko">③ 경력 / 경험사항</span><span class="en">③ Work Experience</span><span class="vi">③ Kinh nghiệm làm việc</span><span class="ja">③ 職歴 / 経験</span></h3>
         <p><span class="ko">회사명·직책·재직기간·주요 업무<br>숫자로 성과 표현이 핵심</span>
            <span class="en">Company, role, period, key duties<br>Key: express achievements with numbers</span>
-           <span class="vi">Công ty, chức vụ, thời gian, nhiệm vụ chính<br>Quan trọng: diễn đạt thành tích bằng con số</span></p>
-        <p class="note"><span class="ko">* 인턴·아르바이트도 직무 관련 시 포함</span><span class="en">* Include internships/part-time if relevant</span><span class="vi">* Bao gồm thực tập/bán thời gian nếu liên quan</span></p>
+           <span class="vi">Công ty, chức vụ, thời gian, nhiệm vụ chính<br>Quan trọng: diễn đạt thành tích bằng con số</span>
+           <span class="ja">会社名・役職・在職期間・主な業務<br>数字で成果を表現するのが鍵</span></p>
+        <p class="note"><span class="ko">* 인턴·아르바이트도 직무 관련 시 포함</span><span class="en">* Include internships/part-time if relevant</span><span class="vi">* Bao gồm thực tập/bán thời gian nếu liên quan</span><span class="ja">* インターン・アルバイトも職務関連なら含める</span></p>
       </div>
       <div class="comp-card">
-        <h3><span class="ko">④ 자격증 / 어학</span><span class="en">④ Certificates / Languages</span><span class="vi">④ Chứng chỉ / Ngoại ngữ</span></h3>
+        <h3><span class="ko">④ 자격증 / 어학</span><span class="en">④ Certificates / Languages</span><span class="vi">④ Chứng chỉ / Ngoại ngữ</span><span class="ja">④ 資格 / 語学</span></h3>
         <p><span class="ko">취득일·점수 명시 (TOEIC, OPIc 등)<br>직무 관련 자격증 우선 배치</span>
            <span class="en">Include date and score (TOEIC, OPIc, etc.)<br>Prioritize job-relevant certificates</span>
-           <span class="vi">Ghi ngày và điểm số (TOEIC, OPIc...)<br>Ưu tiên chứng chỉ liên quan đến công việc</span></p>
-        <p class="note"><span class="ko">* 만료된 자격증은 제외</span><span class="en">* Exclude expired certificates</span><span class="vi">* Loại bỏ chứng chỉ đã hết hạn</span></p>
+           <span class="vi">Ghi ngày và điểm số (TOEIC, OPIc...)<br>Ưu tiên chứng chỉ liên quan đến công việc</span>
+           <span class="ja">取得日・スコア記入（TOEIC、OPIcなど）<br>職務関連の資格を優先配置</span></p>
+        <p class="note"><span class="ko">* 만료된 자격증은 제외</span><span class="en">* Exclude expired certificates</span><span class="vi">* Loại bỏ chứng chỉ đã hết hạn</span><span class="ja">* 有効期限切れの資格は除外</span></p>
       </div>
       <div class="comp-card">
-        <h3><span class="ko">⑤ 수상 / 활동</span><span class="en">⑤ Awards / Activities</span><span class="vi">⑤ Giải thưởng / Hoạt động</span></h3>
+        <h3><span class="ko">⑤ 수상 / 활동</span><span class="en">⑤ Awards / Activities</span><span class="vi">⑤ Giải thưởng / Hoạt động</span><span class="ja">⑤ 受賞 / 活動</span></h3>
         <p><span class="ko">공모전·해커톤·봉사·동아리 등<br>역할과 결과 중심으로 서술</span>
            <span class="en">Competitions, hackathons, volunteer, clubs<br>Focus on your role and results</span>
-           <span class="vi">Cuộc thi, hackathon, tình nguyện, câu lạc bộ<br>Tập trung vào vai trò và kết quả</span></p>
-        <p class="note"><span class="ko">* 5년 이내 활동 권장</span><span class="en">* Activities within last 5 years recommended</span><span class="vi">* Khuyến nghị hoạt động trong 5 năm gần đây</span></p>
+           <span class="vi">Cuộc thi, hackathon, tình nguyện, câu lạc bộ<br>Tập trung vào vai trò và kết quả</span>
+           <span class="ja">コンクール・ハッカソン・ボランティア・サークルなど<br>役割と結果を中心に記述</span></p>
+        <p class="note"><span class="ko">* 5년 이내 활동 권장</span><span class="en">* Activities within last 5 years recommended</span><span class="vi">* Khuyến nghị hoạt động trong 5 năm gần đây</span><span class="ja">* 5年以内の活動を推奨</span></p>
       </div>
       <div class="comp-card">
-        <h3><span class="ko">⑥ 스킬 / 툴</span><span class="en">⑥ Skills / Tools</span><span class="vi">⑥ Kỹ năng / Công cụ</span></h3>
+        <h3><span class="ko">⑥ 스킬 / 툴</span><span class="en">⑥ Skills / Tools</span><span class="vi">⑥ Kỹ năng / Công cụ</span><span class="ja">⑥ スキル / ツール</span></h3>
         <p><span class="ko">상/중/하 수준 표기 또는 사용 경험 기술<br>JD(직무기술서) 키워드와 일치시키기</span>
            <span class="en">Note proficiency level (high/mid/basic)<br>Match keywords in the Job Description</span>
-           <span class="vi">Ghi mức độ thành thạo (cao/trung bình/cơ bản)<br>Khớp từ khóa với mô tả công việc</span></p>
-        <p class="note"><span class="ko">* 과장 금지 — 면접에서 검증됨</span><span class="en">* No exaggeration — verified at interview</span><span class="vi">* Không phóng đại — sẽ được kiểm tra phỏng vấn</span></p>
+           <span class="vi">Ghi mức độ thành thạo (cao/trung bình/cơ bản)<br>Khớp từ khóa với mô tả công việc</span>
+           <span class="ja">上位/中位/基礎レベルを記載、または使用経験を記述<br>JD（職務記述書）のキーワードと一致させる</span></p>
+        <p class="note"><span class="ko">* 과장 금지 — 면접에서 검증됨</span><span class="en">* No exaggeration — verified at interview</span><span class="vi">* Không phóng đại — sẽ được kiểm tra phỏng vấn</span><span class="ja">* 誇張禁止 — 面接で検証されます</span></p>
       </div>
     </div>
   </div>
 
-  <!-- 5단계 워크플로우 -->
   <div class="section">
     <div class="section-title">
       <span class="ko">ChatGPT 활용 5단계 워크플로우</span>
       <span class="en">5-Step Workflow Using ChatGPT</span>
       <span class="vi">5 bước sử dụng ChatGPT viết CV</span>
+      <span class="ja">ChatGPTを活用した5ステップワークフロー</span>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h3><span class="ko">재료 수집 — 경험을 날 것으로 덤핑</span><span class="en">Gather Material — Brain dump your experience</span><span class="vi">Thu thập tài liệu — Đổ hết kinh nghiệm ra</span></h3>
+          <h3><span class="ko">재료 수집 — 경험을 날 것으로 덤핑</span><span class="en">Gather Material — Brain dump your experience</span><span class="vi">Thu thập tài liệu — Đổ hết kinh nghiệm ra</span><span class="ja">資料収集 — 経験をそのままダンプ</span></h3>
           <p><span class="ko">ChatGPT에게 "내가 했던 일을 나열할게, 정리해줘"라고 말하고 담당 업무·숫자·도구를 구어체로 입력합니다.</span>
              <span class="en">Tell ChatGPT "I'll list what I did, please organize it" and input your tasks, numbers, and tools in plain language.</span>
-             <span class="vi">Nói với ChatGPT "Tôi sẽ liệt kê những gì mình đã làm, hãy sắp xếp lại" và nhập công việc, con số, công cụ bằng ngôn ngữ đời thường.</span></p>
+             <span class="vi">Nói với ChatGPT "Tôi sẽ liệt kê những gì mình đã làm, hãy sắp xếp lại" và nhập công việc, con số, công cụ bằng ngôn ngữ đời thường.</span>
+             <span class="ja">ChatGPTに「私がやったことを並べるから整理して」と伝え、担当業務・数字・ツールを口語で入力します。</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h3><span class="ko">JD 분석 — 채용공고 키워드 추출</span><span class="en">Analyze JD — Extract job posting keywords</span><span class="vi">Phân tích JD — Trích xuất từ khóa tin tuyển dụng</span></h3>
+          <h3><span class="ko">JD 분석 — 채용공고 키워드 추출</span><span class="en">Analyze JD — Extract job posting keywords</span><span class="vi">Phân tích JD — Trích xuất từ khóa tin tuyển dụng</span><span class="ja">JD分析 — 求人票のキーワード抽出</span></h3>
           <p><span class="ko">채용공고를 통째로 붙여넣고 "핵심 키워드와 요구 역량을 추출해줘"를 요청합니다.</span>
              <span class="en">Paste the entire job posting and ask "extract key keywords and required competencies."</span>
-             <span class="vi">Dán toàn bộ tin tuyển dụng và yêu cầu "trích xuất từ khóa chính và năng lực yêu cầu."</span></p>
+             <span class="vi">Dán toàn bộ tin tuyển dụng và yêu cầu "trích xuất từ khóa chính và năng lực yêu cầu."</span>
+             <span class="ja">求人票をそのまま貼り付けて「核心キーワードと要求スキルを抽出して」と依頼します。</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h3><span class="ko">초안 생성 — 직무 맞춤 문장 작성</span><span class="en">Generate Draft — Job-tailored sentences</span><span class="vi">Tạo bản nháp — Câu văn phù hợp công việc</span></h3>
+          <h3><span class="ko">초안 생성 — 직무 맞춤 문장 작성</span><span class="en">Generate Draft — Job-tailored sentences</span><span class="vi">Tạo bản nháp — Câu văn phù hợp công việc</span><span class="ja">初稿生成 — 職務に合わせた文章作成</span></h3>
           <p><span class="ko">수집된 재료 + JD 키워드를 결합해 각 항목의 첫 번째 문장을 생성합니다.</span>
              <span class="en">Combine your collected material + JD keywords to generate the first draft of each section.</span>
-             <span class="vi">Kết hợp tài liệu thu thập + từ khóa JD để tạo bản nháp đầu tiên của từng mục.</span></p>
+             <span class="vi">Kết hợp tài liệu thu thập + từ khóa JD để tạo bản nháp đầu tiên của từng mục.</span>
+             <span class="ja">収集した資料とJDキーワードを組み合わせて、各項目の初稿を生成します。</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <h3><span class="ko">수치화 &amp; 강화 — STAR 구조로 다듬기</span><span class="en">Quantify &amp; Strengthen — Refine with STAR</span><span class="vi">Định lượng &amp; Tăng cường — Tinh chỉnh theo STAR</span></h3>
+          <h3><span class="ko">수치화 &amp; 강화 — STAR 구조로 다듬기</span><span class="en">Quantify &amp; Strengthen — Refine with STAR</span><span class="vi">Định lượng &amp; Tăng cường — Tinh chỉnh theo STAR</span><span class="ja">数値化 &amp; 強化 — STARフレームワークで磨く</span></h3>
           <p><span class="ko">상황(S)·과제(T)·행동(A)·결과(R) 프레임으로 경험을 재구성하고 구체적 수치를 삽입합니다.</span>
              <span class="en">Restructure your experience with the Situation-Task-Action-Result framework and add specific numbers.</span>
-             <span class="vi">Tái cấu trúc kinh nghiệm theo khung Tình huống-Nhiệm vụ-Hành động-Kết quả và thêm số liệu cụ thể.</span></p>
+             <span class="vi">Tái cấu trúc kinh nghiệm theo khung Tình huống-Nhiệm vụ-Hành động-Kết quả và thêm số liệu cụ thể.</span>
+             <span class="ja">状況(S)・課題(T)・行動(A)・結果(R)のフレームで経験を再構成し、具体的な数値を挿入します。</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">5</div>
         <div class="step-content">
-          <h3><span class="ko">최종 교정 — 사실 확인 + 맞춤법</span><span class="en">Final Proofread — Fact check + spelling</span><span class="vi">Hiệu đính cuối — Kiểm tra thực tế + chính tả</span></h3>
+          <h3><span class="ko">최종 교정 — 사실 확인 + 맞춤법</span><span class="en">Final Proofread — Fact check + spelling</span><span class="vi">Hiệu đính cuối — Kiểm tra thực tế + chính tả</span><span class="ja">最終校正 — 事実確認 + スペルチェック</span></h3>
           <p><span class="ko">AI 생성 내용의 사실 여부를 직접 확인하고, 맞춤법 검사기(네이버·국립국어원)로 마무리합니다.</span>
              <span class="en">Verify all AI-generated facts yourself, then finish with a Korean spell checker (Naver / National Institute of Korean Language).</span>
-             <span class="vi">Tự xác minh tất cả thông tin do AI tạo ra, sau đó hoàn thiện bằng công cụ kiểm tra chính tả tiếng Hàn (Naver / Viện Ngôn ngữ Quốc gia).</span></p>
+             <span class="vi">Tự xác minh tất cả thông tin do AI tạo ra, sau đó hoàn thiện bằng công cụ kiểm tra chính tả tiếng Hàn (Naver / Viện Ngôn ngữ Quốc gia).</span>
+             <span class="ja">AI生成内容の事実を自分で確認し、韓国語スペルチェッカー（Naver・国立国語院）で仕上げます。</span></p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 실전 프롬프트 템플릿 -->
   <div class="section">
     <div class="section-title">
       <span class="ko">실전 프롬프트 템플릿</span>
       <span class="en">Practical Prompt Templates</span>
       <span class="vi">Mẫu prompt thực chiến</span>
+      <span class="ja">実践プロンプトテンプレート</span>
     </div>
 
     <div class="prompt-card">
-      <h3><span class="ko">1. 경력 항목 작성 프롬프트</span><span class="en">1. Work Experience Prompt</span><span class="vi">1. Prompt viết kinh nghiệm làm việc</span></h3>
-      <span class="prompt-label"><span class="ko">📋 프롬프트 복사 후 [ ] 부분을 채워 사용</span><span class="en">📋 Copy prompt and fill in [ ] parts</span><span class="vi">📋 Sao chép và điền vào phần [ ]</span></span>
+      <h3><span class="ko">1. 경력 항목 작성 프롬프트</span><span class="en">1. Work Experience Prompt</span><span class="vi">1. Prompt viết kinh nghiệm làm việc</span><span class="ja">1. 職歴項目の作成プロンプト</span></h3>
+      <span class="prompt-label"><span class="ko">📋 프롬프트 복사 후 [ ] 부분을 채워 사용</span><span class="en">📋 Copy prompt and fill in [ ] parts</span><span class="vi">📋 Sao chép và điền vào phần [ ]</span><span class="ja">📋 プロンプトをコピーして [ ] 部分を埋めて使用</span></span>
       <div class="prompt-box">역할: 한국 채용 전문가로서 이력서 경력 항목을 작성해줘.
 회사/직책: [회사명] / [직책]
 재직기간: [YYYY.MM ~ YYYY.MM]
@@ -247,8 +253,8 @@
     </div>
 
     <div class="prompt-card">
-      <h3><span class="ko">2. JD 키워드 매핑 프롬프트</span><span class="en">2. JD Keyword Mapping Prompt</span><span class="vi">2. Prompt ánh xạ từ khóa JD</span></h3>
-      <span class="prompt-label"><span class="ko">📋 채용공고 + 내 경험 매핑</span><span class="en">📋 Map job posting + your experience</span><span class="vi">📋 Ghép tin tuyển dụng + kinh nghiệm của bạn</span></span>
+      <h3><span class="ko">2. JD 키워드 매핑 프롬프트</span><span class="en">2. JD Keyword Mapping Prompt</span><span class="vi">2. Prompt ánh xạ từ khóa JD</span><span class="ja">2. JDキーワードマッピングプロンプト</span></h3>
+      <span class="prompt-label"><span class="ko">📋 채용공고 + 내 경험 매핑</span><span class="en">📋 Map job posting + your experience</span><span class="vi">📋 Ghép tin tuyển dụng + kinh nghiệm của bạn</span><span class="ja">📋 求人票 + 自分の経験をマッピング</span></span>
       <div class="prompt-box">다음 채용공고의 핵심 역량 키워드를 추출하고,
 아래 내 경험과 연결되는 부분을 표로 정리해줘.
 
@@ -263,8 +269,8 @@
     </div>
 
     <div class="prompt-card">
-      <h3><span class="ko">3. 자기소개서 연계 프롬프트</span><span class="en">3. Cover Letter Link Prompt</span><span class="vi">3. Prompt viết thư tự giới thiệu</span></h3>
-      <span class="prompt-label"><span class="ko">📋 이력서 → 자소서 연결</span><span class="en">📋 Resume → Cover letter link</span><span class="vi">📋 CV → Thư tự giới thiệu</span></span>
+      <h3><span class="ko">3. 자기소개서 연계 프롬프트</span><span class="en">3. Cover Letter Link Prompt</span><span class="vi">3. Prompt viết thư tự giới thiệu</span><span class="ja">3. 自己PR連携プロンプト</span></h3>
+      <span class="prompt-label"><span class="ko">📋 이력서 → 자소서 연결</span><span class="en">📋 Resume → Cover letter link</span><span class="vi">📋 CV → Thư tự giới thiệu</span><span class="ja">📋 履歴書 → 自己PR連携</span></span>
       <div class="prompt-box">이력서 경력 항목:
 [이력서에서 작성된 내용 붙여넣기]
 
@@ -276,146 +282,158 @@
     </div>
   </div>
 
-  <!-- 비포/애프터 -->
   <div class="section">
     <div class="section-title">
       <span class="ko">비포 / 애프터 — 문장 개선 사례</span>
       <span class="en">Before / After — Sentence Improvement Examples</span>
       <span class="vi">Trước / Sau — Ví dụ cải thiện câu văn</span>
+      <span class="ja">ビフォー / アフター — 文章改善事例</span>
     </div>
 
     <div class="ba-grid">
       <div class="ba-card ba-before">
-        <span class="ba-label">❌ <span class="ko">수정 전 (모호)</span><span class="en">Before (vague)</span><span class="vi">Trước (mơ hồ)</span></span>
+        <span class="ba-label">❌ <span class="ko">수정 전 (모호)</span><span class="en">Before (vague)</span><span class="vi">Trước (mơ hồ)</span><span class="ja">修正前（曖昧）</span></span>
         <span class="ko">고객 문의 대응 업무를 담당하였으며 고객 만족도 향상에 기여하였음.</span>
         <span class="en">Was in charge of customer inquiry response and contributed to improved customer satisfaction.</span>
         <span class="vi">Phụ trách trả lời thắc mắc khách hàng và đóng góp vào cải thiện sự hài lòng của khách.</span>
+        <span class="ja">顧客問い合わせ対応業務を担当し、顧客満足度向上に貢献した。</span>
       </div>
       <div class="ba-card ba-after">
-        <span class="ba-label">✅ <span class="ko">수정 후 (구체적)</span><span class="en">After (specific)</span><span class="vi">Sau (cụ thể)</span></span>
+        <span class="ba-label">✅ <span class="ko">수정 후 (구체적)</span><span class="en">After (specific)</span><span class="vi">Sau (cụ thể)</span><span class="ja">修正後（具体的）</span></span>
         <span class="ko">일평균 120건 인바운드 문의 처리, 응대 스크립트 재정비로 고객 만족도(CSAT) 72% → 89% 향상 기여.</span>
         <span class="en">Handled avg. 120 inbound inquiries/day; revised response scripts → increased CSAT from 72% to 89%.</span>
         <span class="vi">Xử lý trung bình 120 yêu cầu inbound/ngày; sửa đổi kịch bản phản hồi → tăng CSAT từ 72% lên 89%.</span>
+        <span class="ja">日平均120件のインバウンド問い合わせ処理、応対スクリプトの再整備により顧客満足度(CSAT) 72% → 89%向上に貢献。</span>
       </div>
     </div>
 
     <div class="ba-grid">
       <div class="ba-card ba-before">
-        <span class="ba-label">❌ <span class="ko">수정 전 (수동적)</span><span class="en">Before (passive)</span><span class="vi">Trước (thụ động)</span></span>
+        <span class="ba-label">❌ <span class="ko">수정 전 (수동적)</span><span class="en">Before (passive)</span><span class="vi">Trước (thụ động)</span><span class="ja">修正前（受動的）</span></span>
         <span class="ko">팀 프로젝트에 참여하여 마케팅 관련 업무를 수행하였음.</span>
         <span class="en">Participated in team project and performed marketing-related tasks.</span>
         <span class="vi">Tham gia dự án nhóm và thực hiện các nhiệm vụ liên quan đến marketing.</span>
+        <span class="ja">チームプロジェクトに参加し、マーケティング関連業務を行った。</span>
       </div>
       <div class="ba-card ba-after">
-        <span class="ba-label">✅ <span class="ko">수정 후 (능동적)</span><span class="en">After (active)</span><span class="vi">Sau (chủ động)</span></span>
+        <span class="ba-label">✅ <span class="ko">수정 후 (능동적)</span><span class="en">After (active)</span><span class="vi">Sau (chủ động)</span><span class="ja">修正後（能動的）</span></span>
         <span class="ko">SNS 마케팅 캠페인 기획·운영(3인 팀), 인스타그램 팔로워 2,200명 → 8,500명 증가 주도.</span>
         <span class="en">Planned and ran SNS marketing campaign (3-person team); led Instagram growth from 2,200 to 8,500 followers.</span>
         <span class="vi">Lập kế hoạch và điều hành chiến dịch marketing SNS (nhóm 3 người); dẫn dắt tăng trưởng Instagram từ 2.200 lên 8.500 người theo dõi.</span>
+        <span class="ja">SNSマーケティングキャンペーンを企画・運営（3人チーム）、Instagramフォロワー2,200名 → 8,500名増加を主導。</span>
       </div>
     </div>
   </div>
 
-  <!-- 직무별 핵심 키워드 -->
   <div class="section">
     <div class="section-title">
       <span class="ko">직무별 핵심 키워드 예시</span>
       <span class="en">Key Keyword Examples by Job Field</span>
       <span class="vi">Ví dụ từ khóa chính theo lĩnh vực</span>
+      <span class="ja">職務別核心キーワード例</span>
     </div>
     <div class="keyword-grid">
       <div class="kw-card">
-        <h4><span class="ko">마케팅 / 콘텐츠</span><span class="en">Marketing / Content</span><span class="vi">Marketing / Nội dung</span></h4>
+        <h4><span class="ko">마케팅 / 콘텐츠</span><span class="en">Marketing / Content</span><span class="vi">Marketing / Nội dung</span><span class="ja">マーケティング / コンテンツ</span></h4>
         <p><span class="ko">전환율, CTR, ROAS, 콘텐츠 기획, A/B 테스트, 브랜드 아이덴티티, 바이럴, CRM</span>
            <span class="en">Conversion rate, CTR, ROAS, content planning, A/B testing, brand identity, viral, CRM</span>
-           <span class="vi">Tỷ lệ chuyển đổi, CTR, ROAS, lập kế hoạch nội dung, thử nghiệm A/B, nhận diện thương hiệu, viral, CRM</span></p>
+           <span class="vi">Tỷ lệ chuyển đổi, CTR, ROAS, lập kế hoạch nội dung, thử nghiệm A/B, nhận diện thương hiệu, viral, CRM</span>
+           <span class="ja">転換率、CTR、ROAS、コンテンツ企画、A/Bテスト、ブランドアイデンティティ、バイラル、CRM</span></p>
       </div>
       <div class="kw-card">
-        <h4><span class="ko">개발 / IT</span><span class="en">Development / IT</span><span class="vi">Phát triển / IT</span></h4>
+        <h4><span class="ko">개발 / IT</span><span class="en">Development / IT</span><span class="vi">Phát triển / IT</span><span class="ja">開発 / IT</span></h4>
         <p><span class="ko">배포 자동화, 코드 리뷰, API 설계, 성능 최적화, 장애 대응, CI/CD, 응답시간 단축</span>
            <span class="en">Deployment automation, code review, API design, performance optimization, incident response, CI/CD, latency reduction</span>
-           <span class="vi">Tự động hóa triển khai, code review, thiết kế API, tối ưu hóa hiệu suất, xử lý sự cố, CI/CD, giảm độ trễ</span></p>
+           <span class="vi">Tự động hóa triển khai, code review, thiết kế API, tối ưu hóa hiệu suất, xử lý sự cố, CI/CD, giảm độ trễ</span>
+           <span class="ja">デプロイ自動化、コードレビュー、API設計、パフォーマンス最適化、障害対応、CI/CD、応答時間短縮</span></p>
       </div>
       <div class="kw-card">
-        <h4><span class="ko">영업 / 영업관리</span><span class="en">Sales / Account Mgmt</span><span class="vi">Bán hàng / Quản lý KH</span></h4>
+        <h4><span class="ko">영업 / 영업관리</span><span class="en">Sales / Account Mgmt</span><span class="vi">Bán hàng / Quản lý KH</span><span class="ja">営業 / 営業管理</span></h4>
         <p><span class="ko">신규 수주, 매출 달성률, 파이프라인 관리, 고객사 확보, 계약 체결, 목표 초과달성</span>
            <span class="en">New contracts, revenue attainment, pipeline management, client acquisition, deal closing, target over-achievement</span>
-           <span class="vi">Hợp đồng mới, tỷ lệ đạt doanh thu, quản lý pipeline, thu hút khách hàng, ký kết hợp đồng, vượt mục tiêu</span></p>
+           <span class="vi">Hợp đồng mới, tỷ lệ đạt doanh thu, quản lý pipeline, thu hút khách hàng, ký kết hợp đồng, vượt mục tiêu</span>
+           <span class="ja">新規受注、売上達成率、パイプライン管理、顧客獲得、契約締結、目標超過達成</span></p>
       </div>
       <div class="kw-card">
-        <h4><span class="ko">인사 / 총무</span><span class="en">HR / Admin</span><span class="vi">Nhân sự / Hành chính</span></h4>
+        <h4><span class="ko">인사 / 총무</span><span class="en">HR / Admin</span><span class="vi">Nhân sự / Hành chính</span><span class="ja">人事 / 総務</span></h4>
         <p><span class="ko">채용 프로세스 개선, 온보딩, 조직문화, 노무 리스크, 급여 정산, KPI 설계</span>
            <span class="en">Recruitment process improvement, onboarding, organizational culture, labor risk, payroll, KPI design</span>
-           <span class="vi">Cải thiện quy trình tuyển dụng, onboarding, văn hóa tổ chức, rủi ro lao động, tính lương, thiết kế KPI</span></p>
+           <span class="vi">Cải thiện quy trình tuyển dụng, onboarding, văn hóa tổ chức, rủi ro lao động, tính lương, thiết kế KPI</span>
+           <span class="ja">採用プロセス改善、オンボーディング、組織文化、労務リスク、給与計算、KPI設計</span></p>
       </div>
     </div>
   </div>
 
-  <!-- 주의사항 -->
   <div class="section">
     <div class="section-title">
       <span class="ko">ChatGPT 사용 시 주의사항 &amp; 한계</span>
       <span class="en">Cautions &amp; Limitations When Using ChatGPT</span>
       <span class="vi">Lưu ý &amp; Hạn chế khi dùng ChatGPT</span>
+      <span class="ja">ChatGPT使用時の注意事項 &amp; 限界</span>
     </div>
     <ul class="warning-list">
       <li><span class="ko"><strong>허위 사실 생성:</strong> ChatGPT는 그럴듯한 수치를 만들어낼 수 있습니다. 모든 수치와 날짜는 반드시 본인이 직접 확인하세요.</span>
           <span class="en"><strong>Hallucinations:</strong> ChatGPT can fabricate plausible-sounding numbers. Always verify every figure and date yourself.</span>
-          <span class="vi"><strong>Thông tin bịa đặt:</strong> ChatGPT có thể tạo ra số liệu nghe có vẻ hợp lý. Hãy tự xác minh tất cả số liệu và ngày tháng.</span></li>
+          <span class="vi"><strong>Thông tin bịa đặt:</strong> ChatGPT có thể tạo ra số liệu nghe có vẻ hợp lý. Hãy tự xác minh tất cả số liệu và ngày tháng.</span>
+          <span class="ja"><strong>幻覚生成：</strong> ChatGPTはもっともらしい数字を作り出すことがあります。全ての数字と日付は必ず自分で確認してください。</span></li>
       <li><span class="ko"><strong>개인정보 입력 주의:</strong> 주민번호, 정확한 주소, 미공개 회사 정보는 ChatGPT에 입력하지 마세요.</span>
           <span class="en"><strong>Personal data risk:</strong> Do not enter your resident number, exact address, or confidential company info into ChatGPT.</span>
-          <span class="vi"><strong>Nguy cơ thông tin cá nhân:</strong> Không nhập số đăng ký cư trú, địa chỉ chính xác hay thông tin công ty bí mật vào ChatGPT.</span></li>
+          <span class="vi"><strong>Nguy cơ thông tin cá nhân:</strong> Không nhập số đăng ký cư trú, địa chỉ chính xác hay thông tin công ty bí mật vào ChatGPT.</span>
+          <span class="ja"><strong>個人情報入力注意：</strong> 住民番号、正確な住所、未公開の会社情報はChatGPTに入力しないでください。</span></li>
       <li><span class="ko"><strong>획일화 위험:</strong> 비슷한 프롬프트를 쓴 지원자들의 이력서가 유사해질 수 있습니다. 자신만의 에피소드와 표현을 반드시 추가하세요.</span>
           <span class="en"><strong>Generic content risk:</strong> Resumes from applicants using similar prompts can look alike. Always add your own unique stories and expressions.</span>
-          <span class="vi"><strong>Nguy cơ nội dung chung chung:</strong> CV của các ứng viên dùng prompt tương tự có thể trông giống nhau. Luôn thêm câu chuyện và cách diễn đạt riêng của bạn.</span></li>
+          <span class="vi"><strong>Nguy cơ nội dung chung chung:</strong> CV của các ứng viên dùng prompt tương tự có thể trông giống nhau. Luôn thêm câu chuyện và cách diễn đạt riêng của bạn.</span>
+          <span class="ja"><strong>画一化リスク：</strong> 似たプロンプトを使った応募者の履歴書が類似する可能性があります。自分だけのエピソードや表現を必ず追加してください。</span></li>
       <li><span class="ko"><strong>최신 채용 트렌드 미반영:</strong> ChatGPT 지식은 학습 시점까지만 유효합니다. 최신 공고·산업 동향은 직접 조사하세요.</span>
           <span class="en"><strong>Outdated trends:</strong> ChatGPT's knowledge only extends to its training cutoff. Research the latest job postings and industry trends yourself.</span>
-          <span class="vi"><strong>Xu hướng lỗi thời:</strong> Kiến thức của ChatGPT chỉ đến thời điểm huấn luyện. Tự tìm hiểu tin tuyển dụng và xu hướng ngành mới nhất.</span></li>
+          <span class="vi"><strong>Xu hướng lỗi thời:</strong> Kiến thức của ChatGPT chỉ đến thời điểm huấn luyện. Tự tìm hiểu tin tuyển dụng và xu hướng ngành mới nhất.</span>
+          <span class="ja"><strong>最新採用トレンドへの未対応：</strong> ChatGPTの知識は学習時点までです。最新の求人・業界動向は自分で調査してください。</span></li>
       <li><span class="ko"><strong>맥락 손실:</strong> 대화가 길어지면 초기 조건을 잊습니다. 중요한 조건은 매번 다시 명시하거나 새 대화를 시작하세요.</span>
           <span class="en"><strong>Context loss:</strong> Long conversations cause ChatGPT to forget early instructions. Re-state key conditions or start a new chat.</span>
-          <span class="vi"><strong>Mất ngữ cảnh:</strong> Cuộc trò chuyện dài khiến ChatGPT quên hướng dẫn ban đầu. Nêu lại điều kiện quan trọng hoặc bắt đầu cuộc trò chuyện mới.</span></li>
+          <span class="vi"><strong>Mất ngữ cảnh:</strong> Cuộc trò chuyện dài khiến ChatGPT quên hướng dẫn ban đầu. Nêu lại điều kiện quan trọng hoặc bắt đầu cuộc trò chuyện mới.</span>
+          <span class="ja"><strong>コンテキスト消失：</strong> 会話が長くなると初期条件を忘れます。重要な条件は毎回再度記載するか、新しい会話を始めてください。</span></li>
     </ul>
   </div>
 
-  <!-- 체크리스트 + 도구 모음 -->
   <div class="section">
     <div class="two-col">
       <div class="checklist-card">
-        <h3><span class="ko">완성도를 높이는 10가지 체크리스트</span><span class="en">10-Point Completion Checklist</span><span class="vi">10 điểm kiểm tra hoàn thiện CV</span></h3>
+        <h3><span class="ko">완성도를 높이는 10가지 체크리스트</span><span class="en">10-Point Completion Checklist</span><span class="vi">10 điểm kiểm tra hoàn thiện CV</span><span class="ja">完成度を高める10のチェックリスト</span></h3>
         <div class="checklist-grid">
-          <div class="check-item"><span class="ko">모든 경력에 재직기간 명시</span><span class="en">Employment dates on all roles</span><span class="vi">Ngày tháng cho tất cả vị trí</span></div>
-          <div class="check-item"><span class="ko">수치 1개 이상 포함 (경험당)</span><span class="en">≥1 number per experience</span><span class="vi">≥1 con số cho mỗi kinh nghiệm</span></div>
-          <div class="check-item"><span class="ko">동사로 시작하는 문장 구조</span><span class="en">Sentences start with verbs</span><span class="vi">Câu bắt đầu bằng động từ</span></div>
-          <div class="check-item"><span class="ko">JD 키워드 3개 이상 반영</span><span class="en">≥3 JD keywords included</span><span class="vi">≥3 từ khóa JD được đưa vào</span></div>
-          <div class="check-item"><span class="ko">오탈자 0건 (맞춤법 검사 완료)</span><span class="en">Zero typos (spell check done)</span><span class="vi">Không lỗi chính tả (đã kiểm tra)</span></div>
-          <div class="check-item"><span class="ko">파일명: 이름_지원직무_이력서.pdf</span><span class="en">File: Name_Position_Resume.pdf</span><span class="vi">Tên file: Tên_VịTrí_CV.pdf</span></div>
-          <div class="check-item"><span class="ko">사진 규격 확인 (증명사진)</span><span class="en">Photo size verified (ID photo)</span><span class="vi">Ảnh đúng kích cỡ (ảnh thẻ)</span></div>
-          <div class="check-item"><span class="ko">A4 1~2페이지 내 완결</span><span class="en">1–2 A4 pages maximum</span><span class="vi">Tối đa 1–2 trang A4</span></div>
-          <div class="check-item"><span class="ko">연락처·이메일 최신 상태 확인</span><span class="en">Contact/email up to date</span><span class="vi">Liên hệ/email cập nhật</span></div>
-          <div class="check-item"><span class="ko">타인에게 1회 이상 피드백 받기</span><span class="en">At least 1 external feedback</span><span class="vi">Nhận ít nhất 1 phản hồi từ bên ngoài</span></div>
+          <div class="check-item"><span class="ko">모든 경력에 재직기간 명시</span><span class="en">Employment dates on all roles</span><span class="vi">Ngày tháng cho tất cả vị trí</span><span class="ja">全職歴に在職期間を記載</span></div>
+          <div class="check-item"><span class="ko">수치 1개 이상 포함 (경험당)</span><span class="en">≥1 number per experience</span><span class="vi">≥1 con số cho mỗi kinh nghiệm</span><span class="ja">経験ごとに数字を1つ以上含める</span></div>
+          <div class="check-item"><span class="ko">동사로 시작하는 문장 구조</span><span class="en">Sentences start with verbs</span><span class="vi">Câu bắt đầu bằng động từ</span><span class="ja">動詞で始まる文章構造</span></div>
+          <div class="check-item"><span class="ko">JD 키워드 3개 이상 반영</span><span class="en">≥3 JD keywords included</span><span class="vi">≥3 từ khóa JD được đưa vào</span><span class="ja">JDキーワードを3つ以上反映</span></div>
+          <div class="check-item"><span class="ko">오탈자 0건 (맞춤법 검사 완료)</span><span class="en">Zero typos (spell check done)</span><span class="vi">Không lỗi chính tả (đã kiểm tra)</span><span class="ja">誤字・脱字ゼロ（スペルチェック完了）</span></div>
+          <div class="check-item"><span class="ko">파일명: 이름_지원직무_이력서.pdf</span><span class="en">File: Name_Position_Resume.pdf</span><span class="vi">Tên file: Tên_VịTrí_CV.pdf</span><span class="ja">ファイル名：氏名_応募職種_履歴書.pdf</span></div>
+          <div class="check-item"><span class="ko">사진 규격 확인 (증명사진)</span><span class="en">Photo size verified (ID photo)</span><span class="vi">Ảnh đúng kích cỡ (ảnh thẻ)</span><span class="ja">写真サイズ確認（証明写真）</span></div>
+          <div class="check-item"><span class="ko">A4 1~2페이지 내 완결</span><span class="en">1–2 A4 pages maximum</span><span class="vi">Tối đa 1–2 trang A4</span><span class="ja">A4 1〜2ページ以内</span></div>
+          <div class="check-item"><span class="ko">연락처·이메일 최신 상태 확인</span><span class="en">Contact/email up to date</span><span class="vi">Liên hệ/email cập nhật</span><span class="ja">連絡先・メール最新状態確認</span></div>
+          <div class="check-item"><span class="ko">타인에게 1회 이상 피드백 받기</span><span class="en">At least 1 external feedback</span><span class="vi">Nhận ít nhất 1 phản hồi từ bên ngoài</span><span class="ja">第三者から1回以上フィードバックを得る</span></div>
         </div>
       </div>
       <div class="tools-card">
-        <h3><span class="ko">무료 활용 가능한 도구 모음</span><span class="en">Free Tools You Can Use</span><span class="vi">Các công cụ miễn phí hữu ích</span></h3>
+        <h3><span class="ko">무료 활용 가능한 도구 모음</span><span class="en">Free Tools You Can Use</span><span class="vi">Các công cụ miễn phí hữu ích</span><span class="ja">無料で使えるツール集</span></h3>
         <div class="tools-section">
-          <h4><span class="ko">🤖 AI 작성 도구</span><span class="en">🤖 AI Writing Tools</span><span class="vi">🤖 Công cụ AI viết lách</span></h4>
+          <h4><span class="ko">🤖 AI 작성 도구</span><span class="en">🤖 AI Writing Tools</span><span class="vi">🤖 Công cụ AI viết lách</span><span class="ja">🤖 AI作成ツール</span></h4>
           <ul>
             <li>ChatGPT (GPT-4o)</li>
             <li>Claude</li>
-            <li>Wrtn(뤼튼) — <span class="ko">한국어 특화</span><span class="en">Korean-optimized</span><span class="vi">Tối ưu tiếng Hàn</span></li>
+            <li>Wrtn(뤼튼) — <span class="ko">한국어 특화</span><span class="en">Korean-optimized</span><span class="vi">Tối ưu tiếng Hàn</span><span class="ja">韓国語特化</span></li>
           </ul>
         </div>
         <div class="tools-section">
-          <h4><span class="ko">📝 맞춤법 &amp; 교정</span><span class="en">📝 Spell Check</span><span class="vi">📝 Kiểm tra chính tả</span></h4>
+          <h4><span class="ko">📝 맞춤법 &amp; 교정</span><span class="en">📝 Spell Check</span><span class="vi">📝 Kiểm tra chính tả</span><span class="ja">📝 スペルチェック</span></h4>
           <ul>
-            <li><span class="ko">네이버 맞춤법 검사기</span><span class="en">Naver Spell Checker</span><span class="vi">Kiểm tra chính tả Naver</span></li>
-            <li><span class="ko">국립국어원 맞춤법 검사기</span><span class="en">National Institute of Korean Language</span><span class="vi">Viện Ngôn ngữ Quốc gia Hàn Quốc</span></li>
+            <li><span class="ko">네이버 맞춤법 검사기</span><span class="en">Naver Spell Checker</span><span class="vi">Kiểm tra chính tả Naver</span><span class="ja">Naverスペルチェッカー</span></li>
+            <li><span class="ko">국립국어원 맞춤법 검사기</span><span class="en">National Institute of Korean Language</span><span class="vi">Viện Ngôn ngữ Quốc gia Hàn Quốc</span><span class="ja">国立国語院スペルチェッカー</span></li>
           </ul>
         </div>
         <div class="tools-section">
-          <h4><span class="ko">📄 이력서 템플릿</span><span class="en">📄 Resume Templates</span><span class="vi">📄 Mẫu CV</span></h4>
+          <h4><span class="ko">📄 이력서 템플릿</span><span class="en">📄 Resume Templates</span><span class="vi">📄 Mẫu CV</span><span class="ja">📄 履歴書テンプレート</span></h4>
           <ul>
-            <li><span class="ko">사람인 이력서 양식 (공채 표준)</span><span class="en">Saramin template (recruitment standard)</span><span class="vi">Mẫu Saramin (tiêu chuẩn tuyển dụng)</span></li>
-            <li><span class="ko">잡코리아 양식</span><span class="en">JobKorea template</span><span class="vi">Mẫu JobKorea</span></li>
+            <li><span class="ko">사람인 이력서 양식 (공채 표준)</span><span class="en">Saramin template (recruitment standard)</span><span class="vi">Mẫu Saramin (tiêu chuẩn tuyển dụng)</span><span class="ja">サラミン履歴書フォーム（採用標準）</span></li>
+            <li><span class="ko">잡코리아 양식</span><span class="en">JobKorea template</span><span class="vi">Mẫu JobKorea</span><span class="ja">ジョブコリアフォーム</span></li>
             <li>Notion / Figma</li>
           </ul>
         </div>
@@ -423,13 +441,13 @@
     </div>
   </div>
 
-  <!-- 마무리 -->
   <div class="closing">
-    <h2><span class="ko">마무리 — AI 이력서 활용의 원칙</span><span class="en">Conclusion — Principles of AI Resume Use</span><span class="vi">Kết luận — Nguyên tắc sử dụng AI viết CV</span></h2>
+    <h2><span class="ko">마무리 — AI 이력서 활용의 원칙</span><span class="en">Conclusion — Principles of AI Resume Use</span><span class="vi">Kết luận — Nguyên tắc sử dụng AI viết CV</span><span class="ja">まとめ — AI履歴書活用の原則</span></h2>
     <p>
       <span class="ko">ChatGPT는 <strong>당신의 경험을 더 잘 표현</strong>해주는 도구입니다. AI가 만들어준 문장이라도 반드시 <strong>내 목소리로 느껴질 때까지</strong> 고쳐야 합니다. 이력서는 서류 통과가 목적이지만, <strong>면접에서 설명할 수 없는 내용은 쓰지 마세요.</strong></span>
       <span class="en">ChatGPT is a tool that helps you <strong>better express your experience</strong>. Even AI-generated sentences must be edited until they <strong>sound like your own voice</strong>. The goal of a resume is to pass screening, but <strong>never write anything you can't explain in an interview.</strong></span>
       <span class="vi">ChatGPT là công cụ giúp bạn <strong>thể hiện kinh nghiệm tốt hơn</strong>. Dù câu văn do AI tạo ra, bạn vẫn phải chỉnh sửa cho đến khi <strong>nghe như giọng của chính bạn</strong>. Mục tiêu của CV là vượt qua vòng sàng lọc, nhưng <strong>đừng viết bất cứ điều gì bạn không thể giải thích trong phỏng vấn.</strong></span>
+      <span class="ja">ChatGPTは<strong>あなたの経験をより良く表現する</strong>ためのツールです。AI作成文でも<strong>自分の声に聞こえるまで</strong>必ず修正が必要です。履歴書は書類通過が目的ですが、<strong>面接で説明できない内容は書かないでください。</strong></span>
     </p>
   </div>
 
@@ -439,6 +457,7 @@
   <span class="ko">ChatGPT 한국어 이력서 작성 가이드 | 2025 &nbsp;·&nbsp; <a href="https://d2d4.kr">잡앤러닝 d2d4.kr</a></span>
   <span class="en">Korean Resume Guide with ChatGPT | 2025 &nbsp;·&nbsp; <a href="https://d2d4.kr">Job&amp;Learning d2d4.kr</a></span>
   <span class="vi">Hướng dẫn viết CV Hàn Quốc với ChatGPT | 2025 &nbsp;·&nbsp; <a href="https://d2d4.kr">Job&amp;Learning d2d4.kr</a></span>
+  <span class="ja">ChatGPT韓国語履歴書作成ガイド | 2025 &nbsp;·&nbsp; <a href="https://d2d4.kr">Job&amp;Learning d2d4.kr</a></span>
 </footer>
 
 </body>
