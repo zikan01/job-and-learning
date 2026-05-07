@@ -1,9 +1,9 @@
 import { t } from '../lib/translations'
 
 const LANGS = [
-  { code: 'ko', label: '한국어' },
-  { code: 'en', label: 'EN' },
-  { code: 'vi', label: 'VI' },
+  { code: 'ko', label: '🇰🇷 한국어' },
+  { code: 'en', label: '🇺🇸 English' },
+  { code: 'vi', label: '🇻🇳 Tiếng Việt' },
 ]
 
 const TAB_IDS = ['home', 'jobs', 'learning', 'community', 'market', 'help']
@@ -48,22 +48,19 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
           {/* 모바일: 탭 대신 spacer */}
           <div className="flex-1 md:hidden" />
 
-          {/* 언어 선택 버튼 */}
-          <div className="flex items-center gap-0.5 md:gap-1 bg-white/10 rounded-xl p-1 flex-shrink-0">
+          {/* 언어 선택 드롭다운 */}
+          <select
+            value={lang}
+            onChange={e => setLang(e.target.value)}
+            className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl px-2 py-2 border-none outline-none cursor-pointer flex-shrink-0 transition-colors appearance-none"
+            style={{ colorScheme: 'dark' }}
+          >
             {LANGS.map(({ code, label }) => (
-              <button
-                key={code}
-                onClick={() => setLang(code)}
-                className={`px-2 md:px-3 py-1 md:py-1.5 rounded-lg text-xs font-bold transition-colors ${
-                  lang === code
-                    ? 'bg-[#FF8C00] text-white shadow'
-                    : 'text-white/60 hover:text-white'
-                }`}
-              >
+              <option key={code} value={code} className="bg-[#002147] text-white">
                 {label}
-              </button>
+              </option>
             ))}
-          </div>
+          </select>
 
           {/* 로그인 전: 로그인 버튼 */}
           {isAnon ? (
