@@ -49,18 +49,26 @@ export default function Navbar({ tab, setTab, user, onLoginClick, onMyPageClick,
           <div className="flex-1 md:hidden" />
 
           {/* 언어 선택 드롭다운 */}
-          <select
-            value={lang}
-            onChange={e => setLang(e.target.value)}
-            className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl px-2 py-2 border-none outline-none cursor-pointer flex-shrink-0 transition-colors appearance-none"
-            style={{ colorScheme: 'dark' }}
-          >
-            {LANGS.map(({ code, label }) => (
-              <option key={code} value={code} className="bg-[#002147] text-white">
-                {label}
-              </option>
-            ))}
-          </select>
+          <div className="relative flex-shrink-0">
+            <select
+              value={lang}
+              onChange={e => setLang(e.target.value)}
+              className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl pl-2 pr-6 py-2 border-none outline-none cursor-pointer transition-colors appearance-none"
+              style={{ colorScheme: 'dark' }}
+            >
+              {LANGS.map(({ code, label }) => (
+                <option key={code} value={code} className="bg-[#002147] text-white">
+                  {label}
+                </option>
+              ))}
+            </select>
+            <svg
+              className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-white/60"
+              width="11" height="11" viewBox="0 0 24 24" fill="none"
+            >
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
 
           {/* 로그인 전: 로그인 버튼 */}
           {isAnon ? (
